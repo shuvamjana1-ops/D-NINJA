@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>D'NINJA — Social Media Catalog</title>
-    <meta name="description" content="D'NINJA Social Media design catalog — browse, zoom and download all Social Media work.">
+    <title>D'NINJA — All Designs</title>
+    <meta name="description" content="D'NINJA All Designs catalog — browse, zoom and download all design work.">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -17,15 +17,16 @@
         <a href="index.html#projects" class="catalog-back"><i class="fas fa-arrow-left"></i> Back to Home</a>
         <div class="catalog-right" style="display:flex;align-items:center;gap:16px;">
             <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
-            <div class="catalog-title">Social Media</div>
+            <div class="catalog-title">All Designs</div>
         </div>
     </nav>
 
     <div class="gallery-scroll-wrap" id="scroll-wrap">
-        <div class="gallery-track" id="gallery-track" data-folder="socialmedia" data-label="Social Media"></div>
+        <div class="gallery-track" id="gallery-track" data-folder="all" data-label="All Designs"></div>
     </div>
 
     <script>
+        // Theme
         const initTheme = () => {
             const s = localStorage.getItem('dninja-theme');
             if (s === 'dark' || (!s && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.body.classList.add('dark-mode');
@@ -37,6 +38,7 @@
             document.querySelectorAll('.theme-toggle i').forEach(i => i.className = document.body.classList.contains('dark-mode') ? 'fas fa-sun' : 'fas fa-moon');
         }));
         initTheme();
+        // Custom cursor
         const dot = document.getElementById('cursor-dot'), ring = document.getElementById('cursor-ring');
         let mx=0,my=0,rx=0,ry=0;
         document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});

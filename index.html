@@ -256,15 +256,19 @@
     <!-- Projects -->
     <section id="projects" class="projects-section">
         <div class="container">
-            <div class="projects-header" data-reveal>
-                <span class="section-label">Featured Work</span>
-                <h2 class="projects-heading">Selected<br><em>designs.</em></h2>
-            <div class="proj-list" style="margin-top: 32px;" data-reveal>
+            <div class="projects-header" data-reveal style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap: 20px; margin-bottom: 20px;">
+                <div>
+                    <span class="section-label">Featured Work</span>
+                    <h2 class="projects-heading" style="margin-bottom:0;">Selected<br><em>designs.</em></h2>
+                </div>
+            </div>
+            <div class="proj-list" id="proj-list" style="margin-top: 32px;" data-reveal>
+
                 <!-- Branding -->
-                <div class="proj-item">
+                <a href="catalog-branding.html" class="proj-item">
                     <div class="proj-img-wrap">
                         <div class="proj-img-placeholder">
-                            <img src="images/branding/branding-cover.jpg" alt="Branding Concept" class="proj-img"
+                            <img src="images/branding/branding-cover.png" alt="Branding Concept" class="proj-img"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <span class="proj-fallback"><i class="fas fa-folder-open"></i> Branding Cover</span>
                         </div>
@@ -273,15 +277,15 @@
                         <div class="proj-tags"><span>Identity</span><span>Strategy</span></div>
                         <h3 class="proj-title">Branding</h3>
                         <p class="proj-desc">Explore complete brand identity systems, typography, and guidelines.</p>
-                        <a href="catalog-branding.html" class="proj-arrow" title="View Branding"><i class="fas fa-arrow-right"></i></a>
+                        <span class="proj-arrow" title="View Branding"><i class="fas fa-arrow-right"></i></span>
                     </div>
-                </div>
+                </a>
 
                 <!-- Social Media -->
-                <div class="proj-item">
+                <a href="catalog-socialmedia.html" class="proj-item">
                     <div class="proj-img-wrap">
                         <div class="proj-img-placeholder">
-                            <img src="images/socialmedia/socialmedia-cover.jpg" alt="Social Media Concept" class="proj-img"
+                            <img src="images/socialmedia/socialmedia-cover.png" alt="Social Media Concept" class="proj-img"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <span class="proj-fallback"><i class="fas fa-folder-open"></i> Social Media Cover</span>
                         </div>
@@ -290,15 +294,15 @@
                         <div class="proj-tags"><span>Campaigns</span><span>Content</span></div>
                         <h3 class="proj-title">Social Media</h3>
                         <p class="proj-desc">Eye-catching Instagram, Facebook & LinkedIn creatives for max engagement.</p>
-                        <a href="catalog-socialmedia.html" class="proj-arrow" title="View Social Media"><i class="fas fa-arrow-right"></i></a>
+                        <span class="proj-arrow" title="View Social Media"><i class="fas fa-arrow-right"></i></span>
                     </div>
-                </div>
+                </a>
 
                 <!-- Poster & Banner -->
-                <div class="proj-item">
+                <a href="catalog-poster.html" class="proj-item">
                     <div class="proj-img-wrap">
                         <div class="proj-img-placeholder">
-                            <img src="images/poster/poster-cover.jpg" alt="Poster Concept" class="proj-img"
+                            <img src="images/poster/poster-cover.png" alt="Poster Concept" class="proj-img"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <span class="proj-fallback"><i class="fas fa-folder-open"></i> Poster/Banner Cover</span>
                         </div>
@@ -307,15 +311,15 @@
                         <div class="proj-tags"><span>Print</span><span>Digital</span></div>
                         <h3 class="proj-title">Poster or Banner</h3>
                         <p class="proj-desc">High-converting web banners and striking print posters.</p>
-                        <a href="catalog-poster.html" class="proj-arrow" title="View Posters"><i class="fas fa-arrow-right"></i></a>
+                        <span class="proj-arrow" title="View Posters"><i class="fas fa-arrow-right"></i></span>
                     </div>
-                </div>
+                </a>
 
                 <!-- Thumbnail -->
-                <div class="proj-item">
+                <a href="catalog-thumbnail.html" class="proj-item">
                     <div class="proj-img-wrap">
                         <div class="proj-img-placeholder">
-                            <img src="images/thumbnail/thumbnail-cover.jpg" alt="Thumbnail Concept" class="proj-img"
+                            <img src="images/thumbnail/thumbnail-cover.png" alt="Thumbnail Concept" class="proj-img"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <span class="proj-fallback"><i class="fas fa-folder-open"></i> Thumbnail Cover</span>
                         </div>
@@ -324,15 +328,15 @@
                         <div class="proj-tags"><span>YouTube</span><span>Video</span></div>
                         <h3 class="proj-title">Thumbnail</h3>
                         <p class="proj-desc">Click-worthy custom thumbnails designed to boost views and engagement.</p>
-                        <a href="catalog-thumbnail.html" class="proj-arrow" title="View Thumbnails"><i class="fas fa-arrow-right"></i></a>
+                        <span class="proj-arrow" title="View Thumbnails"><i class="fas fa-arrow-right"></i></span>
                     </div>
-                </div>
+                </a>
 
                 <!-- Logo -->
-                <div class="proj-item">
+                <a href="catalog-logo.html" class="proj-item">
                     <div class="proj-img-wrap">
                         <div class="proj-img-placeholder">
-                            <img src="images/logo/logo-cover.jpg" alt="Logo Concept" class="proj-img"
+                            <img src="images/logo/logo-cover.png" alt="Logo Concept" class="proj-img"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <span class="proj-fallback"><i class="fas fa-folder-open"></i> Logo Cover</span>
                         </div>
@@ -341,15 +345,15 @@
                         <div class="proj-tags"><span>Mark</span><span>Logotype</span></div>
                         <h3 class="proj-title">Logo</h3>
                         <p class="proj-desc">Memorable and timeless logo designs crafted for modern brands.</p>
-                        <a href="catalog-logo.html" class="proj-arrow" title="View Logos"><i class="fas fa-arrow-right"></i></a>
+                        <span class="proj-arrow" title="View Logos"><i class="fas fa-arrow-right"></i></span>
                     </div>
-                </div>
+                </a>
 
                 <!-- Invitation Card -->
-                <div class="proj-item">
+                <a href="catalog-invitation.html" class="proj-item">
                     <div class="proj-img-wrap">
                         <div class="proj-img-placeholder">
-                            <img src="images/invitation/invitation-cover.jpg" alt="Invitation Concept" class="proj-img"
+                            <img src="images/invitation/invitation-cover.png" alt="Invitation Concept" class="proj-img"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <span class="proj-fallback"><i class="fas fa-folder-open"></i> Invitation Cover</span>
                         </div>
@@ -358,15 +362,15 @@
                         <div class="proj-tags"><span>Events</span><span>Cards</span></div>
                         <h3 class="proj-title">Invitation Card</h3>
                         <p class="proj-desc">Elegant and creative invitation cards for events and special occasions.</p>
-                        <a href="catalog-invitation.html" class="proj-arrow" title="View Invitations"><i class="fas fa-arrow-right"></i></a>
+                        <span class="proj-arrow" title="View Invitations"><i class="fas fa-arrow-right"></i></span>
                     </div>
-                </div>
+                </a>
 
                 <!-- I-Card -->
-                <div class="proj-item">
+                <a href="catalog-icard.html" class="proj-item">
                     <div class="proj-img-wrap">
                         <div class="proj-img-placeholder">
-                            <img src="images/icard/icard-cover.jpg" alt="I-Card Concept" class="proj-img"
+                            <img src="images/icard/icard-cover.png" alt="I-Card Concept" class="proj-img"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <span class="proj-fallback"><i class="fas fa-folder-open"></i> I-Card Cover</span>
                         </div>
@@ -375,9 +379,15 @@
                         <div class="proj-tags"><span>Corporate</span><span>ID</span></div>
                         <h3 class="proj-title">I-Card</h3>
                         <p class="proj-desc">Professional corporate identity cards designed for businesses and schools.</p>
-                        <a href="catalog-icard.html" class="proj-arrow" title="View I-Cards"><i class="fas fa-arrow-right"></i></a>
+                        <span class="proj-arrow" title="View I-Cards"><i class="fas fa-arrow-right"></i></span>
                     </div>
-                </div>
+                </a>
+            </div>
+            
+            <div style="display:flex; justify-content:center; margin-top: 60px;" data-reveal>
+                <a href="catalog-all.html" class="pf-btn active" style="font-size: 1rem; padding: 16px 40px; border-color: var(--accent); background: var(--accent); color: #fff; border-radius: 50px; text-decoration: none;">
+                    <i class="fas fa-th"></i>&nbsp;&nbsp;View All Designs
+                </a>
             </div>
         </div>
     </section>
@@ -448,6 +458,36 @@
     </footer>
 
     <button class="btt" id="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- Global Floating Search -->
+    <div class="global-search-wrapper" data-reveal>
+        <div class="global-search">
+            <i class="fas fa-search search-icon-g"></i>
+            <input type="text" id="global-search-input" placeholder="Search any image sample... (e.g. Logo, Poster)">
+            <button class="search-btn" id="global-search-btn">Find Image</button>
+        </div>
+    </div>
+
+    <script>
+        const globalInput = document.getElementById('global-search-input');
+        const globalBtn = document.getElementById('global-search-btn');
+        
+        function executeGlobalSearch() {
+            const query = globalInput.value.trim();
+            if(query) {
+                window.location.href = `catalog-all.html?q=${encodeURIComponent(query)}`;
+            } else {
+                window.location.href = `catalog-all.html`;
+            }
+        }
+
+        if(globalBtn && globalInput) {
+            globalBtn.addEventListener('click', executeGlobalSearch);
+            globalInput.addEventListener('keypress', (e) => {
+                if(e.key === 'Enter') executeGlobalSearch();
+            });
+        }
+    </script>
     <script src="script.js"></script>
 </body>
 
