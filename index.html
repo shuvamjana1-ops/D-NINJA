@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shuvam — Creative Designer</title>
+    <meta name="description" content="Shuvam — Graphic Designer crafting bold visual identities, brand stories, and stunning designs with 3+ years of experience.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div id="cursor-dot" class="cursor-dot"></div>
+    <div id="cursor-ring" class="cursor-ring"></div>
+
+    <!-- Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="pre-counter" id="pre-counter">0</div>
+        <div class="pre-bar"><div class="pre-fill" id="pre-fill"></div></div>
+        <div class="pre-name">D'NINJA</div>
+    </div>
+
+    <!-- Nav -->
+    <nav id="navbar" class="navbar">
+        <div class="nav-inner">
+            <a href="#hero" class="nav-logo">
+                <!-- YOUR LOGO: replace 'dninja_logo.png' with your actual logo file -->
+                <div class="nav-logo-placeholder" id="logo-placeholder">
+                    <img src="dninja_logo.png" alt="D'NINJA Logo" class="nav-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <span class="logo-fallback">D'N</span>
+                </div>
+                <span class="nav-logo-text">D<span class="logo-apostrophe">'</span>NINJA</span>
+            </a>
+            <div class="nav-center">
+                <a href="#about" class="nav-link" data-section="about">About</a>
+                <a href="#skills" class="nav-link" data-section="skills">Skills</a>
+                <a href="#projects" class="nav-link" data-section="projects">Work</a>
+                <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+            </div>
+            <a href="#contact" class="nav-hire">Hire Me <i class="fas fa-arrow-right"></i></a>
+            <button class="nav-toggle" id="nav-toggle"><span></span><span></span></button>
+        </div>
+        <div class="nav-drawer" id="nav-drawer">
+            <a href="#about" class="drawer-link" data-section="about">About</a>
+            <a href="#skills" class="drawer-link" data-section="skills">Skills</a>
+            <a href="#projects" class="drawer-link" data-section="projects">Work</a>
+            <a href="#contact" class="drawer-link" data-section="contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero" class="hero-section">
+        <div class="hero-top">
+            <div class="hero-badge"><span class="badge-dot"></span>Available for projects</div>
+            <div class="hero-location">📍 India</div>
+        </div>
+        <div class="hero-headline">
+            <div class="hero-line-wrap"><span class="hero-line hl-left reveal-text">CREATIVE</span></div>
+            <div class="hero-line-wrap hero-line-mid">
+                <span class="hero-line hl-img-wrap reveal-text">
+                    <span class="hl-img"><i class="fas fa-palette"></i></span>
+                    GRAPHIC
+                </span>
+            </div>
+            <div class="hero-line-wrap"><span class="hero-line hl-right reveal-text">DESIGNER</span></div>
+        </div>
+        <div class="hero-bottom">
+            <p class="hero-desc">Turning ideas into<br>pixel-perfect visuals</p>
+            <a href="#projects" class="hero-scroll-btn" id="hero-scroll-btn">
+                <span>View Work</span>
+                <div class="scroll-circle"><i class="fas fa-arrow-down"></i></div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee-section">
+        <div class="marquee-track">
+            <span>Canva</span><span>✦</span><span>Photoshop</span><span>✦</span>
+            <span>Picsart</span><span>✦</span><span>Lightroom</span><span>✦</span>
+            <span>Snapseed</span><span>✦</span><span>Brand Identity</span><span>✦</span>
+            <span>Social Media</span><span>✦</span><span>Print Design</span><span>✦</span>
+            <span>Canva</span><span>✦</span><span>Photoshop</span><span>✦</span>
+            <span>Picsart</span><span>✦</span><span>Lightroom</span><span>✦</span>
+            <span>Snapseed</span><span>✦</span><span>Brand Identity</span><span>✦</span>
+        </div>
+    </div>
+
+    <!-- I DESIGN Section -->
+    <div class="idesign-section">
+        <div class="idesign-inner">
+            <span class="idesign-label">Currently working on</span>
+            <div class="idesign-display">
+                <span class="idesign-prefix">I design</span>
+                <span class="idesign-arrow">→</span>
+                <span id="typed-text" class="typed-text"></span><span class="typed-cursor">_</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- About -->
+    <section id="about" class="about-section">
+        <div class="about-header-wrap" data-reveal>
+            <span class="section-label">The Team Behind D'NINJA</span>
+            <h2 class="about-team-heading">Meet the <em>Creators</em></h2>
+            <p class="about-team-sub">Two designers. One vision. Infinite creativity.</p>
+        </div>
+
+        <div class="team-cards-wrap">
+            <!-- Sumit Dinda -->
+            <div class="team-card" data-reveal>
+                <div class="team-card-glow glow-purple"></div>
+                <div class="team-img-wrap">
+                    <!-- YOUR PHOTO: replace 'sumit_avatar.png' with your actual photo file -->
+                    <div class="team-avatar-placeholder">
+                        <img src="sumit_avatar.png" alt="Sumit Dinda" class="team-avatar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        <span class="avatar-fallback"><i class="fas fa-user"></i></span>
+                    </div>
+                    <div class="team-img-ring"></div>
+                    <div class="team-badge"><i class="fas fa-palette"></i> Co-Founder</div>
+                </div>
+                <div class="team-info">
+                    <h3 class="team-name">SUMIT DINDA</h3>
+                    <span class="team-role">Creative Director & Brand Designer</span>
+                    <p class="team-bio">A visionary brand architect with an eye for bold aesthetics. Sumit breathes life into brand identities, transforming abstract ideas into powerful visual statements that resonate, inspire, and convert.</p>
+                    <div class="team-skills">
+                        <span>Brand Identity</span><span>Logo Design</span><span>Typography</span><span>Art Direction</span>
+                    </div>
+                    <div class="team-meta">
+                        <div class="tm-item"><span class="tm-label">Role</span><span class="tm-val">Co-Founder</span></div>
+                        <div class="tm-item"><span class="tm-label">Based in</span><span class="tm-val">India</span></div>
+                        <div class="tm-item"><span class="tm-label">Status</span><span class="tm-val open">Open ●</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shuvam Jana -->
+            <div class="team-card" data-reveal>
+                <div class="team-card-glow glow-pink"></div>
+                <div class="team-img-wrap">
+                    <!-- YOUR PHOTO: replace 'shuvam_avatar.png' with your actual photo file -->
+                    <div class="team-avatar-placeholder">
+                        <img src="shuvam_avatar.png" alt="Shuvam Jana" class="team-avatar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        <span class="avatar-fallback"><i class="fas fa-user"></i></span>
+                    </div>
+                    <div class="team-img-ring"></div>
+                    <div class="team-badge"><i class="fas fa-magic"></i> Co-Founder</div>
+                </div>
+                <div class="team-info">
+                    <h3 class="team-name">SHUVAM JANA</h3>
+                    <span class="team-role">Visual Designer & Creative Strategist</span>
+                    <p class="team-bio">A pixel-perfect storyteller who turns raw concepts into stunning visual narratives. Shuvam blends creativity with strategy — every design decision is intentional, purposeful, and crafted to make an impact.</p>
+                    <div class="team-skills">
+                        <span>Visual Design</span><span>Social Media</span><span>Print Design</span><span>Motion Graphics</span>
+                    </div>
+                    <div class="team-meta">
+                        <div class="tm-item"><span class="tm-label">Role</span><span class="tm-val">Co-Founder</span></div>
+                        <div class="tm-item"><span class="tm-label">Based in</span><span class="tm-val">India</span></div>
+                        <div class="tm-item"><span class="tm-label">Status</span><span class="tm-val open">Open ●</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="skills-section">
+        <div class="container">
+            <div class="skills-header" data-reveal>
+                <span class="section-label">My Toolkit</span>
+                <h2 class="skills-heading">Tools I <em>master</em></h2>
+            </div>
+            <div class="skills-list" data-reveal>
+                <div class="skill-row">
+                    <div class="skill-info"><span class="skill-num">01</span><span class="skill-name">Canva</span></div>
+                    <div class="skill-track"><div class="skill-bar-fill" data-w="95"></div></div>
+                    <span class="skill-pct">95%</span>
+                </div>
+                <div class="skill-row">
+                    <div class="skill-info"><span class="skill-num">02</span><span class="skill-name">Picsart</span></div>
+                    <div class="skill-track"><div class="skill-bar-fill" data-w="90"></div></div>
+                    <span class="skill-pct">90%</span>
+                </div>
+                <div class="skill-row">
+                    <div class="skill-info"><span class="skill-num">03</span><span class="skill-name">Photoshop</span></div>
+                    <div class="skill-track"><div class="skill-bar-fill" data-w="88"></div></div>
+                    <span class="skill-pct">88%</span>
+                </div>
+                <div class="skill-row">
+                    <div class="skill-info"><span class="skill-num">04</span><span class="skill-name">Lightroom</span></div>
+                    <div class="skill-track"><div class="skill-bar-fill" data-w="85"></div></div>
+                    <span class="skill-pct">85%</span>
+                </div>
+                <div class="skill-row">
+                    <div class="skill-info"><span class="skill-num">05</span><span class="skill-name">Snapseed</span></div>
+                    <div class="skill-track"><div class="skill-bar-fill" data-w="92"></div></div>
+                    <span class="skill-pct">92%</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <div class="projects-header" data-reveal>
+                <span class="section-label">Featured Work</span>
+                <h2 class="projects-heading">Selected<br><em>designs.</em></h2>
+                <div class="proj-filter">
+                    <button class="pf-btn active" data-filter="all">All</button>
+                    <button class="pf-btn" data-filter="branding">Branding</button>
+                    <button class="pf-btn" data-filter="social">Social</button>
+                    <button class="pf-btn" data-filter="print">Print</button>
+                </div>
+            </div>
+            <div class="proj-list" data-reveal>
+                <!-- Project 1 -->
+                <div class="proj-item" data-category="branding">
+                    <div class="proj-img-wrap">
+                        <!-- YOUR DESIGN: replace 'placeholder1.jpg' with your actual image -->
+                        <div class="proj-img-placeholder">
+                            <img src="placeholder1.jpg" alt="Design Project" class="proj-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                            <span class="proj-fallback"><i class="fas fa-image"></i> Upload Design</span>
+                        </div>
+                    </div>
+                    <div class="proj-meta">
+                        <div class="proj-tags"><span>Logo</span><span>Branding</span></div>
+                        <h3 class="proj-title">Luxe Fashion Brand Identity</h3>
+                        <p class="proj-desc">Complete brand identity system — logo, palette, typography & guidelines.</p>
+                        <a href="catalog-branding.html" class="proj-arrow" title="View Branding Catalog"><i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="proj-item" data-category="social">
+                    <div class="proj-img-wrap">
+                        <!-- YOUR DESIGN: replace 'placeholder2.jpg' with your actual image -->
+                        <div class="proj-img-placeholder">
+                            <img src="placeholder2.jpg" alt="Design Project" class="proj-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                            <span class="proj-fallback"><i class="fas fa-image"></i> Upload Design</span>
+                        </div>
+                    </div>
+                    <div class="proj-meta">
+                        <div class="proj-tags"><span>Social</span><span>Campaign</span></div>
+                        <h3 class="proj-title">Social Media Campaign Suite</h3>
+                        <p class="proj-desc">Eye-catching Instagram, Facebook & LinkedIn creatives for max engagement.</p>
+                        <a href="catalog-social.html" class="proj-arrow" title="View Social Catalog"><i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="proj-item" data-category="branding">
+                    <div class="proj-img-wrap">
+                        <!-- YOUR DESIGN: replace 'placeholder3.jpg' with your actual image -->
+                        <div class="proj-img-placeholder">
+                            <img src="placeholder3.jpg" alt="Design Project" class="proj-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                            <span class="proj-fallback"><i class="fas fa-image"></i> Upload Design</span>
+                        </div>
+                    </div>
+                    <div class="proj-meta">
+                        <div class="proj-tags"><span>Logo</span><span>Packaging</span></div>
+                        <h3 class="proj-title">Café Brand & Packaging</h3>
+                        <p class="proj-desc">Warm brand identity with custom packaging for an artisan coffee shop.</p>
+                        <a href="catalog-branding.html" class="proj-arrow" title="View Branding Catalog"><i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="proj-item" data-category="print">
+                    <div class="proj-img-wrap">
+                        <!-- YOUR DESIGN: replace 'placeholder4.jpg' with your actual image -->
+                        <div class="proj-img-placeholder">
+                            <img src="placeholder4.jpg" alt="Design Project" class="proj-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                            <span class="proj-fallback"><i class="fas fa-image"></i> Upload Design</span>
+                        </div>
+                    </div>
+                    <div class="proj-meta">
+                        <div class="proj-tags"><span>Magazine</span><span>Editorial</span></div>
+                        <h3 class="proj-title">Editorial Magazine Layout</h3>
+                        <p class="proj-desc">Clean modern editorial design for a lifestyle magazine.</p>
+                        <a href="catalog-print.html" class="proj-arrow" title="View Print Catalog"><i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="proj-item" data-category="social">
+                    <div class="proj-img-wrap">
+                        <!-- YOUR DESIGN: replace 'placeholder5.jpg' with your actual image -->
+                        <div class="proj-img-placeholder">
+                            <img src="placeholder5.jpg" alt="Design Project" class="proj-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                            <span class="proj-fallback"><i class="fas fa-image"></i> Upload Design</span>
+                        </div>
+                    </div>
+                    <div class="proj-meta">
+                        <div class="proj-tags"><span>Banner</span><span>Web Ads</span></div>
+                        <h3 class="proj-title">Digital Ad Campaign</h3>
+                        <p class="proj-desc">High-converting web banners for an e-commerce product launch.</p>
+                        <a href="catalog-social.html" class="proj-arrow" title="View Social Catalog"><i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="proj-item" data-category="print">
+                    <div class="proj-img-wrap">
+                        <!-- YOUR DESIGN: replace 'placeholder6.jpg' with your actual image -->
+                        <div class="proj-img-placeholder">
+                            <img src="placeholder6.jpg" alt="Design Project" class="proj-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                            <span class="proj-fallback"><i class="fas fa-image"></i> Upload Design</span>
+                        </div>
+                    </div>
+                    <div class="proj-meta">
+                        <div class="proj-tags"><span>Business Card</span><span>Print</span></div>
+                        <h3 class="proj-title">Corporate Stationery Set</h3>
+                        <p class="proj-desc">Premium cards, letterheads and envelopes with foil details.</p>
+                        <a href="catalog-print.html" class="proj-arrow" title="View Print Catalog"><i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact-section">
+        <div class="contact-inner">
+            <div class="contact-left" data-reveal>
+                <span class="section-label light">Get In Touch</span>
+                <h2 class="contact-heading">Let's make<br>something<br><em>great.</em></h2>
+                <div class="contact-details">
+                    <a href="mailto:shuvamjana2007@gmail.com" class="cd-item">
+                        <div class="cd-icon"><i class="fas fa-envelope"></i></div>
+                        <div><span class="cd-label">Email</span><span class="cd-val">shuvamjana2007@gmail.com</span></div>
+                    </a>
+                    <div class="cd-item">
+                        <div class="cd-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div><span class="cd-label">Location</span><span class="cd-val">India</span></div>
+                    </div>
+                </div>
+                <div class="social-row">
+                    <a href="https://www.instagram.com/" target="_blank" class="soc-btn instagram" id="social-instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/" target="_blank" class="soc-btn facebook" id="social-facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/in/" target="_blank" class="soc-btn linkedin" id="social-linkedin"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/" target="_blank" class="soc-btn github" id="social-github"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="contact-right" data-reveal>
+                <form id="contact-form" class="c-form">
+                    <div class="cf-group">
+                        <input type="text" id="cf-name" class="cf-input" placeholder="Your name" required>
+                    </div>
+                    <div class="cf-group">
+                        <input type="email" id="cf-email" class="cf-input" placeholder="Your email" required>
+                    </div>
+                    <div class="cf-group">
+                        <input type="text" id="cf-proj" class="cf-input" placeholder="Project type">
+                    </div>
+                    <div class="cf-group">
+                        <textarea id="cf-msg" class="cf-input" rows="5" placeholder="Tell me about your project" required></textarea>
+                    </div>
+                    <button type="submit" class="cf-submit" id="submit-btn">
+                        <span>Send Message</span><i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <!-- YOUR LOGO: replace 'dninja_logo.png' with your actual logo file -->
+                <img src="dninja_logo.png" alt="D'NINJA" class="footer-logo-img" onerror="this.style.display='none'">
+                <span class="footer-logo">D<span>'</span>NINJA</span>
+            </div>
+            <p>Designed &amp; crafted by <strong>Sumit &amp; Shuvam</strong> — D'NINJA © 2026</p>
+            <div class="footer-links">
+                <a href="#hero">Home</a>
+                <a href="#about">About</a>
+                <a href="#projects">Work</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <button class="btt" id="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+    <script src="script.js"></script>
+</body>
+</html>
