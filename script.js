@@ -1,5 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // ── Theme Toggle ──
+    const initTheme = () => {
+        const savedTheme = localStorage.getItem('dninja-theme');
+        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.body.classList.add('dark-mode');
+        }
+        updateThemeIcons();
+    };
+
+    const updateThemeIcons = () => {
+        const isDark = document.body.classList.contains('dark-mode');
+        document.querySelectorAll('.theme-toggle i').forEach(icon => {
+            icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        });
+    };
+
+    document.querySelectorAll('.theme-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('dninja-theme', isDark ? 'dark' : 'light');
+            updateThemeIcons();
+        });
+    });
+
+    initTheme();
+
     // ── Preloader with counter ──
     const counter = document.getElementById('pre-counter');
     const fill = document.getElementById('pre-fill');
@@ -22,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dot.style.left = mx + 'px'; dot.style.top = my + 'px';
     });
     (function anim() {
-        rx += (mx - rx) * 0.1; ry += (my - ry) * 0.1;
+        rx += (mx - rx) * 0.15; ry += (my - ry) * 0.15;
         ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
         requestAnimationFrame(anim);
     })();
@@ -120,8 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (hireBtn) {
         hireBtn.addEventListener('mousemove', e => {
             const r = hireBtn.getBoundingClientRect();
-            const dx = (e.clientX - r.left - r.width/2) * 0.35;
-            const dy = (e.clientY - r.top - r.height/2) * 0.35;
+            const dx = (e.clientX - r.left - r.width / 2) * 0.35;
+            const dy = (e.clientY - r.top - r.height / 2) * 0.35;
             hireBtn.style.transform = `translate(${dx}px,${dy}px)`;
         });
         hireBtn.addEventListener('mouseleave', () => hireBtn.style.transform = '');

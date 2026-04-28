@@ -18,7 +18,12 @@
 
     <nav class="catalog-nav">
         <a href="index.html#projects" class="catalog-back"><i class="fas fa-arrow-left"></i> Back to Home</a>
-        <div class="catalog-title">Branding</div>
+        <div class="catalog-right" style="display: flex; align-items: center; gap: 24px;">
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="catalog-title">Branding</div>
+        </div>
     </nav>
 
     <!-- Horizontal scroll wrapper for the "cool frame" gallery -->
@@ -83,6 +88,32 @@
     </div>
 
     <script>
+        // ── Theme Toggle ──
+        const initTheme = () => {
+            const savedTheme = localStorage.getItem('dninja-theme');
+            if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.body.classList.add('dark-mode');
+            }
+            updateThemeIcons();
+        };
+
+        const updateThemeIcons = () => {
+            const isDark = document.body.classList.contains('dark-mode');
+            document.querySelectorAll('.theme-toggle i').forEach(icon => {
+                icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+            });
+        };
+
+        document.querySelectorAll('.theme-toggle').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                const isDark = document.body.classList.contains('dark-mode');
+                localStorage.setItem('dninja-theme', isDark ? 'dark' : 'light');
+                updateThemeIcons();
+            });
+        });
+        initTheme();
+
         // Smooth horizontal scrolling with mouse wheel
         const scrollWrap = document.getElementById('scroll-wrap');
         scrollWrap.addEventListener('wheel', (evt) => {
@@ -107,7 +138,7 @@
             requestAnimationFrame(anim);
         })();
 
-        document.querySelectorAll('a, .gallery-frame').forEach(el => {
+        document.querySelectorAll('a, .gallery-frame, .theme-toggle').forEach(el => {
             el.addEventListener('mouseenter', () => ring.classList.add('hov'));
             el.addEventListener('mouseleave', () => ring.classList.remove('hov'));
         });
