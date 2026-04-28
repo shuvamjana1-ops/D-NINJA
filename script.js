@@ -119,17 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.5 });
     document.querySelectorAll('.hero-float-stat').forEach(s => statObs.observe(s));
 
-    // ── Project filter ──
-    document.querySelectorAll('.pf-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.pf-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const f = btn.dataset.filter;
-            document.querySelectorAll('.proj-item').forEach(item => {
-                item.classList.toggle('hidden', f !== 'all' && item.dataset.category !== f);
-            });
-        });
-    });
+    // ── Project filter removed as we now use distinct category cards ──
 
     // ── Skill rows hover highlight ──
     document.querySelectorAll('.skill-row').forEach(row => {
