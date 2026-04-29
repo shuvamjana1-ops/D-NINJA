@@ -137,6 +137,7 @@
        2. RENDER — HORIZONTAL SCROLL (default)
     ═══════════════════════════════════════════ */
     function renderScrollView() {
+        document.body.classList.add('horizontal-mode');
         track.innerHTML = '';
         images.forEach((img, i) => {
             const displayName = img.alt;
@@ -188,6 +189,7 @@
        3. RENDER — PINTEREST MASONRY GRID
     ═══════════════════════════════════════════ */
     function renderGridView() {
+        document.body.classList.remove('horizontal-mode');
         // Switch layout container
         scrollWrap.classList.add('grid-mode');
         track.classList.add('masonry-grid');

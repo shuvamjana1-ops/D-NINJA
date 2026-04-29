@@ -2136,11 +2136,7 @@ body.dark-mode .navbar.scrolled {
     }
 
     .footer-brand {
-        <div id="cursor-dot" class="cursor-dot"></div>
-    <div id="cursor-ring" class="cursor-ring"></div>
-    <div class="noise-overlay"></div>
-    <div class="progress-wrap"><div class="progress-bar" id="progress-bar"></div></div>
-    <div id="festive-container" class="festive-container"></div>
+        justify-content: center;
     }
 
     .cursor-dot,
@@ -2189,10 +2185,13 @@ body.dark-mode .navbar.scrolled {
 
 /* ===== CATALOG GALLERY FRAME ===== */
 .catalog-body {
-    background: var(--dark);
-    color: #fff;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+.catalog-body.horizontal-mode {
     overflow: hidden;
-    height: 100vh
+    height: 100vh;
 }
 
 .catalog-nav {
@@ -2257,7 +2256,9 @@ body.dark-mode .navbar.scrolled {
     overflow-x: auto;
     overflow-y: hidden;
     padding: 0 20vw;
-    scroll-behavior: smooth
+    scroll-behavior: smooth;
+    position: relative;
+    z-index: 1;
 }
 
 /* Hide scrollbar */
@@ -2511,9 +2512,8 @@ body.dark-mode .navbar.scrolled {
     display: block;
     height: auto;
     min-height: 100vh;
-    overflow-x: hidden;
-    overflow-y: auto;
-    padding: 120px 40px 80px
+    overflow: visible;
+    padding: 160px 40px 80px;
 }
 
 .gallery-track.masonry-grid {
