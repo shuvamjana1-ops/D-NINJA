@@ -46,6 +46,18 @@
         return `${baseUrl}?${entryId}=${encodeURIComponent(name)}`;
     };
 
+    const handleAddToCart = (idx) => {
+        const img = images[idx];
+        if (window.dninjaCart) {
+            window.dninjaCart.addItem({
+                id: `${img.folder}-${img.idx}`,
+                name: img.alt,
+                src: img.src,
+                folder: img.folder
+            });
+        }
+    };
+
     /* ═══════════════════════════════════════════
        1. LOAD IMAGES (try jpg → png → webp)
     ═══════════════════════════════════════════ */
@@ -155,8 +167,11 @@
                         <button class="gf-action-btn" data-action="download" data-src="${img.src}" data-name="${folder}-${img.idx}" title="Download">
                             <i class="fas fa-download"></i>
                         </button>
-                        <a href="${getOrderUrl(displayName)}" target="_blank" class="gf-action-btn" title="Order this design">
-                            <i class="fas fa-shopping-cart"></i>
+                        <button class="gf-action-btn add-to-cart-btn" data-idx="${i}" title="Add to Cart">
+                            <i class="fas fa-cart-plus"></i>
+                        </button>
+                        <a href="${getOrderUrl(displayName)}" target="_blank" class="gf-action-btn" title="Quick Order (Google Form)">
+                            <i class="fas fa-external-link-alt"></i>
                         </a>
                     </div>
                     <div class="gf-caption">
@@ -181,6 +196,10 @@
             frame.querySelector('[data-action="download"]').addEventListener('click', (e) => {
                 e.stopPropagation();
                 downloadImage(img.src, `${folder}-${img.idx}`);
+            });
+            frame.querySelector('.add-to-cart-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                handleAddToCart(i);
             });
         });
     }
@@ -211,8 +230,11 @@
                         <button class="masonry-btn" data-action="download" data-src="${img.src}" title="Download">
                             <i class="fas fa-download"></i>
                         </button>
-                        <a href="${getOrderUrl(displayName)}" target="_blank" class="masonry-btn" title="Order Now">
-                            <i class="fas fa-shopping-cart"></i>
+                        <button class="masonry-btn add-to-cart-btn" data-idx="${i}" title="Add to Cart">
+                            <i class="fas fa-cart-plus"></i>
+                        </button>
+                        <a href="${getOrderUrl(displayName)}" target="_blank" class="masonry-btn" title="Quick Order">
+                            <i class="fas fa-external-link-alt"></i>
                         </a>
                     </div>
                     <div class="masonry-label">${displayName}</div>
@@ -223,6 +245,10 @@
             card.querySelector('[data-action="download"]').addEventListener('click', (e) => {
                 e.stopPropagation();
                 downloadImage(img.src, `${folder}-${img.idx}`);
+            });
+            card.querySelector('.add-to-cart-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                handleAddToCart(i);
             });
             card.addEventListener('click', (e) => {
                 if (!e.target.closest('.masonry-btn')) openLightbox(i);
@@ -299,8 +325,11 @@
                         <button class="lb-btn" id="lb-zoom-in" title="Zoom in"><i class="fas fa-search-plus"></i></button>
                         <button class="lb-btn" id="lb-zoom-reset" title="Reset zoom"><i class="fas fa-expand-arrows-alt"></i></button>
                         <button class="lb-btn" id="lb-download" title="Download"><i class="fas fa-download"></i></button>
-                        <a href="#" target="_blank" class="lb-btn lb-order-btn" id="lb-order" title="Order this design">
-                            <i class="fas fa-shopping-cart"></i> <span class="order-text">Order Now</span>
+                        <button class="lb-btn lb-cart-btn" id="lb-add-to-cart" title="Add to Cart">
+                            <i class="fas fa-cart-plus"></i> <span class="order-text">Add to Cart</span>
+                        </button>
+                        <a href="#" target="_blank" class="lb-btn lb-order-btn" id="lb-order" title="Order Now">
+                            <i class="fas fa-external-link-alt"></i> <span class="order-text">Order Form</span>
                         </a>
                         <button class="lb-btn" id="lb-share" title="Copy link"><i class="fas fa-share-alt"></i></button>
                         <button class="lb-btn lb-close-btn" id="lb-close" title="Close (Esc)"><i class="fas fa-times"></i></button>
@@ -329,6 +358,7 @@
         document.getElementById('lb-zoom-out').addEventListener('click', () => applyZoom(zoom / 1.3));
         document.getElementById('lb-zoom-reset').addEventListener('click', () => applyZoom(1));
         document.getElementById('lb-download').addEventListener('click', () => downloadImage(images[currentIdx].src, `${folder}-${images[currentIdx].idx}`));
+        document.getElementById('lb-add-to-cart').addEventListener('click', () => handleAddToCart(currentIdx));
         document.getElementById('lb-share').addEventListener('click', shareImage);
 
         /* Click to toggle zoom like Pinterest */

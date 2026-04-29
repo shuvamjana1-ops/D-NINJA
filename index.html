@@ -1,15 +1,15 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shuvam — Creative Designer</title>
+    <title>Shuvam &mdash; Creative Designer</title>
     <meta name="description"
-        content="Shuvam — Graphic Designer crafting bold visual identities, brand stories, and stunning designs with 3+ years of experience.">
+        content="Shuvam &mdash; Graphic Designer crafting bold visual identities, brand stories, and stunning designs with 3+ years of experience.">
     <link rel="stylesheet" href="styles.css">
     <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -51,10 +51,12 @@
                 <a href="#contact" class="nav-link" data-section="contact">Contact</a>
             </div>
             <div class="nav-right" style="display: flex; align-items: center; gap: 16px;">
-                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon"></i>
-                </button>
+                
                 <a href="#" id="pricing-btn" class="nav-link" style="color: var(--accent2); font-weight: 600;"><i class="fas fa-tags"></i> Pricing</a>
+                <a href="cart.html" class="nav-link" style="position: relative; color: var(--accent); font-weight: 600;">
+                    <i class="fas fa-shopping-cart"></i> Cart
+                    <span class="cart-count" style="display: none;">0</span>
+                </a>
                 <a href="#contact" class="nav-hire">Hire Me <i class="fas fa-arrow-right"></i></a>
                 <button class="nav-toggle" id="nav-toggle"><span></span><span></span></button>
             </div>
@@ -67,6 +69,7 @@
             <a href="#student-corner" class="drawer-link" data-section="student-corner">Students</a>
             <a href="#contact" class="drawer-link" data-section="contact">Contact</a>
             <a href="#" id="drawer-pricing-btn" class="drawer-link" style="color: var(--accent2);">Pricing</a>
+            <a href="cart.html" class="drawer-link" style="color: var(--accent);"><i class="fas fa-shopping-cart"></i> Cart <span class="cart-count"></span></a>
         </div>
     </nav>
 
@@ -78,7 +81,7 @@
                 <div class="hero-badge"><span class="badge-dot"></span>Available for projects</div>
                 <div class="hero-clock" id="live-clock">IST 00:00:00</div>
             </div>
-            <div class="hero-location">📍 India, West Bengal</div>
+            <div class="hero-location">ðŸ“ India, West Bengal</div>
         </div>
         <div class="hero-headline">
             <div class="hero-line-wrap"><span class="hero-line hl-left reveal-text">CREATIVE</span></div>
@@ -102,13 +105,13 @@
     <!-- Marquee -->
     <div class="marquee-section">
         <div class="marquee-track">
-            <span>Canva</span><span>✦</span><span>Photoshop</span><span>✦</span>
-            <span>Picsart</span><span>✦</span><span>Lightroom</span><span>✦</span>
-            <span>Snapseed</span><span>✦</span><span>Brand Identity</span><span>✦</span>
-            <span>Social Media</span><span>✦</span><span>Print Design</span><span>✦</span>
-            <span>Canva</span><span>✦</span><span>Photoshop</span><span>✦</span>
-            <span>Picsart</span><span>✦</span><span>Lightroom</span><span>✦</span>
-            <span>Snapseed</span><span>✦</span><span>Brand Identity</span><span>✦</span>
+            <span>Canva</span><span>&#10022;</span><span>Photoshop</span><span>&#10022;</span>
+            <span>Picsart</span><span>&#10022;</span><span>Lightroom</span><span>&#10022;</span>
+            <span>Snapseed</span><span>&#10022;</span><span>Brand Identity</span><span>&#10022;</span>
+            <span>Social Media</span><span>&#10022;</span><span>Print Design</span><span>&#10022;</span>
+            <span>Canva</span><span>&#10022;</span><span>Photoshop</span><span>&#10022;</span>
+            <span>Picsart</span><span>&#10022;</span><span>Lightroom</span><span>&#10022;</span>
+            <span>Snapseed</span><span>&#10022;</span><span>Brand Identity</span><span>&#10022;</span>
         </div>
     </div>
 
@@ -118,7 +121,7 @@
             <span class="idesign-label">Currently working on</span>
             <div class="idesign-display">
                 <span class="idesign-prefix">I design</span>
-                <span class="idesign-arrow">→</span>
+                <span class="idesign-arrow">&rarr;</span>
                 <span id="typed-text" class="typed-text"></span><span class="typed-cursor">_</span>
             </div>
         </div>
@@ -280,6 +283,23 @@
                         <span class="proj-arrow" title="View I-Cards"><i class="fas fa-arrow-right"></i></span>
                     </div>
                 </a>
+
+                <!-- Greetings Card -->
+                <a href="catalog-greetings.html" class="proj-item">
+                    <div class="proj-img-wrap">
+                        <div class="proj-img-placeholder">
+                            <img src="images/greetings/greetings-cover.png" alt="Greetings Concept" class="proj-img"
+                                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                            <span class="proj-fallback"><i class="fas fa-folder-open"></i> Greetings Cover</span>
+                        </div>
+                    </div>
+                    <div class="proj-meta">
+                        <div class="proj-tags"><span>Gift</span><span>Events</span></div>
+                        <h3 class="proj-title">Greetings Card</h3>
+                        <p class="proj-desc">Heartfelt and creative greetings cards for every occasion and celebration.</p>
+                        <span class="proj-arrow" title="View Greetings"><i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
             </div>
             
             <div style="display:flex; justify-content:center; margin-top: 60px;" data-reveal>
@@ -333,7 +353,7 @@
                         <div class="tm-item"><span class="tm-label">Based in</span><span class="tm-val">India</span>
                         </div>
                         <div class="tm-item"><span class="tm-label">Status</span><span class="tm-val open">Open to work
-                                ●</span>
+                                â—</span>
                         </div>
                     </div>
                 </div>
@@ -358,7 +378,7 @@
                     <div class="team-hover-wrapper">
                         <div class="team-hover-inner">
                             <p class="team-bio">A pixel-perfect storyteller who turns raw concepts into stunning visual
-                                narratives. Shuvam blends creativity with strategy — every design decision is
+                                narratives. Shuvam blends creativity with strategy &mdash; every design decision is
                                 intentional,
                                 purposeful, and crafted to make an impact.</p>
                             <div class="team-skills">
@@ -373,7 +393,7 @@
                         <div class="tm-item"><span class="tm-label">Based in</span><span class="tm-val">India</span>
                         </div>
                         <div class="tm-item"><span class="tm-label">Status</span><span class="tm-val open">Open to
-                                work●</span>
+                                workâ—</span>
                         </div>
                     </div>
                 </div>
@@ -431,7 +451,7 @@
                     <div class="sc-icon"><i class="fas fa-gem"></i></div>
                     <div class="sc-content">
                         <h3>Design Accessories</h3>
-                        <p>Browse our exclusive collection of project cover pages, textures, and design assets to give your work an elite edge.</p>
+                        <p>Browse our exclusive collection of project cover pages, greetings card covers, textures, and design assets to give your work an elite edge.</p>
                         <a href="catalog-accessories.html" class="sc-btn">Open Accessories Slot <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -502,7 +522,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>D'NINJA © 2026 — Designed & Crafted by Sumit & Shuvam</p>
+                <p>D'NINJA Â© 2026 &mdash; Designed & Crafted by Sumit & Shuvam</p>
                 <div class="footer-legal">
                     <a href="#">Privacy Policy</a>
                     <a href="#">Terms of Service</a>
@@ -534,7 +554,7 @@
                 <div class="pricing-grid">
                     <div class="pricing-card">
                         <h3>Logo Design</h3>
-                        <div class="price">₹24</div>
+                        <div class="price">&#8377;24</div>
                         <ul>
                             <li><i class="fas fa-check"></i> High Res Vectors (AI, EPS)</li>
                             <li><i class="fas fa-check"></i> Unlimited Revisions</li>
@@ -544,7 +564,7 @@
                     
                     <div class="pricing-card">
                         <h3>Social Media Post</h3>
-                        <div class="price">₹19</div>
+                        <div class="price">&#8377;19</div>
                         <ul>
                             <li><i class="fas fa-check"></i> Instagram Square (1080x1080)</li>
                             <li><i class="fas fa-check"></i> Instagram Portrait (1080x1350)</li>
@@ -554,7 +574,7 @@
 
                     <div class="pricing-card">
                         <h3>YouTube Thumbnail</h3>
-                        <div class="price">₹16</div>
+                        <div class="price">&#8377;16</div>
                         <ul>
                             <li><i class="fas fa-check"></i> High CTR Design</li>
                             <li><i class="fas fa-check"></i> 1920x1080 Resolution</li>
@@ -564,7 +584,7 @@
 
                     <div class="pricing-card">
                         <h3>Poster / Banner</h3>
-                        <div class="price">₹25</div>
+                        <div class="price">&#8377;25</div>
                         <ul>
                             <li><i class="fas fa-check"></i> Print-Ready PDF (300 DPI)</li>
                             <li><i class="fas fa-check"></i> A3 / A4 / Custom Sizes</li>
@@ -574,7 +594,7 @@
 
                     <div class="pricing-card">
                         <h3>Invitation Card</h3>
-                        <div class="price">₹15</div>
+                        <div class="price">&#8377;15</div>
                         <ul>
                             <li><i class="fas fa-check"></i> Premium Custom Themes</li>
                             <li><i class="fas fa-check"></i> Digital & Print Versions</li>
@@ -583,8 +603,18 @@
                     </div>
 
                     <div class="pricing-card">
+                        <h3>Greetings Card</h3>
+                        <div class="price">&#8377;15</div>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Custom Festive Themes</li>
+                            <li><i class="fas fa-check"></i> High Res Printable Files</li>
+                            <li><i class="fas fa-check"></i> Multiple Design Variations</li>
+                        </ul>
+                    </div>
+
+                    <div class="pricing-card">
                         <h3>I-Card Design</h3>
-                        <div class="price">₹17</div>
+                        <div class="price">&#8377;17</div>
                         <ul>
                             <li><i class="fas fa-check"></i> Professional Corporate/School Layout</li>
                             <li><i class="fas fa-check"></i> Multiple Design Variants</li>
@@ -609,15 +639,15 @@
                             <div class="price-list" style="margin: 16px 0;">
                                 <div style="display:flex; justify-content:space-between; padding: 6px 0; border-bottom: 1px solid var(--border);">
                                     <span style="color:var(--dim);">3 Projects</span>
-                                    <span style="color:var(--accent2); font-weight:600;">₹50</span>
+                                    <span style="color:var(--accent2); font-weight:600;">&#8377;50</span>
                                 </div>
                                 <div style="display:flex; justify-content:space-between; padding: 6px 0; border-bottom: 1px solid var(--border);">
                                     <span style="color:var(--dim);">5 Projects</span>
-                                    <span style="color:var(--accent2); font-weight:600;">₹80</span>
+                                    <span style="color:var(--accent2); font-weight:600;">&#8377;80</span>
                                 </div>
                                 <div style="display:flex; justify-content:space-between; padding: 6px 0;">
                                     <span style="color:var(--dim);">10 Projects</span>
-                                    <span style="color:var(--accent2); font-weight:600;">₹170</span>
+                                    <span style="color:var(--accent2); font-weight:600;">&#8377;170</span>
                                 </div>
                             </div>
                             <p style="font-size: 0.8rem; color: var(--dim); margin-top: auto;">*Exclusive to school students.</p>
@@ -630,11 +660,11 @@
                             <div class="price-list" style="margin: 16px 0;">
                                 <div style="display:flex; justify-content:space-between; padding: 6px 0; border-bottom: 1px solid var(--border);">
                                     <span style="color:var(--dim);">1 Month</span>
-                                    <span style="color:var(--accent); font-weight:600;">₹150</span>
+                                    <span style="color:var(--accent); font-weight:600;">&#8377;150</span>
                                 </div>
                                 <div style="display:flex; justify-content:space-between; padding: 6px 0;">
                                     <span style="color:var(--dim);">3 Months</span>
-                                    <span style="color:var(--accent); font-weight:600;">₹500</span>
+                                    <span style="color:var(--accent); font-weight:600;">&#8377;500</span>
                                 </div>
                             </div>
                             <div style="background: rgba(95, 15, 255, 0.1); padding: 10px; border-radius: 8px; font-size: 0.8rem; color: var(--accent); border: 1px dashed var(--accent); margin-top: 10px;">
@@ -672,63 +702,11 @@
         </div>
     </div>
 
-    <script>
-        const globalInput = document.getElementById('global-search-input');
-        const globalBtn = document.getElementById('global-search-btn');
-        
-        function executeGlobalSearch() {
-            const query = globalInput.value.trim();
-            if(query) {
-                window.location.href = `catalog-all.html?q=${encodeURIComponent(query)}`;
-            } else {
-                window.location.href = `catalog-all.html`;
-            }
-        }
-
-        if(globalBtn && globalInput) {
-            globalBtn.addEventListener('click', executeGlobalSearch);
-            globalInput.addEventListener('keypress', (e) => {
-                if(e.key === 'Enter') executeGlobalSearch();
-            });
-        }
-
-        // Pricing Modal Logic
-        const pricingModal = document.getElementById('pricing-modal');
-        const btnPricingNav = document.getElementById('pricing-btn');
-        const btnPricingDrawer = document.getElementById('drawer-pricing-btn');
-        const btnPricingClose = document.getElementById('pricing-close');
-        const modalCtaBtn = document.getElementById('modal-cta-btn');
-        
-        function openPricing(e) {
-            e.preventDefault();
-            pricingModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            // Close drawer if open
-            document.getElementById('nav-drawer').classList.remove('open');
-            document.getElementById('nav-toggle').classList.remove('active');
-        }
-
-        function closePricing() {
-            pricingModal.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        if(btnPricingNav) btnPricingNav.addEventListener('click', openPricing);
-        if(btnPricingDrawer) btnPricingDrawer.addEventListener('click', openPricing);
-        if(btnPricingClose) btnPricingClose.addEventListener('click', closePricing);
-        
-        // Close on clicking outside or pressing Escape
-        window.addEventListener('click', (e) => {
-            if (e.target === pricingModal) closePricing();
-        });
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && pricingModal.classList.contains('active')) closePricing();
-        });
-        
-        // Close when clicking the CTA button inside the modal
-        if(modalCtaBtn) modalCtaBtn.addEventListener('click', closePricing);
-    </script>
+    
+    <script src="cart.js"></script>
     <script src="script.js"></script>
 </body>
 
 </html>
+
+

@@ -1,12 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>D'NINJA — Branding Catalog</title>
-    <meta name="description" content="D'NINJA Branding design catalog — browse, zoom and download all Branding work.">
+    <title>D'NINJA &mdash; Branding Catalog</title>
+    <meta name="description" content="D'NINJA Branding design catalog &mdash; browse, zoom and download all Branding work.">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body class="catalog-body">
@@ -16,8 +16,8 @@
     <nav class="catalog-nav">
         <a href="index.html#projects" class="catalog-back"><i class="fas fa-arrow-left"></i> Back to Home</a>
         <div class="catalog-right" style="display:flex;align-items:center;gap:16px;">
-            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
-            <div class="catalog-title">Branding</div>
+            
+            <a href="cart.html" class="nav-link" style="position: relative; margin-right: 15px;"><i class="fas fa-shopping-cart"></i><span class="cart-count" style="display: none;">0</span></a><div class="catalog-title">Branding</div>
         </div>
     </nav>
 
@@ -25,27 +25,13 @@
         <div class="gallery-track" id="gallery-track" data-folder="branding" data-label="Branding"></div>
     </div>
 
-    <script>
-        // Theme
-        const initTheme = () => {
-            const s = localStorage.getItem('dninja-theme');
-            if (s === 'dark' || (!s && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.body.classList.add('dark-mode');
-            document.querySelectorAll('.theme-toggle i').forEach(i => i.className = document.body.classList.contains('dark-mode') ? 'fas fa-sun' : 'fas fa-moon');
-        };
-        document.querySelectorAll('.theme-toggle').forEach(btn => btn.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            localStorage.setItem('dninja-theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
-            document.querySelectorAll('.theme-toggle i').forEach(i => i.className = document.body.classList.contains('dark-mode') ? 'fas fa-sun' : 'fas fa-moon');
-        }));
-        initTheme();
-        // Custom cursor
-        const dot = document.getElementById('cursor-dot'), ring = document.getElementById('cursor-ring');
-        let mx=0,my=0,rx=0,ry=0;
-        document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
-        (function a(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a)})();
-        document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('hov'));el.addEventListener('mouseleave',()=>ring.classList.remove('hov'));});
-    </script>
+    
     <script src="catalog-data.js"></script>
-    <script src="catalog-viewer.js"></script>
+    <script src="cart.js"></script><script src="catalog-viewer.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
+
+
+
+

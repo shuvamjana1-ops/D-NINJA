@@ -1,31 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ── Theme Toggle ──
-    const initTheme = () => {
-        const savedTheme = localStorage.getItem('dninja-theme');
-        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.body.classList.add('dark-mode');
-        }
-        updateThemeIcons();
-    };
-
-    const updateThemeIcons = () => {
-        const isDark = document.body.classList.contains('dark-mode');
-        document.querySelectorAll('.theme-toggle i').forEach(icon => {
-            icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
-        });
-    };
-
-    document.querySelectorAll('.theme-toggle').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            localStorage.setItem('dninja-theme', isDark ? 'dark' : 'light');
-            updateThemeIcons();
-        });
-    });
-
-    initTheme();
+    // ── Theme Forced (Constant Dark Mode) ──
+    document.body.classList.add('dark-mode');
+    localStorage.setItem('dninja-theme', 'dark');
 
     // ── Festive Theme Engine ──
     const initFestive = () => {
@@ -113,7 +90,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (count >= 100) { count = 100; clearInterval(tick); }
         counter.textContent = count;
         fill.style.width = count + '%';
-        if (count === 100) setTimeout(() => preloader.classList.add('hidden'), 400);
+        if (count === 100) {
+            if (preloader) setTimeout(() => preloader.classList.add('hidden'), 400);
+            else clearInterval(tick);
+        }
     }, 40);
 
     // ── Cursor ──
@@ -125,8 +105,10 @@ document.addEventListener('DOMContentLoaded', () => {
         dot.style.left = mx + 'px'; dot.style.top = my + 'px';
     });
     (function anim() {
-        rx += (mx - rx) * 0.15; ry += (my - ry) * 0.15;
-        ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+        if (ring) {
+            rx += (mx - rx) * 0.15; ry += (my - ry) * 0.15;
+            ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+        }
 
         // Mouse Reactive Background Blobs
         const bx = (mx / window.innerWidth - 0.5) * 50;
@@ -137,18 +119,20 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(anim);
     })();
     // ── Smart Cursor Transformations ──
-    document.querySelectorAll('a,button,.about-tags span,.proj-item,.masonry-card,.team-card,.student-card,.skill-row,.soc-btn,.pf-btn').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            ring.classList.add('hov');
-            if (el.classList.contains('proj-item') || el.classList.contains('masonry-card')) {
-                ring.classList.add('view-mode');
-            }
+    if (dot && ring) {
+        document.querySelectorAll('a,button,.about-tags span,.proj-item,.masonry-card,.team-card,.student-card,.skill-row,.soc-btn,.pf-btn').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                ring.classList.add('hov');
+                if (el.classList.contains('proj-item') || el.classList.contains('masonry-card')) {
+                    ring.classList.add('view-mode');
+                }
+            });
+            el.addEventListener('mouseleave', () => {
+                ring.classList.remove('hov');
+                ring.classList.remove('view-mode');
+            });
         });
-        el.addEventListener('mouseleave', () => {
-            ring.classList.remove('hov');
-            ring.classList.remove('view-mode');
-        });
-    });
+    }
 
     // ── Live IST Clock ──
     const updateClock = () => {
@@ -242,19 +226,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentScroll = window.pageYOffset;
         
         // Auto-Hide Navbar
-        if (currentScroll > 150) {
-            if (currentScroll > lastScroll && !drawer.classList.contains('open')) {
+        if (navbar && currentScroll > 150) {
+            if (currentScroll > lastScroll && drawer && !drawer.classList.contains('open')) {
                 navbar.classList.add('hidden');
             } else {
                 navbar.classList.remove('hidden');
             }
-        } else {
+        } else if (navbar) {
             navbar.classList.remove('hidden');
         }
         lastScroll = currentScroll;
 
-        navbar.classList.toggle('scrolled', scrollY > 60);
-        btt.classList.toggle('visible', scrollY > 600);
+        if (navbar) navbar.classList.toggle('scrolled', scrollY > 60);
+        if (btt) btt.classList.toggle('visible', scrollY > 600);
         
         // Update Progress Bar (Top)
         const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -276,9 +260,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('section').forEach(s => { if (scrollY >= s.offsetTop - 140) cur = s.id; });
         document.querySelectorAll('.nav-link').forEach(l => l.classList.toggle('active', l.dataset.section === cur));
     });
-    toggle.addEventListener('click', () => { toggle.classList.toggle('active'); drawer.classList.toggle('open'); });
-    document.querySelectorAll('.drawer-link').forEach(l => l.addEventListener('click', () => { toggle.classList.remove('active'); drawer.classList.remove('open'); }));
-    btt.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
+    if (toggle && drawer) {
+        toggle.addEventListener('click', () => { toggle.classList.toggle('active'); drawer.classList.toggle('open'); });
+    }
+    document.querySelectorAll('.drawer-link').forEach(l => l.addEventListener('click', () => { 
+        if (toggle) toggle.classList.remove('active'); 
+        if (drawer) drawer.classList.remove('open'); 
+    }));
+    if (btt) btt.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
 
     // ── Typed text ──
     const phrases = ['brand identities.', 'visual experiences.', 'logos that speak.', 'social campaigns.', 'print that pops.', 'bold typography.'];
@@ -420,4 +409,63 @@ document.addEventListener('DOMContentLoaded', () => {
             l.style.transform = `translateX(${x * dir * 0.5}px)`;
         });
     });
+
+    // ── Global Search Logic ──
+    const globalInput = document.getElementById('global-search-input');
+    const globalBtn = document.getElementById('global-search-btn');
+    
+    const executeGlobalSearch = () => {
+        const query = globalInput.value.trim();
+        if(query) {
+            window.location.href = `catalog-all.html?q=${encodeURIComponent(query)}`;
+        } else {
+            window.location.href = `catalog-all.html`;
+        }
+    };
+
+    if(globalBtn && globalInput) {
+        globalBtn.addEventListener('click', executeGlobalSearch);
+        globalInput.addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') executeGlobalSearch();
+        });
+    }
+
+    // ── Pricing Modal Logic ──
+    const pricingModal = document.getElementById('pricing-modal');
+    const btnPricingNav = document.getElementById('pricing-btn');
+    const btnPricingDrawer = document.getElementById('drawer-pricing-btn');
+    const btnPricingClose = document.getElementById('pricing-close');
+    const modalCtaBtn = document.getElementById('modal-cta-btn');
+    
+    const openPricing = (e) => {
+        if (e) e.preventDefault();
+        if (pricingModal) {
+            pricingModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        // Close drawer if open
+        const drawer = document.getElementById('nav-drawer');
+        const toggle = document.getElementById('nav-toggle');
+        if (drawer) drawer.classList.remove('open');
+        if (toggle) toggle.classList.remove('active');
+    };
+
+    const closePricing = () => {
+        if (pricingModal) {
+            pricingModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    };
+
+    if(btnPricingNav) btnPricingNav.addEventListener('click', openPricing);
+    if(btnPricingDrawer) btnPricingDrawer.addEventListener('click', openPricing);
+    if(btnPricingClose) btnPricingClose.addEventListener('click', closePricing);
+    
+    window.addEventListener('click', (e) => {
+        if (e.target === pricingModal) closePricing();
+    });
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && pricingModal && pricingModal.classList.contains('active')) closePricing();
+    });
+    if(modalCtaBtn) modalCtaBtn.addEventListener('click', closePricing);
 });
