@@ -2,10 +2,11 @@
 cd /d "%~dp0"
 echo.
 echo  ========================================
-echo     D'NINJA  -  Image Sync Tool
+echo     D'NINJA  -  MASTER SYNC TOOL
 echo  ========================================
 echo.
-echo  Scanning images folder...
+echo  Updating all catalogs (Branding, Logo, 
+echo  Social, Students, Accessories, etc.)
 echo.
 powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0sync-helper.ps1"
 pause
