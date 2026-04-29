@@ -38,61 +38,44 @@
        1. LOAD IMAGES (try jpg → png → webp)
     ═══════════════════════════════════════════ */
     function loadImages() {
-        if (folder === 'all') {
-            const folders = ['branding', 'socialmedia', 'poster', 'thumbnail', 'logo', 'invitation', 'icard'];
-            let pending = MAX_IMAGES * folders.length;
-            folders.forEach(f => {
-                for (let i = 1; i <= MAX_IMAGES; i++) {
-                    tryExtensionAll(f, i, 0, () => { if (--pending === 0) onAllAttempted(); });
-                }
-            });
-            setTimeout(() => onAllAttempted(), 4000);
-        } else {
-            let pending = MAX_IMAGES;
-            for (let i = 1; i <= MAX_IMAGES; i++) {
-                tryExtension(i, 0, () => { if (--pending === 0) onAllAttempted(); });
-            }
-            setTimeout(() => onAllAttempted(), 3000);
+        images = [];
+        if (!window.CATALOG_DATA) {
+            console.error("CATALOG_DATA not found. Run Sync-Images.bat!");
+            onAllAttempted();
+            return;
         }
-    }
 
-    function tryExtension(i, extIdx, done) {
-        if (extIdx >= EXTENSIONS.length) { done(); return; }
-        const ext = EXTENSIONS[extIdx];
-        const src = `images/${folder}/${folder}-${i}.${ext}`;
-        const img = new Image();
-        img.onload = () => {
-            if (!images.find(x => x.src === src)) {
-                images.push({ src, alt: `${label} Design ${i}`, idx: i });
+        if (folder === 'all') {
+            let globalIdx = 0;
+            for (const f in window.CATALOG_DATA) {
+                window.CATALOG_DATA[f].forEach((item) => {
+                    images.push({
+                        src: item.src,
+                        alt: item.name,
+                        idx: globalIdx++,
+                        folder: f
+                    });
+                });
             }
-            done();
-        };
-        img.onerror = () => tryExtension(i, extIdx + 1, done);
-        img.src = src;
-    }
-
-    function tryExtensionAll(f, i, extIdx, done) {
-        if (extIdx >= EXTENSIONS.length) { done(); return; }
-        const ext = EXTENSIONS[extIdx];
-        const src = `images/${f}/${f}-${i}.${ext}`;
-        const img = new Image();
-        img.onload = () => {
-            if (!images.find(x => x.src === src)) {
-                // Mix them simply by incrementing idx so they sort globally
-                images.push({ src, alt: `Design from ${f}`, idx: images.length });
-            }
-            done();
-        };
-        img.onerror = () => tryExtensionAll(f, i, extIdx + 1, done);
-        img.src = src;
+        } else {
+            const folderData = window.CATALOG_DATA[folder] || [];
+            folderData.forEach((item, i) => {
+                images.push({
+                    src: item.src,
+                    alt: item.name,
+                    idx: i,
+                    folder: folder
+                });
+            });
+        }
+        
+        onAllAttempted();
     }
 
     let allAttempted = false;
     function onAllAttempted() {
         if (allAttempted) return;
         allAttempted = true;
-        // Sort by idx
-        images.sort((a, b) => a.idx - b.idx);
         renderGridView();
         if (images.length === 0) renderEmpty();
 
@@ -144,10 +127,8 @@
     function renderScrollView() {
         track.innerHTML = '';
         images.forEach((img, i) => {
-            const tagKey = img.src.replace('images/', '');
-            const tagData = window.IMAGE_TAGS && window.IMAGE_TAGS[tagKey];
-            const displayName = tagData && tagData.name ? tagData.name : `${label} Project`;
-            const searchStr = (img.alt + " " + (tagData ? tagData.name + " " + tagData.tags : "")).toLowerCase();
+            const displayName = img.alt;
+            const searchStr = img.alt.toLowerCase();
 
             const frame = el('div', 'gallery-frame');
             frame.setAttribute('data-search', searchStr);
@@ -198,10 +179,8 @@
         track.innerHTML = '';
 
         images.forEach((img, i) => {
-            const tagKey = img.src.replace('images/', '');
-            const tagData = window.IMAGE_TAGS && window.IMAGE_TAGS[tagKey];
-            const displayName = tagData && tagData.name ? tagData.name : `${label} — ${String(img.idx).padStart(2, '0')}`;
-            const searchStr = (img.alt + " " + (tagData ? tagData.name + " " + tagData.tags : "")).toLowerCase();
+            const displayName = img.alt;
+            const searchStr = img.alt.toLowerCase();
 
             const card = el('div', 'masonry-card');
             card.setAttribute('data-search', searchStr);
@@ -513,8 +492,10 @@
         track.innerHTML = `
             <div class="catalog-empty">
                 <i class="fas fa-folder-open"></i>
-                <p>Drop your images into<br><code>images/${folder}/</code></p>
-                <span>Name them: <code>${folder}-1.jpg</code>, <code>${folder}-2.jpg</code> …</span>
+                <p>No images found in<br><code>images/${folder}/</code></p>
+                <span>Save your designs here with descriptive names<br>
+                e.g. <code>my-cool-design.jpg</code><br>
+                then run <code>Sync-Images.bat</code></span>
             </div>`;
     }
 
