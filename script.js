@@ -260,8 +260,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
         const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const scrolled = (winScroll / height) * 100;
-        const pBar = document.getElementById('progress-bar');
-        if (pBar) pBar.style.width = scrolled + "%";
+        const topBar = document.getElementById('top-progress');
+        if (topBar) topBar.style.width = scrolled + "%";
 
         // Update BTT Progress Ring & Percent
         const circleFill = document.querySelector('.btt-circle-fill');
@@ -293,7 +293,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     setTimeout(type, 2800);
 
-    // ── Scroll reveal ──
+    // ── Magnetic Navigation ──
+    const magneticLinks = document.querySelectorAll('.nav-link, .nav-logo, .nav-hire');
+    magneticLinks.forEach(link => {
+        link.addEventListener('mousemove', (e) => {
+            const rect = link.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            link.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+        });
+        link.addEventListener('mouseleave', () => {
+            link.style.transform = '';
+        });
+    });
+
+    // ── Section Reveal ──
     const revealObs = new IntersectionObserver(entries => {
         entries.forEach((e, i) => {
             if (e.isIntersecting) {

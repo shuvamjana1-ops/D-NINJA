@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D'NINJA — Student Perks & Discounts</title>
+    <meta name="description" content="Exclusive design discounts and memberships for school and college students at D'NINJA studio.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="dark-mode">
+    <div id="cursor-dot" class="cursor-dot"></div>
+    <div id="cursor-ring" class="cursor-ring"></div>
+    <div class="noise-overlay"></div>
+    <div id="festive-container" class="festive-container"></div>
+
+    <nav class="catalog-nav">
+        <a href="index.html#student-corner" class="catalog-back"><i class="fas fa-arrow-left"></i> Back to Studio</a>
+        <div class="catalog-right">
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+        </div>
+    </nav>
+
+    <main class="container" style="padding-top: 160px; padding-bottom: 100px;">
+        <header style="text-align: center; margin-bottom: 60px;">
+            <span class="section-label">Verified Student Perks</span>
+            <h1 class="hero-line" style="font-size: clamp(4rem, 10vw, 8rem); margin-bottom: 20px;">Special <br><em>Discounts</em></h1>
+            <p style="color: var(--dim); max-width: 600px; margin: 0 auto; font-size: 1.1rem;">Official D'NINJA Student Discount Charts for 2024. Select your category below to unlock exclusive rates.</p>
+        </header>
+
+        <!-- OFFICIAL DISCOUNT CHART -->
+        <div class="pricing-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; margin-bottom: 40px;">
+            
+            <!-- School Student Chart -->
+            <div class="pricing-card" style="border-color: var(--accent2); padding: 40px; background: rgba(255, 60, 110, 0.05); transform: none; opacity: 1;">
+                <div style="display:flex; align-items:center; gap: 15px; margin-bottom: 30px;">
+                    <i class="fas fa-school" style="font-size: 2rem; color: var(--accent2);"></i>
+                    <h2 style="font-size: 2.2rem; font-family: var(--display); letter-spacing: 1px;">Class 10-12 Chart</h2>
+                </div>
+
+                <div style="width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 60, 110, 0.2);">
+                    <table style="width: 100%; border-collapse: collapse; text-align: left; font-family: var(--mono);">
+                        <thead style="background: rgba(255, 60, 110, 0.1);">
+                            <tr>
+                                <th style="padding: 15px; border-bottom: 1px solid rgba(255, 60, 110, 0.2); color: var(--accent2);">PROJECTS</th>
+                                <th style="padding: 15px; border-bottom: 1px solid rgba(255, 60, 110, 0.2); color: var(--accent2); text-align: right;">PRICE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">03 Bundle</td>
+                                <td style="padding: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); text-align: right; font-weight: 700; color: #fff;">₹50</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">05 Bundle</td>
+                                <td style="padding: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); text-align: right; font-weight: 700; color: #fff;">₹80</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 15px;">10 Bundle</td>
+                                <td style="padding: 15px; text-align: right; font-weight: 700; color: #fff;">₹170</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="margin-top: 20px; font-size: 0.85rem; color: var(--dim); line-height: 1.6;">*Valid School ID required. Covers all basic design categories.</p>
+                <a href="index.html#contact" class="cf-submit" style="width: 100%; text-decoration: none; justify-content: center; margin-top: 25px; border-color: var(--accent2);">
+                    <span>Get School Pack</span><i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- College Student Chart -->
+            <div class="pricing-card" style="border-color: var(--accent); padding: 40px; background: rgba(95, 15, 255, 0.05); transform: none; opacity: 1;">
+                <div style="display:flex; align-items:center; gap: 15px; margin-bottom: 30px;">
+                    <i class="fas fa-university" style="font-size: 2rem; color: var(--accent);"></i>
+                    <h2 style="font-size: 2.2rem; font-family: var(--display); letter-spacing: 1px;">College Chart</h2>
+                </div>
+
+                <div style="width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid rgba(95, 15, 255, 0.2);">
+                    <table style="width: 100%; border-collapse: collapse; text-align: left; font-family: var(--mono);">
+                        <thead style="background: rgba(95, 15, 255, 0.1);">
+                            <tr>
+                                <th style="padding: 15px; border-bottom: 1px solid rgba(95, 15, 255, 0.2); color: var(--accent);">DURATION</th>
+                                <th style="padding: 15px; border-bottom: 1px solid rgba(95, 15, 255, 0.2); color: var(--accent); text-align: right;">FEE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">01 Month Pass</td>
+                                <td style="padding: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); text-align: right; font-weight: 700; color: #fff;">₹150</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 15px;">03 Month Pass</td>
+                                <td style="padding: 15px; text-align: right; font-weight: 700; color: #fff;">₹500</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="background: rgba(95, 15, 255, 0.1); padding: 15px; border-radius: 12px; font-size: 0.9rem; color: var(--accent); border: 1px dashed var(--accent); margin-top: 20px;">
+                    <i class="fas fa-gift"></i> <strong>BONUS:</strong> Your very first project is <strong>FREE</strong> with any membership!
+                </div>
+
+                <a href="index.html#contact" class="cf-submit" style="width: 100%; text-decoration: none; justify-content: center; margin-top: 25px; background: var(--accent);">
+                    <span>Get College Pass</span><i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Referral Section -->
+        <section style="padding: 40px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); border-radius: 24px; display: flex; align-items: center; gap: 30px; flex-wrap: wrap;">
+            <div style="font-size: 3rem; color: var(--accent2);"><i class="fas fa-users"></i></div>
+            <div style="flex: 1; min-width: 300px;">
+                <h3 style="font-size: 1.8rem; font-family: var(--display);">The Ninja Referral Program</h3>
+                <p style="color: var(--dim); line-height: 1.6;">Refer a friend and you <strong>BOTH get 20% OFF</strong> your next project bundle. No limits!</p>
+            </div>
+            <a href="index.html#contact" class="sc-btn" style="background: var(--accent2); color: #fff; border: none; padding: 15px 30px; border-radius: 50px;">Share the Love</a>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

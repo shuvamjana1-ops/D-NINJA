@@ -122,21 +122,15 @@ body.festive-christmas {
     100% { transform: translate(5%,0); }
 }
 
-/* ===== SCROLL PROGRESS ===== */
-.progress-wrap {
+.top-progress-bar {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 3px;
-    z-index: 2000;
-}
-
-.progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
     width: 0%;
-    box-shadow: 0 0 10px var(--accent);
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    z-index: 2001;
+    box-shadow: 0 0 15px var(--accent);
 }
 
 *,
@@ -1216,10 +1210,11 @@ body.dark-mode .navbar.scrolled {
 }
 
 
-/* ===== SKILLS ===== */
-.skills-section {
+.services-section,
+.faq-section,
+.student-section,
+.about-section {
     padding: 120px 0;
-    background: transparent;
     position: relative;
     overflow: hidden;
 }
@@ -1844,6 +1839,37 @@ body.dark-mode .navbar.scrolled {
 
 .cd-item:hover {
     color: var(--text)
+}
+
+.nav-logo-placeholder {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.glint-logo::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transform: skewX(-20deg);
+    animation: glint 4s infinite;
+}
+
+@keyframes glint {
+    0% { left: -150%; }
+    20% { left: 150%; }
+    100% { left: 150%; }
 }
 
 .cd-icon {

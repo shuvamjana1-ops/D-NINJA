@@ -18,7 +18,7 @@
     <div id="cursor-dot" class="cursor-dot"></div>
     <div id="cursor-ring" class="cursor-ring"></div>
     <div class="noise-overlay"></div>
-    <div class="progress-wrap"><div class="progress-bar" id="progress-bar"></div></div>
+    <div class="top-progress-bar" id="top-progress"></div>
     <div id="festive-container" class="festive-container"></div>
 
     <!-- Preloader -->
@@ -35,7 +35,7 @@
         <div class="nav-inner">
             <a href="#hero" class="nav-logo">
                 <!-- YOUR LOGO: replace 'dninja_logo.png' with your actual logo file -->
-                <div class="nav-logo-placeholder" id="logo-placeholder">
+                <div class="nav-logo-placeholder glint-logo" id="logo-placeholder">
                     <img src="dninja_logo.png" alt="D'NINJA Logo" class="nav-logo-img"
                         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                     <span class="logo-fallback">D'N</span>
@@ -46,6 +46,8 @@
                 <a href="#services" class="nav-link" data-section="services">Services</a>
                 <a href="#projects" class="nav-link" data-section="projects">Work</a>
                 <a href="#about" class="nav-link" data-section="about">About</a>
+                <a href="#faq" class="nav-link" data-section="faq">FAQ</a>
+                <a href="#student-corner" class="nav-link" data-section="student-corner">Students</a>
                 <a href="#contact" class="nav-link" data-section="contact">Contact</a>
             </div>
             <div class="nav-right" style="display: flex; align-items: center; gap: 16px;">
@@ -61,6 +63,8 @@
             <a href="#services" class="drawer-link" data-section="services">Services</a>
             <a href="#projects" class="drawer-link" data-section="projects">Work</a>
             <a href="#about" class="drawer-link" data-section="about">About</a>
+            <a href="#faq" class="drawer-link" data-section="faq">FAQ</a>
+            <a href="#student-corner" class="drawer-link" data-section="student-corner">Students</a>
             <a href="#contact" class="drawer-link" data-section="contact">Contact</a>
             <a href="#" id="drawer-pricing-btn" class="drawer-link" style="color: var(--accent2);">Pricing</a>
         </div>
@@ -377,61 +381,6 @@
         </div>
     </section>
 
-    <!-- Skills -->
-    <section id="skills" class="skills-section">
-        <!-- Floating Design Assets -->
-        <div class="floating-asset asset-1"><i class="fas fa-palette"></i></div>
-        <div class="floating-asset asset-2"><i class="fab fa-adobe"></i></div>
-        <div class="floating-asset asset-3"><i class="fas fa-magic"></i></div>
-        
-        <div class="container">
-            <div class="skills-header" data-reveal>
-                <span class="section-label">My Toolkit</span>
-                <h2 class="skills-heading scramble-text">Tools I master</h2>
-            </div>
-            <div class="skills-list" data-reveal>
-                <div class="skill-row">
-                    <div class="skill-info"><span class="skill-num">01</span><span class="skill-name">Canva</span></div>
-                    <div class="skill-track">
-                        <div class="skill-bar-fill" data-w="95"></div>
-                    </div>
-                    <span class="skill-pct">95%</span>
-                </div>
-                <div class="skill-row">
-                    <div class="skill-info"><span class="skill-num">02</span><span class="skill-name">Picsart</span>
-                    </div>
-                    <div class="skill-track">
-                        <div class="skill-bar-fill" data-w="90"></div>
-                    </div>
-                    <span class="skill-pct">90%</span>
-                </div>
-                <div class="skill-row">
-                    <div class="skill-info"><span class="skill-num">03</span><span class="skill-name">Photoshop</span>
-                    </div>
-                    <div class="skill-track">
-                        <div class="skill-bar-fill" data-w="88"></div>
-                    </div>
-                    <span class="skill-pct">88%</span>
-                </div>
-                <div class="skill-row">
-                    <div class="skill-info"><span class="skill-num">04</span><span class="skill-name">Lightroom</span>
-                    </div>
-                    <div class="skill-track">
-                        <div class="skill-bar-fill" data-w="85"></div>
-                    </div>
-                    <span class="skill-pct">85%</span>
-                </div>
-                <div class="skill-row">
-                    <div class="skill-info"><span class="skill-num">05</span><span class="skill-name">Snapseed</span>
-                    </div>
-                    <div class="skill-track">
-                        <div class="skill-bar-fill" data-w="92"></div>
-                    </div>
-                    <span class="skill-pct">92%</span>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- FAQ Section -->
     <section id="faq" class="faq-section">
@@ -472,8 +421,8 @@
                     <div class="sc-icon"><i class="fas fa-percent"></i></div>
                     <div class="sc-content">
                         <h3>Student Discounts</h3>
-                        <p>Need a killer logo for your college club or a stunning poster for your fest? Get premium designs at exclusive student-friendly rates.</p>
-                        <a href="#contact" class="sc-btn">Claim Discount <i class="fas fa-arrow-right"></i></a>
+                        <p>Special project-based rates and monthly memberships for Class 10-12 and College students.</p>
+                        <a href="student-discounts.html" class="sc-btn">Explore Discounts <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 
