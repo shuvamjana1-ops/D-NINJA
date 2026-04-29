@@ -225,6 +225,21 @@
             card.addEventListener('click', (e) => {
                 if (!e.target.closest('.masonry-btn')) openLightbox(i);
             });
+
+            // 3D Tilt Effect
+            card.addEventListener('mousemove', e => {
+                const r = card.getBoundingClientRect();
+                const x = e.clientX - r.left;
+                const y = e.clientY - r.top;
+                const xc = r.width / 2;
+                const yc = r.height / 2;
+                const dx = (x - xc) / 10;
+                const dy = (y - yc) / 10;
+                card.style.transform = `perspective(1000px) rotateY(${dx}deg) rotateX(${-dy}deg) translateY(-4px)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
         });
     }
 

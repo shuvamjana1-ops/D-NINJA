@@ -17,6 +17,9 @@
 <body>
     <div id="cursor-dot" class="cursor-dot"></div>
     <div id="cursor-ring" class="cursor-ring"></div>
+    <div class="noise-overlay"></div>
+    <div class="progress-wrap"><div class="progress-bar" id="progress-bar"></div></div>
+    <div id="festive-container" class="festive-container"></div>
 
     <!-- Preloader -->
     <div id="preloader" class="preloader">
@@ -40,10 +43,9 @@
                 <span class="nav-logo-text">D<span class="logo-apostrophe">'</span>NINJA</span>
             </a>
             <div class="nav-center">
-                <a href="#about" class="nav-link" data-section="about">About</a>
-                <a href="#skills" class="nav-link" data-section="skills">Skills</a>
+                <a href="#services" class="nav-link" data-section="services">Services</a>
                 <a href="#projects" class="nav-link" data-section="projects">Work</a>
-                <a href="#student-corner" class="nav-link" data-section="student-corner">Students</a>
+                <a href="#about" class="nav-link" data-section="about">About</a>
                 <a href="#contact" class="nav-link" data-section="contact">Contact</a>
             </div>
             <div class="nav-right" style="display: flex; align-items: center; gap: 16px;">
@@ -56,10 +58,9 @@
             </div>
         </div>
         <div class="nav-drawer" id="nav-drawer">
-            <a href="#about" class="drawer-link" data-section="about">About</a>
-            <a href="#skills" class="drawer-link" data-section="skills">Skills</a>
+            <a href="#services" class="drawer-link" data-section="services">Services</a>
             <a href="#projects" class="drawer-link" data-section="projects">Work</a>
-            <a href="#student-corner" class="drawer-link" data-section="student-corner">Students</a>
+            <a href="#about" class="drawer-link" data-section="about">About</a>
             <a href="#contact" class="drawer-link" data-section="contact">Contact</a>
             <a href="#" id="drawer-pricing-btn" class="drawer-link" style="color: var(--accent2);">Pricing</a>
         </div>
@@ -67,12 +68,12 @@
 
     <!-- HERO -->
     <section id="hero" class="hero-section">
-        <!-- Gen Z Stickers -->
-        <div class="sticker st-1"><i class="fas fa-fire"></i> 100% Fire</div>
-        <div class="sticker st-2"><i class="fas fa-bolt"></i> No Cap</div>
 
         <div class="hero-top">
-            <div class="hero-badge"><span class="badge-dot"></span>Available for projects</div>
+            <div class="hero-badge-wrap">
+                <div class="hero-badge"><span class="badge-dot"></span>Available for projects</div>
+                <div class="hero-clock" id="live-clock">IST 00:00:00</div>
+            </div>
             <div class="hero-location">📍 India, West Bengal</div>
         </div>
         <div class="hero-headline">
@@ -119,143 +120,28 @@
         </div>
     </div>
 
-    <!-- About -->
-    <section id="about" class="about-section">
-        <div class="about-header-wrap" data-reveal>
-            <span class="section-label">The Team Behind D'NINJA</span>
-            <h2 class="about-team-heading">Meet the <em>Creators</em></h2>
-            <p class="about-team-sub">Two designers. One vision. Infinite creativity.</p>
-        </div>
-
-        <div class="team-cards-wrap">
-            <!-- Sumit Dinda -->
-            <div class="team-card" data-reveal>
-                <div class="team-card-glow glow-purple"></div>
-                <div class="team-img-wrap">
-                    <!-- YOUR PHOTO: replace 'sumit_avatar.png' with your actual photo file -->
-                    <div class="team-avatar-placeholder">
-                        <img src="sumit_avatar.png" alt="Sumit Dinda" class="team-avatar"
-                            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                        <span class="avatar-fallback"><i class="fas fa-user"></i></span>
-                    </div>
-                    <div class="team-img-ring"></div>
-                    <div class="team-badge"><i class="fas fa-palette"></i> Co-Founder</div>
-                </div>
-                <div class="team-info">
-                    <h3 class="team-name">SUMIT DINDA</h3>
-                    <span class="team-role">Creative Director & Brand Designer</span>
-                    <div class="team-hover-wrapper">
-                        <div class="team-hover-inner">
-                            <p class="team-bio">A visionary brand architect with an eye for bold aesthetics. Sumit
-                                breathes life
-                                into brand identities, transforming abstract ideas into powerful visual statements that
-                                resonate, inspire, and convert.</p>
-                            <div class="team-skills">
-                                <span>Brand Identity</span><span>Logo Design</span><span>Typography</span><span>Art
-                                    Direction</span><span>Video Editor</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="team-meta">
-                        <div class="tm-item"><span class="tm-label">Role</span><span class="tm-val">Co-Founder</span>
-                        </div>
-                        <div class="tm-item"><span class="tm-label">Based in</span><span class="tm-val">India</span>
-                        </div>
-                        <div class="tm-item"><span class="tm-label">Status</span><span class="tm-val open">Open to work
-                                ●</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Shuvam Jana -->
-            <div class="team-card" data-reveal>
-                <div class="team-card-glow glow-pink"></div>
-                <div class="team-img-wrap">
-                    <!-- YOUR PHOTO: replace 'shuvam_avatar.png' with your actual photo file -->
-                    <div class="team-avatar-placeholder">
-                        <img src="shuvam_avatar.png" alt="Shuvam Jana" class="team-avatar"
-                            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                        <span class="avatar-fallback"><i class="fas fa-user"></i></span>
-                    </div>
-                    <div class="team-img-ring"></div>
-                    <div class="team-badge"><i class="fas fa-magic"></i> Co-Founder</div>
-                </div>
-                <div class="team-info">
-                    <h3 class="team-name">SHUVAM JANA</h3>
-                    <span class="team-role">Visual Designer & Creative Strategist</span>
-                    <div class="team-hover-wrapper">
-                        <div class="team-hover-inner">
-                            <p class="team-bio">A pixel-perfect storyteller who turns raw concepts into stunning visual
-                                narratives. Shuvam blends creativity with strategy — every design decision is
-                                intentional,
-                                purposeful, and crafted to make an impact.</p>
-                            <div class="team-skills">
-                                <span>Visual Design</span><span>Social Media</span><span>Print Design</span><span>Motion
-                                    Graphics</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="team-meta">
-                        <div class="tm-item"><span class="tm-label">Role</span><span class="tm-val">Co-Founder</span>
-                        </div>
-                        <div class="tm-item"><span class="tm-label">Based in</span><span class="tm-val">India</span>
-                        </div>
-                        <div class="tm-item"><span class="tm-label">Status</span><span class="tm-val open">Open to
-                                work●</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills -->
-    <section id="skills" class="skills-section">
+    <!-- Services -->
+    <section id="services" class="services-section">
         <div class="container">
-            <div class="skills-header" data-reveal>
-                <span class="section-label">My Toolkit</span>
-                <h2 class="skills-heading">Tools I <em>master</em></h2>
+            <div class="services-header" data-reveal>
+                <span class="section-label">Our Expertise</span>
+                <h2 class="services-heading scramble-text">Professional Services.</h2>
             </div>
-            <div class="skills-list" data-reveal>
-                <div class="skill-row">
-                    <div class="skill-info"><span class="skill-num">01</span><span class="skill-name">Canva</span></div>
-                    <div class="skill-track">
-                        <div class="skill-bar-fill" data-w="95"></div>
-                    </div>
-                    <span class="skill-pct">95%</span>
+            <div class="services-grid">
+                <div class="service-card" data-reveal>
+                    <div class="s-icon"><i class="fas fa-fingerprint"></i></div>
+                    <h3>Brand Identity</h3>
+                    <p>Crafting unique visual stories that define your brand's essence and personality.</p>
                 </div>
-                <div class="skill-row">
-                    <div class="skill-info"><span class="skill-num">02</span><span class="skill-name">Picsart</span>
-                    </div>
-                    <div class="skill-track">
-                        <div class="skill-bar-fill" data-w="90"></div>
-                    </div>
-                    <span class="skill-pct">90%</span>
+                <div class="service-card" data-reveal>
+                    <div class="s-icon"><i class="fas fa-hashtag"></i></div>
+                    <h3>Social Media</h3>
+                    <p>Strategic content creation designed to stop the scroll and build community.</p>
                 </div>
-                <div class="skill-row">
-                    <div class="skill-info"><span class="skill-num">03</span><span class="skill-name">Photoshop</span>
-                    </div>
-                    <div class="skill-track">
-                        <div class="skill-bar-fill" data-w="88"></div>
-                    </div>
-                    <span class="skill-pct">88%</span>
-                </div>
-                <div class="skill-row">
-                    <div class="skill-info"><span class="skill-num">04</span><span class="skill-name">Lightroom</span>
-                    </div>
-                    <div class="skill-track">
-                        <div class="skill-bar-fill" data-w="85"></div>
-                    </div>
-                    <span class="skill-pct">85%</span>
-                </div>
-                <div class="skill-row">
-                    <div class="skill-info"><span class="skill-num">05</span><span class="skill-name">Snapseed</span>
-                    </div>
-                    <div class="skill-track">
-                        <div class="skill-bar-fill" data-w="92"></div>
-                    </div>
-                    <span class="skill-pct">92%</span>
+                <div class="service-card" data-reveal>
+                    <div class="s-icon"><i class="fas fa-print"></i></div>
+                    <h3>Print Design</h3>
+                    <p>High-quality layouts for posters, banners, and physical marketing assets.</p>
                 </div>
             </div>
         </div>
@@ -267,7 +153,7 @@
             <div class="projects-header" data-reveal style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap: 20px; margin-bottom: 20px;">
                 <div>
                     <span class="section-label">Featured Work</span>
-                    <h2 class="projects-heading" style="margin-bottom:0;">Selected<br><em>designs.</em></h2>
+                    <h2 class="projects-heading scramble-text" style="margin-bottom:0;">Selected Designs.</h2>
                 </div>
             </div>
             <div class="proj-list" id="proj-list" style="margin-top: 32px;" data-reveal>
@@ -400,12 +286,183 @@
         </div>
     </section>
 
+    <!-- About -->
+    <section id="about" class="about-section">
+        <div class="about-header-wrap" data-reveal>
+            <span class="section-label">The Team Behind D'NINJA</span>
+            <h2 class="about-team-heading scramble-text">Meet the Creators</h2>
+            <p class="about-team-sub">Two designers. One vision. Infinite creativity.</p>
+        </div>
+
+        <div class="team-cards-wrap">
+            <!-- Sumit Dinda -->
+            <div class="team-card" data-reveal>
+                <div class="team-card-glow glow-purple"></div>
+                <div class="team-img-wrap">
+                    <!-- YOUR PHOTO: replace 'sumit_avatar.png' with your actual photo file -->
+                    <div class="team-avatar-placeholder">
+                        <img src="sumit_avatar.png" alt="Sumit Dinda" class="team-avatar"
+                            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        <span class="avatar-fallback"><i class="fas fa-user"></i></span>
+                    </div>
+                    <div class="team-img-ring"></div>
+                    <div class="team-badge"><i class="fas fa-palette"></i> Co-Founder</div>
+                </div>
+                <div class="team-info">
+                    <h3 class="team-name">SUMIT DINDA</h3>
+                    <span class="team-role">Creative Director & Brand Designer</span>
+                    <div class="team-hover-wrapper">
+                        <div class="team-hover-inner">
+                            <p class="team-bio">A visionary brand architect with an eye for bold aesthetics. Sumit
+                                breathes life
+                                into brand identities, transforming abstract ideas into powerful visual statements that
+                                resonate, inspire, and convert.</p>
+                            <div class="team-skills">
+                                <span>Brand Identity</span><span>Logo Design</span><span>Typography</span><span>Art
+                                    Direction</span><span>Video Editor</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-meta">
+                        <div class="tm-item"><span class="tm-label">Role</span><span class="tm-val">Co-Founder</span>
+                        </div>
+                        <div class="tm-item"><span class="tm-label">Based in</span><span class="tm-val">India</span>
+                        </div>
+                        <div class="tm-item"><span class="tm-label">Status</span><span class="tm-val open">Open to work
+                                ●</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shuvam Jana -->
+            <div class="team-card" data-reveal>
+                <div class="team-card-glow glow-pink"></div>
+                <div class="team-img-wrap">
+                    <!-- YOUR PHOTO: replace 'shuvam_avatar.png' with your actual photo file -->
+                    <div class="team-avatar-placeholder">
+                        <img src="shuvam_avatar.png" alt="Shuvam Jana" class="team-avatar"
+                            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        <span class="avatar-fallback"><i class="fas fa-user"></i></span>
+                    </div>
+                    <div class="team-img-ring"></div>
+                    <div class="team-badge"><i class="fas fa-magic"></i> Co-Founder</div>
+                </div>
+                <div class="team-info">
+                    <h3 class="team-name">SHUVAM JANA</h3>
+                    <span class="team-role">Visual Designer & Creative Strategist</span>
+                    <div class="team-hover-wrapper">
+                        <div class="team-hover-inner">
+                            <p class="team-bio">A pixel-perfect storyteller who turns raw concepts into stunning visual
+                                narratives. Shuvam blends creativity with strategy — every design decision is
+                                intentional,
+                                purposeful, and crafted to make an impact.</p>
+                            <div class="team-skills">
+                                <span>Visual Design</span><span>Social Media</span><span>Print Design</span><span>Motion
+                                    Graphics</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-meta">
+                        <div class="tm-item"><span class="tm-label">Role</span><span class="tm-val">Co-Founder</span>
+                        </div>
+                        <div class="tm-item"><span class="tm-label">Based in</span><span class="tm-val">India</span>
+                        </div>
+                        <div class="tm-item"><span class="tm-label">Status</span><span class="tm-val open">Open to
+                                work●</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="skills-section">
+        <!-- Floating Design Assets -->
+        <div class="floating-asset asset-1"><i class="fas fa-palette"></i></div>
+        <div class="floating-asset asset-2"><i class="fab fa-adobe"></i></div>
+        <div class="floating-asset asset-3"><i class="fas fa-magic"></i></div>
+        
+        <div class="container">
+            <div class="skills-header" data-reveal>
+                <span class="section-label">My Toolkit</span>
+                <h2 class="skills-heading scramble-text">Tools I master</h2>
+            </div>
+            <div class="skills-list" data-reveal>
+                <div class="skill-row">
+                    <div class="skill-info"><span class="skill-num">01</span><span class="skill-name">Canva</span></div>
+                    <div class="skill-track">
+                        <div class="skill-bar-fill" data-w="95"></div>
+                    </div>
+                    <span class="skill-pct">95%</span>
+                </div>
+                <div class="skill-row">
+                    <div class="skill-info"><span class="skill-num">02</span><span class="skill-name">Picsart</span>
+                    </div>
+                    <div class="skill-track">
+                        <div class="skill-bar-fill" data-w="90"></div>
+                    </div>
+                    <span class="skill-pct">90%</span>
+                </div>
+                <div class="skill-row">
+                    <div class="skill-info"><span class="skill-num">03</span><span class="skill-name">Photoshop</span>
+                    </div>
+                    <div class="skill-track">
+                        <div class="skill-bar-fill" data-w="88"></div>
+                    </div>
+                    <span class="skill-pct">88%</span>
+                </div>
+                <div class="skill-row">
+                    <div class="skill-info"><span class="skill-num">04</span><span class="skill-name">Lightroom</span>
+                    </div>
+                    <div class="skill-track">
+                        <div class="skill-bar-fill" data-w="85"></div>
+                    </div>
+                    <span class="skill-pct">85%</span>
+                </div>
+                <div class="skill-row">
+                    <div class="skill-info"><span class="skill-num">05</span><span class="skill-name">Snapseed</span>
+                    </div>
+                    <div class="skill-track">
+                        <div class="skill-bar-fill" data-w="92"></div>
+                    </div>
+                    <span class="skill-pct">92%</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <div class="faq-header" data-reveal>
+                <span class="section-label">Questions?</span>
+                <h2 class="faq-heading scramble-text">Frequently Asked.</h2>
+            </div>
+            <div class="faq-list" data-reveal>
+                <div class="faq-item">
+                    <div class="faq-q">What is your typical turnaround time? <i class="fas fa-plus"></i></div>
+                    <div class="faq-a">For small projects like logos or thumbnails, 2-3 days. Larger brand identities take 1-2 weeks.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">Do you offer unlimited revisions? <i class="fas fa-plus"></i></div>
+                    <div class="faq-a">Yes, we work until you are 100% satisfied with the final result.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">Can you handle rush orders? <i class="fas fa-plus"></i></div>
+                    <div class="faq-a">Yes, we offer express delivery for an additional fee depending on our current schedule.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Student Corner -->
     <section id="student-corner" class="student-section">
         <div class="container">
             <div class="student-header" data-reveal>
                 <span class="section-label">For The Learners</span>
-                <h2 class="student-heading">Student <em>Corner.</em></h2>
+                <h2 class="student-heading scramble-text">Student Corner.</h2>
                 <p style="color: var(--dim); margin-top: 10px; max-width: 500px; line-height: 1.6;">Exclusive resources, discounts, and opportunities dedicated to empowering the next generation of designers and creators.</p>
             </div>
             
@@ -440,7 +497,7 @@
                 <span class="section-label light">Slide into our inbox</span>
                 <h2 class="contact-heading">Let's build<br>something<br><em>iconic.</em></h2>
                 <div class="contact-details">
-                    <a href="mailto:shuvamjana2007@gmail.com" class="cd-item">
+                    <a href="mailto:WorkDninja@gmail.com" class="cd-item">
                         <div class="cd-icon"><i class="fas fa-envelope"></i></div>
                         <div><span class="cd-label">Email</span><span class="cd-val">WorkDninja@gmail.com</span>
                         </div>
@@ -473,22 +530,46 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-inner">
-            <div class="footer-brand">
-                <!-- YOUR LOGO: replace 'dninja_logo.png' with your actual logo file -->
-                <img src="dninja_logo.png" alt="D'NINJA" class="footer-logo-img" onerror="this.style.display='none'">
-                <span class="footer-logo">D<span>'</span>NINJA</span>
+            <div class="footer-top">
+                <div class="footer-col">
+                    <div class="footer-brand">
+                        <img src="dninja_logo.png" alt="D'NINJA" class="footer-logo-img" onerror="this.style.display='none'">
+                        <span class="footer-logo">D<span>'</span>NINJA</span>
+                    </div>
+                    <p class="footer-about">Elevating brands through bold, intentional design. Based in India, working globally.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <a href="#about">About</a>
+                    <a href="#projects">Work</a>
+                    <a href="#services">Services</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Social</h4>
+                    <a href="https://instagram.com/_d.ninja_" target="_blank">Instagram</a>
+                    <a href="#">Facebook</a>
+                    <a href="#">Behance</a>
+                </div>
             </div>
-            <p>Designed &amp; crafted by <strong>Sumit &amp; Shuvam</strong> — D'NINJA © 2026</p>
-            <div class="footer-links">
-                <a href="#hero">Home</a>
-                <a href="#about">About</a>
-                <a href="#projects">Work</a>
-                <a href="#contact">Contact</a>
+            <div class="footer-bottom">
+                <p>D'NINJA © 2026 — Designed & Crafted by Sumit & Shuvam</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <button class="btt" id="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+    <div class="btt-wrap" id="back-to-top">
+        <svg class="btt-progress" width="56" height="56" viewBox="0 0 56 56">
+            <circle class="btt-circle-bg" cx="28" cy="28" r="24" fill="none"></circle>
+            <circle class="btt-circle-fill" cx="28" cy="28" r="24" fill="none"></circle>
+        </svg>
+        <div class="btt-percent" id="btt-percent">0%</div>
+        <div class="btt-icon"><i class="fas fa-arrow-up"></i></div>
+    </div>
 
     <!-- Pricing & Sizes Modal -->
     <div id="pricing-modal" class="modal-overlay">

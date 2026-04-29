@@ -27,6 +27,59 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initTheme();
 
+    // ── Festive Theme Engine ──
+    const initFestive = () => {
+        const now = new Date();
+        const month = now.getMonth();
+        const day = now.getDate();
+        const params = new URLSearchParams(window.location.search);
+        const forcedTheme = params.get('theme');
+
+        let theme = '';
+        // Diwali Range (Approx Oct 15 - Nov 15) or Forced
+        if (forcedTheme === 'diwali' || (month === 9 && day >= 15) || (month === 10 && day <= 15)) {
+            theme = 'diwali';
+        }
+        // Christmas Range (Dec 15 - Dec 31) or Forced
+        else if (forcedTheme === 'christmas' || (month === 11 && day >= 15)) {
+            theme = 'christmas';
+        }
+
+        if (theme) {
+            document.body.classList.add(`festive-${theme}`);
+            startFestiveEffects(theme);
+        }
+    };
+
+    const startFestiveEffects = (theme) => {
+        const container = document.getElementById('festive-container');
+        if (!container) return;
+
+        if (theme === 'christmas') {
+            for (let i = 0; i < 50; i++) {
+                const snow = document.createElement('div');
+                snow.className = 'snowflake fas fa-snowflake';
+                snow.style.left = Math.random() * 100 + 'vw';
+                snow.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                snow.style.animationDelay = (Math.random() * 5) + 's';
+                snow.style.opacity = Math.random();
+                snow.style.fontSize = (Math.random() * 10 + 10) + 'px';
+                container.appendChild(snow);
+            }
+        } else if (theme === 'diwali') {
+            for (let i = 0; i < 15; i++) {
+                const diya = document.createElement('div');
+                diya.className = 'diya';
+                diya.style.left = Math.random() * 100 + 'vw';
+                diya.style.top = Math.random() * 100 + 'vh';
+                diya.style.animationDelay = (Math.random() * 2) + 's';
+                container.appendChild(diya);
+            }
+        }
+    };
+
+    initFestive();
+
     // ── Preloader with counter ──
     const counter = document.getElementById('pre-counter');
     const fill = document.getElementById('pre-fill');
@@ -51,11 +104,108 @@ document.addEventListener('DOMContentLoaded', () => {
     (function anim() {
         rx += (mx - rx) * 0.15; ry += (my - ry) * 0.15;
         ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+
+        // Mouse Reactive Background Blobs
+        const bx = (mx / window.innerWidth - 0.5) * 50;
+        const by = (my / window.innerHeight - 0.5) * 50;
+        document.body.style.setProperty('--bx', bx + 'px');
+        document.body.style.setProperty('--by', by + 'px');
+
         requestAnimationFrame(anim);
     })();
-    document.querySelectorAll('a,button,.about-tags span,.proj-item,.skill-row,.soc-btn,.pf-btn').forEach(el => {
-        el.addEventListener('mouseenter', () => ring.classList.add('hov'));
-        el.addEventListener('mouseleave', () => ring.classList.remove('hov'));
+    // ── Smart Cursor Transformations ──
+    document.querySelectorAll('a,button,.about-tags span,.proj-item,.masonry-card,.team-card,.student-card,.skill-row,.soc-btn,.pf-btn').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            ring.classList.add('hov');
+            if (el.classList.contains('proj-item') || el.classList.contains('masonry-card')) {
+                ring.classList.add('view-mode');
+            }
+        });
+        el.addEventListener('mouseleave', () => {
+            ring.classList.remove('hov');
+            ring.classList.remove('view-mode');
+        });
+    });
+
+    // ── Live IST Clock ──
+    const updateClock = () => {
+        const now = new Date();
+        const options = { timeZone: 'Asia/Kolkata', hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        const istTime = now.toLocaleTimeString('en-GB', options);
+        const clockEl = document.getElementById('live-clock');
+        if (clockEl) clockEl.textContent = `IST ${istTime}`;
+    };
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // ── Text Scramble Effect ──
+    class TextScramble {
+        constructor(el) {
+            this.el = el;
+            this.chars = '!<>-_\\/[]{}—=+*^?#________';
+            this.update = this.update.bind(this);
+        }
+        setText(newText) {
+            const oldText = this.el.innerText;
+            const length = Math.max(oldText.length, newText.length);
+            const promise = new Promise((resolve) => this.resolve = resolve);
+            this.queue = [];
+            for (let i = 0; i < length; i++) {
+                const from = oldText[i] || '';
+                const to = newText[i] || '';
+                const start = Math.floor(Math.random() * 40);
+                const end = start + Math.floor(Math.random() * 40);
+                this.queue.push({ from, to, start, end });
+            }
+            cancelAnimationFrame(this.frameRequest);
+            this.frame = 0;
+            this.update();
+            return promise;
+        }
+        update() {
+            let output = '';
+            let complete = 0;
+            for (let i = 0, n = this.queue.length; i < n; i++) {
+                let { from, to, start, end, char } = this.queue[i];
+                if (this.frame >= end) {
+                    complete++;
+                    output += to;
+                } else if (this.frame >= start) {
+                    if (!char || Math.random() < 0.28) {
+                        char = this.randomChar();
+                        this.queue[i].char = char;
+                    }
+                    output += `<span class="d-scramble">${char}</span>`;
+                } else {
+                    output += from;
+                }
+            }
+            this.el.innerHTML = output;
+            if (complete === this.queue.length) {
+                this.resolve();
+            } else {
+                this.frameRequest = requestAnimationFrame(this.update);
+                this.frame++;
+            }
+        }
+        randomChar() {
+            return this.chars[Math.floor(Math.random() * this.chars.length)];
+        }
+    }
+
+    const scrambleObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                const fx = new TextScramble(e.target);
+                fx.setText(e.target.dataset.text || e.target.innerText);
+                scrambleObs.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    document.querySelectorAll('.scramble-text').forEach(el => {
+        el.dataset.text = el.innerText;
+        scrambleObs.observe(el);
     });
 
     // ── Navbar ──
@@ -64,9 +214,41 @@ document.addEventListener('DOMContentLoaded', () => {
     const drawer = document.getElementById('nav-drawer');
     const btt = document.getElementById('back-to-top');
 
+    let lastScroll = 0;
     window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        // Auto-Hide Navbar
+        if (currentScroll > 150) {
+            if (currentScroll > lastScroll && !drawer.classList.contains('open')) {
+                navbar.classList.add('hidden');
+            } else {
+                navbar.classList.remove('hidden');
+            }
+        } else {
+            navbar.classList.remove('hidden');
+        }
+        lastScroll = currentScroll;
+
         navbar.classList.toggle('scrolled', scrollY > 60);
         btt.classList.toggle('visible', scrollY > 600);
+        
+        // Update Progress Bar (Top)
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        const pBar = document.getElementById('progress-bar');
+        if (pBar) pBar.style.width = scrolled + "%";
+
+        // Update BTT Progress Ring & Percent
+        const circleFill = document.querySelector('.btt-circle-fill');
+        const percentText = document.getElementById('btt-percent');
+        if (circleFill) {
+            const circumference = 150.8;
+            circleFill.style.strokeDashoffset = circumference - (scrolled / 100) * circumference;
+        }
+        if (percentText) percentText.textContent = Math.floor(scrolled) + "%";
+
         let cur = '';
         document.querySelectorAll('section').forEach(s => { if (scrollY >= s.offsetTop - 140) cur = s.id; });
         document.querySelectorAll('.nav-link').forEach(l => l.classList.toggle('active', l.dataset.section === cur));
@@ -151,18 +333,45 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
     });
 
-    // ── Contact form ──
-    const form = document.getElementById('contact-form');
-    if (form) form.addEventListener('submit', e => {
-        e.preventDefault();
-        const btn = document.getElementById('submit-btn');
-        btn.innerHTML = '<span>Sent ✓</span>';
-        btn.style.background = '#22c55e';
-        setTimeout(() => {
-            btn.innerHTML = '<span>Send Message</span><i class="fas fa-paper-plane"></i>';
-            btn.style.background = '';
-            form.reset();
-        }, 2500);
+    // ── 3D Card Tilt ──
+    const tiltCards = document.querySelectorAll('.proj-item, .service-card');
+    tiltCards.forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const r = card.getBoundingClientRect();
+            const x = e.clientX - r.left;
+            const y = e.clientY - r.top;
+            const xc = r.width / 2;
+            const yc = r.height / 2;
+            const dx = (x - xc) / 15;
+            const dy = (y - yc) / 15;
+            card.style.transform = `perspective(1000px) rotateY(${dx}deg) rotateX(${-dy}deg) translateY(-8px)`;
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+        });
+    });
+
+    // ── FAQ Accordion ──
+    document.querySelectorAll('.faq-q').forEach(q => {
+        q.addEventListener('click', () => {
+            const item = q.parentElement;
+            item.classList.toggle('active');
+            // Close others
+            document.querySelectorAll('.faq-item').forEach(other => {
+                if (other !== item) other.classList.remove('active');
+            });
+        });
+    });
+
+    // ── Global Magnetic Elements ──
+    document.querySelectorAll('.nav-link, .pf-btn, .search-btn').forEach(btn => {
+        btn.addEventListener('mousemove', e => {
+            const r = btn.getBoundingClientRect();
+            const dx = (e.clientX - r.left - r.width / 2) * 0.3;
+            const dy = (e.clientY - r.top - r.height / 2) * 0.3;
+            btn.style.transform = `translate(${dx}px,${dy}px)`;
+        });
+        btn.addEventListener('mouseleave', () => btn.style.transform = '');
     });
 
     // ── Parallax on hero headline ──
