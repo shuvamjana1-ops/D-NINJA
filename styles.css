@@ -2524,6 +2524,46 @@ body.dark-mode .navbar.scrolled {
         gap: 10px
     }
 }
+
+/* ═══════════════════════════════════════════════════
+   CATALOG — ORDER BUTTON STYLES
+   (For Google Forms Integration)
+═══════════════════════════════════════════════════ */
+.lb-order-btn {
+    width: auto !important;
+    padding: 0 20px !important;
+    background: var(--accent) !important;
+    color: #fff !important;
+    border-color: var(--accent) !important;
+    gap: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.lb-order-btn .order-text {
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-family: var(--display);
+}
+
+.lb-order-btn:hover {
+    background: var(--accent2) !important;
+    border-color: var(--accent2) !important;
+    box-shadow: 0 0 20px rgba(255, 60, 110, 0.4);
+}
+
+@media(max-width: 650px) {
+    .lb-order-btn .order-text {
+        display: none;
+    }
+    .lb-order-btn {
+        width: 34px !important;
+        padding: 0 !important;
+        justify-content: center;
+    }
+}
 /* ===== PRICING MODAL ===== */
 .modal-overlay {
     position: fixed;

@@ -9,6 +9,12 @@
     /* ─── CONFIG ─── */
     const MAX_IMAGES = 60;
     const EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp'];
+    
+    // GOOGLE FORM CONFIG
+    const FORM_CONFIG = {
+        url: "https://docs.google.com/forms/d/e/1FAIpQLSfSTa2vXu7hfrneCq3plXLOIn9W68XQvZULHnSnfFl4dWRaVg/viewform", // Your actual Form URL
+        designEntryId: "entry.123456789" // Replace this with your Design Name field Entry ID later
+    };
 
     /* ─── STATE ─── */
     let images = [];       // { src, alt }
@@ -32,6 +38,12 @@
         if (cls) e.className = cls;
         if (html) e.innerHTML = html;
         return e;
+    };
+
+    const getOrderUrl = (name) => {
+        const baseUrl = FORM_CONFIG.url;
+        const entryId = FORM_CONFIG.designEntryId;
+        return `${baseUrl}?${entryId}=${encodeURIComponent(name)}`;
     };
 
     /* ═══════════════════════════════════════════
@@ -142,6 +154,9 @@
                         <button class="gf-action-btn" data-action="download" data-src="${img.src}" data-name="${folder}-${img.idx}" title="Download">
                             <i class="fas fa-download"></i>
                         </button>
+                        <a href="${getOrderUrl(displayName)}" target="_blank" class="gf-action-btn" title="Order this design">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
                     </div>
                     <div class="gf-caption">
                         <span class="gf-text">${displayName}</span>
@@ -194,6 +209,9 @@
                         <button class="masonry-btn" data-action="download" data-src="${img.src}" title="Download">
                             <i class="fas fa-download"></i>
                         </button>
+                        <a href="${getOrderUrl(displayName)}" target="_blank" class="masonry-btn" title="Order Now">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
                     </div>
                     <div class="masonry-label">${displayName}</div>
                 </div>`;
@@ -264,6 +282,9 @@
                         <button class="lb-btn" id="lb-zoom-in" title="Zoom in"><i class="fas fa-search-plus"></i></button>
                         <button class="lb-btn" id="lb-zoom-reset" title="Reset zoom"><i class="fas fa-expand-arrows-alt"></i></button>
                         <button class="lb-btn" id="lb-download" title="Download"><i class="fas fa-download"></i></button>
+                        <a href="#" target="_blank" class="lb-btn lb-order-btn" id="lb-order" title="Order this design">
+                            <i class="fas fa-shopping-cart"></i> <span class="order-text">Order Now</span>
+                        </a>
                         <button class="lb-btn" id="lb-share" title="Copy link"><i class="fas fa-share-alt"></i></button>
                         <button class="lb-btn lb-close-btn" id="lb-close" title="Close (Esc)"><i class="fas fa-times"></i></button>
                     </div>
@@ -362,6 +383,7 @@
         lbImg.alt = img.alt;
         document.getElementById('lb-counter').textContent = `${currentIdx + 1} / ${images.length}`;
         document.getElementById('lb-title').textContent = img.alt;
+        document.getElementById('lb-order').href = getOrderUrl(img.alt);
         applyZoom(1);
 
         // Show/hide prev-next
