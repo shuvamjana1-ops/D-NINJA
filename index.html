@@ -49,6 +49,7 @@
                 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <i class="fas fa-moon"></i>
                 </button>
+                <a href="#" id="pricing-btn" class="nav-link" style="color: var(--accent2); font-weight: 600;"><i class="fas fa-tags"></i> Pricing</a>
                 <a href="#contact" class="nav-hire">Hire Me <i class="fas fa-arrow-right"></i></a>
                 <button class="nav-toggle" id="nav-toggle"><span></span><span></span></button>
             </div>
@@ -58,6 +59,7 @@
             <a href="#skills" class="drawer-link" data-section="skills">Skills</a>
             <a href="#projects" class="drawer-link" data-section="projects">Work</a>
             <a href="#contact" class="drawer-link" data-section="contact">Contact</a>
+            <a href="#" id="drawer-pricing-btn" class="drawer-link" style="color: var(--accent2);">Pricing</a>
         </div>
     </nav>
 
@@ -417,24 +419,14 @@
                 </div>
             </div>
             <div class="contact-right" data-reveal>
-                <form id="contact-form" class="c-form">
-                    <div class="cf-group">
-                        <input type="text" id="cf-name" class="cf-input" placeholder="Your name" required>
-                    </div>
-                    <div class="cf-group">
-                        <input type="email" id="cf-email" class="cf-input" placeholder="Your email" required>
-                    </div>
-                    <div class="cf-group">
-                        <input type="text" id="cf-proj" class="cf-input" placeholder="Project type">
-                    </div>
-                    <div class="cf-group">
-                        <textarea id="cf-msg" class="cf-input" rows="5" placeholder="Tell me about your project"
-                            required></textarea>
-                    </div>
-                    <button type="submit" class="cf-submit" id="submit-btn">
-                        <span>Send Message</span><i class="fas fa-paper-plane"></i>
-                    </button>
-                </form>
+                <div class="c-form" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 40px 30px; background: var(--card); border: 1px solid var(--border); border-top: 1px solid var(--glass-highlight); border-left: 1px solid var(--glass-highlight); border-radius: 28px; backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); box-shadow: var(--glass-shadow);">
+                    <i class="fas fa-clipboard-list" style="font-size: 3rem; color: var(--accent); margin-bottom: 8px;"></i>
+                    <h3 style="font-family: var(--display); font-size: 2.2rem; letter-spacing: 1px; color: var(--text);">Start a Project</h3>
+                    <p style="color: var(--dim); line-height: 1.6; font-size: 0.95rem; margin-bottom: 24px;">Have a query or want to order a design? Fill out our quick Google Form and we'll get back to you shortly.</p>
+                    <a href="https://forms.google.com/" target="_blank" class="cf-submit" style="text-decoration: none; width: 100%;">
+                        <span>Open Order Form</span><i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -458,6 +450,68 @@
     </footer>
 
     <button class="btt" id="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- Pricing & Sizes Modal -->
+    <div id="pricing-modal" class="modal-overlay">
+        <div class="modal-content glass-panel">
+            <button class="modal-close" id="pricing-close"><i class="fas fa-times"></i></button>
+            <div class="modal-header">
+                <i class="fas fa-tags modal-icon"></i>
+                <h2>Pricing &amp; Size Chart</h2>
+                <p>Standard rates and common dimensions for our design services.</p>
+            </div>
+            
+            <div class="modal-body">
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3>Logo Design</h3>
+                        <div class="price">$50 - $150</div>
+                        <ul>
+                            <li><i class="fas fa-check"></i> High Res Vectors (AI, EPS)</li>
+                            <li><i class="fas fa-check"></i> Unlimited Revisions</li>
+                            <li><i class="fas fa-check"></i> Brand Guidelines</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pricing-card">
+                        <h3>Social Media Post</h3>
+                        <div class="price">$20 - $40</div>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Instagram Square (1080x1080)</li>
+                            <li><i class="fas fa-check"></i> Instagram Portrait (1080x1350)</li>
+                            <li><i class="fas fa-check"></i> Story/Reel (1080x1920)</li>
+                        </ul>
+                    </div>
+
+                    <div class="pricing-card">
+                        <h3>YouTube Thumbnail</h3>
+                        <div class="price">$15 - $30</div>
+                        <ul>
+                            <li><i class="fas fa-check"></i> High CTR Design</li>
+                            <li><i class="fas fa-check"></i> 1920x1080 Resolution</li>
+                            <li><i class="fas fa-check"></i> Source File Included</li>
+                        </ul>
+                    </div>
+
+                    <div class="pricing-card">
+                        <h3>Poster / Banner</h3>
+                        <div class="price">$40 - $80</div>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Print-Ready PDF (300 DPI)</li>
+                            <li><i class="fas fa-check"></i> A3 / A4 / Custom Sizes</li>
+                            <li><i class="fas fa-check"></i> CMYK Color Profile</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <a href="#contact" id="modal-cta-btn" class="cf-submit" style="text-decoration: none; width: 100%; display: inline-flex; justify-content: center; margin-top: 10px;">
+                        <span>Order Now</span><i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Global Floating Search -->
     <div class="global-search-wrapper" data-reveal>
@@ -487,6 +541,42 @@
                 if(e.key === 'Enter') executeGlobalSearch();
             });
         }
+
+        // Pricing Modal Logic
+        const pricingModal = document.getElementById('pricing-modal');
+        const btnPricingNav = document.getElementById('pricing-btn');
+        const btnPricingDrawer = document.getElementById('drawer-pricing-btn');
+        const btnPricingClose = document.getElementById('pricing-close');
+        const modalCtaBtn = document.getElementById('modal-cta-btn');
+        
+        function openPricing(e) {
+            e.preventDefault();
+            pricingModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            // Close drawer if open
+            document.getElementById('nav-drawer').classList.remove('open');
+            document.getElementById('nav-toggle').classList.remove('active');
+        }
+
+        function closePricing() {
+            pricingModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        if(btnPricingNav) btnPricingNav.addEventListener('click', openPricing);
+        if(btnPricingDrawer) btnPricingDrawer.addEventListener('click', openPricing);
+        if(btnPricingClose) btnPricingClose.addEventListener('click', closePricing);
+        
+        // Close on clicking outside or pressing Escape
+        window.addEventListener('click', (e) => {
+            if (e.target === pricingModal) closePricing();
+        });
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && pricingModal.classList.contains('active')) closePricing();
+        });
+        
+        // Close when clicking the CTA button inside the modal
+        if(modalCtaBtn) modalCtaBtn.addEventListener('click', closePricing);
     </script>
     <script src="script.js"></script>
 </body>
