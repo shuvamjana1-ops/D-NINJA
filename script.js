@@ -80,6 +80,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initFestive();
 
+    // ── Automatic Contrast Engine ──
+    const updateContrast = () => {
+        const sections = document.querySelectorAll('section, footer, .hero-section');
+        sections.forEach(sec => {
+            const bg = window.getComputedStyle(sec).backgroundColor;
+            const rgb = bg.match(/\d+/g);
+            if (rgb) {
+                const brightness = (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) / 1000;
+                if (brightness > 128) {
+                    sec.classList.add('light-bg-mode');
+                    sec.classList.remove('dark-bg-mode');
+                } else {
+                    sec.classList.add('dark-bg-mode');
+                    sec.classList.remove('light-bg-mode');
+                }
+            }
+        });
+    };
+    
+    window.addEventListener('load', updateContrast);
+    window.addEventListener('resize', updateContrast);
+    updateContrast();
+
     // ── Preloader with counter ──
     const counter = document.getElementById('pre-counter');
     const fill = document.getElementById('pre-fill');
