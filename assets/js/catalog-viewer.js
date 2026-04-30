@@ -48,11 +48,14 @@
 
     const handleAddToCart = (idx) => {
         const img = images[idx];
+        // Ensure the path in the cart is always root-relative (images/...)
+        const cleanSrc = img.src.replace(/^(\.\.\/)+/, '');
+        
         if (window.dninjaCart) {
             window.dninjaCart.addItem({
                 id: `${img.folder}-${img.idx}`,
                 name: img.alt,
-                src: img.src,
+                src: cleanSrc,
                 folder: img.folder
             });
         }
@@ -69,12 +72,15 @@
             return;
         }
 
+        const isSubfolder = window.location.pathname.includes('/catalog/');
+        const pathPrefix = isSubfolder ? '../' : '';
+
         if (folder === 'all') {
             let globalIdx = 0;
             for (const f in window.CATALOG_DATA) {
                 window.CATALOG_DATA[f].forEach((item) => {
                     images.push({
-                        src: item.src,
+                        src: pathPrefix + item.src,
                         alt: item.name,
                         idx: globalIdx++,
                         folder: f
@@ -85,7 +91,7 @@
             const folderData = window.CATALOG_DATA[folder] || [];
             folderData.forEach((item, i) => {
                 images.push({
-                    src: item.src,
+                    src: pathPrefix + item.src,
                     alt: item.name,
                     idx: i,
                     folder: folder
