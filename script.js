@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ── Theme Forced (Constant Dark Mode) ──
-    document.body.classList.add('dark-mode');
-    localStorage.setItem('dninja-theme', 'dark');
+    // ── Theme Preference ──
+    const savedTheme = localStorage.getItem('dninja-theme') || 'dark';
+    document.body.classList.toggle('light-mode', savedTheme === 'light');
+    document.body.classList.toggle('dark-mode', savedTheme !== 'light');
 
     // ── Festive Theme Engine ──
     const initFestive = () => {
@@ -88,8 +89,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const tick = setInterval(() => {
         count += Math.floor(Math.random() * 8) + 3;
         if (count >= 100) { count = 100; clearInterval(tick); }
-        counter.textContent = count;
-        fill.style.width = count + '%';
+        if (counter) counter.textContent = count;
+        if (fill) fill.style.width = count + '%';
         if (count === 100) {
             if (preloader) setTimeout(() => preloader.classList.add('hidden'), 400);
             else clearInterval(tick);
@@ -144,6 +145,68 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     setInterval(updateClock, 1000);
     updateClock();
+
+    // ── UI Sounds (Oscillators) ──
+    let audioCtx;
+    let sfxEnabled = localStorage.getItem('dninja-sfx') !== 'false';
+    const sfxToggle = document.getElementById('sfx-toggle');
+    
+    const playSound = (freq, type, duration) => {
+        if (!sfxEnabled) return;
+        try {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = type;
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + duration);
+        } catch (e) { console.warn("Audio Context blocked or unsupported"); }
+    };
+
+    const updateSfxIcon = () => {
+        if (sfxToggle) {
+            const icon = sfxToggle.querySelector('i');
+            if (icon) icon.className = sfxEnabled ? 'fas fa-volume-up' : 'fas fa-volume-mute';
+            sfxToggle.style.opacity = sfxEnabled ? '1' : '0.5';
+        }
+    };
+    updateSfxIcon();
+
+    sfxToggle?.addEventListener('click', () => {
+        sfxEnabled = !sfxEnabled;
+        localStorage.setItem('dninja-sfx', sfxEnabled);
+        updateSfxIcon();
+        if (sfxEnabled) playSound(440, 'sine', 0.1);
+    });
+
+    document.querySelectorAll('a, button, .pf-btn, .proj-item').forEach(el => {
+        el.addEventListener('mouseenter', () => playSound(880, 'sine', 0.05));
+        el.addEventListener('click', () => playSound(440, 'square', 0.1));
+    });
+
+    // ── Ninja Easter Egg ──
+    let ninjaKeys = '';
+    window.addEventListener('keydown', (e) => {
+        ninjaKeys += e.key.toLowerCase();
+        if (ninjaKeys.endsWith('ninja')) {
+            ninjaKeys = '';
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#7c3aed', '#ff2d55', '#ffffff']
+            });
+            showToast("🥷 NINJA MODE ACTIVATED!");
+            document.body.classList.add('ninja-mode');
+            setTimeout(() => document.body.classList.remove('ninja-mode'), 5000);
+        }
+        if (ninjaKeys.length > 10) ninjaKeys = ninjaKeys.slice(-10);
+    });
 
     // ── Text Scramble Effect ──
     class TextScramble {
@@ -280,7 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
         else { ci--; if (ci === 0) { del = false; pi = (pi + 1) % phrases.length; } }
         setTimeout(type, del ? 30 : 70);
     }
-    setTimeout(type, 2800);
+    setTimeout(type, 1400);
 
     // ── Magnetic Navigation ──
     const magneticLinks = document.querySelectorAll('.nav-link, .nav-logo, .nav-hire');
@@ -308,7 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }, { threshold: 0.12 });
-    document.querySelectorAll('[data-reveal]').forEach(el => revealObs.observe(el));
+    document.querySelectorAll('[data-reveal], .proj-item').forEach(el => revealObs.observe(el));
 
     // ── Floating stat counters ──
     const statObs = new IntersectionObserver(entries => {
@@ -360,7 +423,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ── 3D Card Tilt ──
-    const tiltCards = document.querySelectorAll('.proj-item, .service-card');
+    const tiltCards = document.querySelectorAll('.service-card');
     tiltCards.forEach(card => {
         card.addEventListener('mousemove', e => {
             const r = card.getBoundingClientRect();
@@ -390,7 +453,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ── Global Magnetic Elements ──
-    document.querySelectorAll('.nav-link, .pf-btn, .search-btn').forEach(btn => {
+    document.querySelectorAll('.nav-link, .pf-btn').forEach(btn => {
         btn.addEventListener('mousemove', e => {
             const r = btn.getBoundingClientRect();
             const dx = (e.clientX - r.left - r.width / 2) * 0.3;
@@ -410,25 +473,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ── Global Search Logic ──
-    const globalInput = document.getElementById('global-search-input');
-    const globalBtn = document.getElementById('global-search-btn');
-    
-    const executeGlobalSearch = () => {
-        const query = globalInput.value.trim();
-        if(query) {
-            window.location.href = `catalog-all.html?q=${encodeURIComponent(query)}`;
-        } else {
-            window.location.href = `catalog-all.html`;
-        }
-    };
 
-    if(globalBtn && globalInput) {
-        globalBtn.addEventListener('click', executeGlobalSearch);
-        globalInput.addEventListener('keypress', (e) => {
-            if(e.key === 'Enter') executeGlobalSearch();
-        });
-    }
 
     // ── Pricing Modal Logic ──
     const pricingModal = document.getElementById('pricing-modal');
@@ -468,4 +513,572 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape' && pricingModal && pricingModal.classList.contains('active')) closePricing();
     });
     if(modalCtaBtn) modalCtaBtn.addEventListener('click', closePricing);
+
+    // ── Project Hub Enhancements ──
+    const projectList = document.getElementById('proj-list');
+    const projectSearch = document.getElementById('project-search');
+    const projectSort = document.getElementById('project-sort');
+    const favoritesOnlyBtn = document.getElementById('favorites-only-btn');
+    const clearFiltersBtn = document.getElementById('clear-filters-btn');
+    const tagFilterWrap = document.getElementById('project-tag-filters');
+    const resultCountEl = document.getElementById('project-result-count');
+    const emptyState = document.getElementById('project-empty-state');
+    const compareCountEl = document.getElementById('compare-count');
+    const openCompareBtn = document.getElementById('open-compare-btn');
+    const compareModal = document.getElementById('compare-modal');
+    const compareGrid = document.getElementById('compare-grid');
+    const compareCloseBtn = document.getElementById('compare-close');
+    const quickView = document.getElementById('project-quick-view');
+    const quickViewClose = document.getElementById('quick-view-close');
+    const quickViewTitle = document.getElementById('quick-view-title');
+    const quickViewDescription = document.getElementById('quick-view-description');
+    const quickViewImage = document.getElementById('quick-view-image');
+    const quickViewTags = document.getElementById('quick-view-tags');
+    const quickViewOpen = document.getElementById('quick-view-open');
+    const quickViewFavorite = document.getElementById('quick-view-favorite');
+    const quickViewCompare = document.getElementById('quick-view-compare');
+    const quickViewShare = document.getElementById('quick-view-share');
+    const recentlyViewedWrap = document.getElementById('recently-viewed-wrap');
+    const recentlyViewedList = document.getElementById('recently-viewed-list');
+    const toast = document.getElementById('site-toast');
+
+    const state = {
+        search: '',
+        tag: 'all',
+        sort: 'default',
+        favoritesOnly: false,
+        favorites: JSON.parse(localStorage.getItem('dninja-favorites') || '[]'),
+        compare: JSON.parse(localStorage.getItem('dninja-compare') || '[]').slice(0, 3),
+        recent: JSON.parse(localStorage.getItem('dninja-recent') || '[]').slice(0, 6),
+        quickIndex: -1
+    };
+
+    const safeCopy = async (text) => {
+        try { await navigator.clipboard.writeText(text); return true; }
+        catch (_) { return false; }
+    };
+
+    const showToast = (message) => {
+        if (!toast) return;
+        toast.textContent = message;
+        toast.classList.add('show');
+        clearTimeout(window._dninjaToastTimer);
+        window._dninjaToastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+    };
+
+    const saveState = () => {
+        localStorage.setItem('dninja-favorites', JSON.stringify(state.favorites));
+        localStorage.setItem('dninja-compare', JSON.stringify(state.compare));
+        localStorage.setItem('dninja-recent', JSON.stringify(state.recent));
+    };
+
+    const getProjectCards = () => projectList ? Array.from(projectList.querySelectorAll('.proj-item')) : [];
+    const cardId = (card) => card.querySelector('.proj-title')?.textContent.trim().toLowerCase().replace(/\s+/g, '-');
+
+    const updateActionStates = () => {
+        getProjectCards().forEach(card => {
+            const id = cardId(card);
+            card.classList.toggle('is-favorite', state.favorites.includes(id));
+            card.classList.toggle('is-compare', state.compare.includes(id));
+            card.querySelector('.favorite-btn')?.classList.toggle('active', state.favorites.includes(id));
+            card.querySelector('.compare-btn')?.classList.toggle('active', state.compare.includes(id));
+        });
+        if (compareCountEl) compareCountEl.textContent = String(state.compare.length);
+    };
+
+    const updateResultCount = (count) => {
+        if (resultCountEl) resultCountEl.textContent = `${count} project${count === 1 ? '' : 's'} found`;
+        if (emptyState) emptyState.hidden = count !== 0;
+    };
+
+    const matchesFilters = (card) => {
+        const title = card.querySelector('.proj-title')?.textContent.toLowerCase() || '';
+        const desc = card.querySelector('.proj-desc')?.textContent.toLowerCase() || '';
+        const tags = Array.from(card.querySelectorAll('.proj-tags span')).map(t => t.textContent.toLowerCase());
+        const id = cardId(card);
+        const searchOK = !state.search || `${title} ${desc} ${tags.join(' ')}`.includes(state.search);
+        const tagOK = state.tag === 'all' || tags.includes(state.tag);
+        const favoriteOK = !state.favoritesOnly || state.favorites.includes(id);
+        return searchOK && tagOK && favoriteOK;
+    };
+
+    const applyProjectFilters = () => {
+        const cards = getProjectCards();
+        cards.forEach(card => {
+            card.classList.toggle('hidden', !matchesFilters(card));
+        });
+        const visibleCards = cards.filter(card => !card.classList.contains('hidden'));
+        if (state.sort !== 'default' && projectList) {
+            const sorted = [...cards].sort((a, b) => {
+                const at = a.querySelector('.proj-title')?.textContent || '';
+                const bt = b.querySelector('.proj-title')?.textContent || '';
+                return state.sort === 'az' ? at.localeCompare(bt) : bt.localeCompare(at);
+            });
+            sorted.forEach(card => projectList.appendChild(card));
+        }
+        updateResultCount(visibleCards.length);
+        updateActionStates();
+    };
+
+    const toggleFavorite = (card) => {
+        const id = cardId(card);
+        if (!id) return;
+        if (state.favorites.includes(id)) {
+            state.favorites = state.favorites.filter(v => v !== id);
+            showToast('Removed from favorites');
+        } else {
+            state.favorites.push(id);
+            showToast('Added to favorites');
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#7c3aed', '#ff2d55']
+                });
+            }
+        }
+        saveState();
+        applyProjectFilters();
+    };
+
+    const toggleCompare = (card) => {
+        const id = cardId(card);
+        if (!id) return;
+        if (state.compare.includes(id)) {
+            state.compare = state.compare.filter(v => v !== id);
+            showToast('Removed from compare');
+        } else if (state.compare.length >= 3) {
+            showToast('Compare supports up to 3 items');
+            return;
+        } else {
+            state.compare.push(id);
+            showToast('Added to compare');
+        }
+        saveState();
+        updateActionStates();
+    };
+
+    const openQuickView = (card) => {
+        const title = card.querySelector('.proj-title')?.textContent.trim() || '';
+        const desc = card.querySelector('.proj-desc')?.textContent.trim() || '';
+        const link = card.getAttribute('href') || '#';
+        const image = card.querySelector('.proj-img')?.getAttribute('src') || '';
+        const tags = Array.from(card.querySelectorAll('.proj-tags span')).map(t => t.textContent.trim());
+        const id = cardId(card);
+        if (!quickView || !id) return;
+        state.quickIndex = getProjectCards().indexOf(card);
+        quickViewTitle.textContent = title;
+        quickViewDescription.textContent = desc;
+        quickViewImage.src = image;
+        quickViewImage.alt = title;
+        quickViewOpen.href = link;
+        quickViewTags.innerHTML = tags.map(t => `<span>${t}</span>`).join('');
+        quickViewFavorite.textContent = state.favorites.includes(id) ? 'Unfavorite' : 'Favorite';
+        quickViewCompare.textContent = state.compare.includes(id) ? 'Remove Compare' : 'Compare';
+        quickView.setAttribute('aria-hidden', 'false');
+        quickView.classList.add('active');
+        state.recent = [id, ...state.recent.filter(v => v !== id)].slice(0, 6);
+        saveState();
+        renderRecentlyViewed();
+    };
+
+    const closeQuickView = () => {
+        if (!quickView) return;
+        quickView.classList.remove('active');
+        quickView.setAttribute('aria-hidden', 'true');
+    };
+
+    const renderCompare = () => {
+        if (!compareGrid) return;
+        const cards = getProjectCards();
+        const selected = cards.filter(card => state.compare.includes(cardId(card)));
+        compareGrid.innerHTML = selected.length ? selected.map(card => `
+            <article class="compare-card">
+                <img src="${card.querySelector('.proj-img')?.getAttribute('src') || ''}" alt="${card.querySelector('.proj-title')?.textContent || ''}">
+                <div class="meta">
+                    <h4>${card.querySelector('.proj-title')?.textContent || ''}</h4>
+                    <p>${card.querySelector('.proj-desc')?.textContent || ''}</p>
+                </div>
+            </article>
+        `).join('') : '<p class="project-result-count">No items selected for compare.</p>';
+    };
+
+    const renderRecentlyViewed = () => {
+        if (!recentlyViewedWrap || !recentlyViewedList) return;
+        const cards = getProjectCards();
+        const titleToCard = new Map(cards.map(card => [cardId(card), card]));
+        const recentCards = state.recent.map(id => titleToCard.get(id)).filter(Boolean);
+        recentlyViewedWrap.hidden = recentCards.length === 0;
+        recentlyViewedList.innerHTML = recentCards.map(card => `<button class="recent-chip" type="button">${card.querySelector('.proj-title')?.textContent || ''}</button>`).join('');
+        Array.from(recentlyViewedList.querySelectorAll('.recent-chip')).forEach((chip, i) => {
+            chip.addEventListener('click', () => openQuickView(recentCards[i]));
+        });
+    };
+
+    const buildTagFilters = () => {
+        if (!tagFilterWrap) return;
+        const tags = new Set();
+        getProjectCards().forEach(card => {
+            card.querySelectorAll('.proj-tags span').forEach(tag => tags.add(tag.textContent.trim()));
+        });
+        tagFilterWrap.innerHTML = `<button class="pf-btn active" data-tag="all" type="button">All</button>${Array.from(tags).map(tag => `<button class="pf-btn" data-tag="${tag.toLowerCase()}" type="button">${tag}</button>`).join('')}`;
+        tagFilterWrap.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                state.tag = btn.dataset.tag || 'all';
+                tagFilterWrap.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                applyProjectFilters();
+            });
+        });
+    };
+
+    const enhanceProjectCards = () => {
+        getProjectCards().forEach(card => {
+            const actionWrap = document.createElement('div');
+            actionWrap.className = 'project-actions';
+            actionWrap.innerHTML = `
+                <button class="favorite-btn" type="button" aria-label="Toggle favorite"><i class="fas fa-heart"></i></button>
+                <button class="compare-btn" type="button" aria-label="Add to compare"><i class="fas fa-code-compare"></i></button>
+                <button class="quick-btn" type="button" aria-label="Open quick view"><i class="fas fa-eye"></i></button>
+            `;
+            card.querySelector('.proj-img-wrap')?.appendChild(actionWrap);
+
+            actionWrap.querySelector('.favorite-btn')?.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); toggleFavorite(card); });
+            actionWrap.querySelector('.compare-btn')?.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); toggleCompare(card); });
+            actionWrap.querySelector('.quick-btn')?.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); openQuickView(card); });
+            card.addEventListener('click', () => {
+                const id = cardId(card);
+                if (!id) return;
+                state.recent = [id, ...state.recent.filter(v => v !== id)].slice(0, 6);
+                saveState();
+                renderRecentlyViewed();
+            });
+        });
+    };
+
+    if (projectList) {
+        enhanceProjectCards();
+        buildTagFilters();
+        renderRecentlyViewed();
+        applyProjectFilters();
+
+        projectSearch?.addEventListener('input', () => {
+            state.search = projectSearch.value.trim().toLowerCase();
+            applyProjectFilters();
+        });
+        projectSort?.addEventListener('change', () => {
+            state.sort = projectSort.value;
+            applyProjectFilters();
+        });
+        favoritesOnlyBtn?.addEventListener('click', () => {
+            state.favoritesOnly = !state.favoritesOnly;
+            favoritesOnlyBtn.classList.toggle('active', state.favoritesOnly);
+            favoritesOnlyBtn.setAttribute('aria-pressed', String(state.favoritesOnly));
+            applyProjectFilters();
+        });
+        clearFiltersBtn?.addEventListener('click', () => {
+            state.search = '';
+            state.tag = 'all';
+            state.sort = 'default';
+            state.favoritesOnly = false;
+            if (projectSearch) projectSearch.value = '';
+            if (projectSort) projectSort.value = 'default';
+            favoritesOnlyBtn?.classList.remove('active');
+            tagFilterWrap?.querySelectorAll('button').forEach(btn => btn.classList.toggle('active', btn.dataset.tag === 'all'));
+            applyProjectFilters();
+            showToast('Filters cleared');
+        });
+
+        quickViewClose?.addEventListener('click', closeQuickView);
+        quickView?.querySelector('[data-close-quick-view]')?.addEventListener('click', closeQuickView);
+        quickViewFavorite?.addEventListener('click', () => {
+            const card = getProjectCards()[state.quickIndex];
+            if (card) { toggleFavorite(card); openQuickView(card); }
+        });
+        quickViewCompare?.addEventListener('click', () => {
+            const card = getProjectCards()[state.quickIndex];
+            if (card) { toggleCompare(card); openQuickView(card); }
+        });
+        quickViewShare?.addEventListener('click', async () => {
+            const link = `${location.origin}${location.pathname}#projects`;
+            const ok = await safeCopy(link);
+            showToast(ok ? 'Project section link copied' : 'Copy failed');
+        });
+
+        openCompareBtn?.addEventListener('click', () => {
+            renderCompare();
+            compareModal?.classList.add('active');
+            compareModal?.setAttribute('aria-hidden', 'false');
+        });
+        compareCloseBtn?.addEventListener('click', () => {
+            compareModal?.classList.remove('active');
+            compareModal?.setAttribute('aria-hidden', 'true');
+        });
+        compareModal?.querySelector('[data-close-compare]')?.addEventListener('click', () => {
+            compareModal.classList.remove('active');
+            compareModal.setAttribute('aria-hidden', 'true');
+        });
+    }
+
+    // ── Motion Preference (Keep) ──
+    const reduceMotion = localStorage.getItem('dninja-reduce-motion') === 'true' || 
+                         window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.body.classList.toggle('reduce-motion', reduceMotion);
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeQuickView();
+            closePricing();
+            if (compareModal) {
+                compareModal.classList.remove('active');
+                compareModal.setAttribute('aria-hidden', 'true');
+            }
+        }
+    });
+
+    // ── Feature 1: Dynamic Greeting ──
+    const updateGreeting = () => {
+        const greetingEl = document.getElementById('dynamic-greeting');
+        if (!greetingEl) return;
+        const hour = new Date().getHours();
+        let text = "Available for projects";
+        if (hour >= 5 && hour < 12) text = "Good Morning! Available for work";
+        else if (hour >= 12 && hour < 17) text = "Good Afternoon! Ready to design";
+        else if (hour >= 17 && hour < 21) text = "Good Evening! Let's build something";
+        else text = "Working late? We're available";
+        
+        greetingEl.innerHTML = `<span class="badge-dot"></span>${text}`;
+    };
+    updateGreeting();
+
+
+
+    // ── Feature 3: Live Pulse Notifications ──
+    const pulseMessages = [
+        "Logo delivered to a client in Kolkata!",
+        "Someone just added a poster to their cart.",
+        "New project: Brand identity for TechRise.",
+        "Sumit is currently working on a social media campaign.",
+        "5 people are viewing the Student Corner right now."
+    ];
+    
+    const showPulseToast = () => {
+        const msg = pulseMessages[Math.floor(Math.random() * pulseMessages.length)];
+        const pulseToast = document.createElement('div');
+        pulseToast.className = 'site-toast active';
+        pulseToast.style.bottom = '120px';
+        pulseToast.style.right = '40px';
+        pulseToast.style.zIndex = '999';
+        pulseToast.innerHTML = `<span class="pulse-indicator"></span> ${msg}`;
+        document.body.appendChild(pulseToast);
+        
+        setTimeout(() => {
+            pulseToast.classList.remove('active');
+            setTimeout(() => pulseToast.remove(), 500);
+        }, 4000);
+    };
+    
+    // Show first pulse after 10s, then every 30s
+    setTimeout(() => {
+        showPulseToast();
+        setInterval(showPulseToast, 30000);
+    }, 10000);
+
+    // ── Feature 4: Testimonial Auto-Scroll ──
+    const slider = document.querySelector('.testimonial-slider');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    slider?.addEventListener('mousedown', (e) => {
+        isDown = true;
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
+    slider?.addEventListener('mouseleave', () => isDown = false);
+    slider?.addEventListener('mouseup', () => isDown = false);
+    slider?.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2;
+        slider.scrollLeft = scrollLeft - walk;
+    });
+
+    // ── NEW PREMIUM FEATURES ──
+
+    // 1. Reading Progress Bar
+    const progress = document.getElementById('reading-progress');
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        if (progress) progress.style.width = scrolled + "%";
+    });
+
+    // 2. Custom Context Menu
+    const ctxMenu = document.getElementById('custom-menu');
+    window.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        if (!ctxMenu) return;
+        ctxMenu.style.left = e.clientX + 'px';
+        ctxMenu.style.top = e.clientY + 'px';
+        ctxMenu.classList.add('active');
+    });
+
+    window.addEventListener('click', () => {
+        ctxMenu?.classList.remove('active');
+    });
+
+    document.getElementById('menu-theme-toggle')?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        document.getElementById('theme-toggle')?.click();
+    });
+
+    document.getElementById('menu-confetti')?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+    });
+
+    // 3. Page Transitions
+    const curtain = document.getElementById('page-transition');
+    document.querySelectorAll('a[href^="catalog-"], a[href="cart.html"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const target = link.getAttribute('href');
+            if (target.startsWith('#')) return;
+            e.preventDefault();
+            curtain?.classList.add('active');
+            setTimeout(() => window.location.href = target, 800);
+        });
+    });
+
+    // 4. Keyboard Shortcuts
+    window.addEventListener('keydown', (e) => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        const key = e.key.toLowerCase();
+        if (key === 'h') window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (key === 'c') document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+        if (key === 'p') document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+        if (key === 't') document.getElementById('theme-toggle')?.click();
+        if (key === 's') document.getElementById('sfx-toggle')?.click();
+    });
+
+    // 5. Project Image Magnifier
+    const mag = document.getElementById('magnifier');
+    document.querySelectorAll('.proj-img').forEach(img => {
+        img.addEventListener('mousemove', (e) => {
+            if (!mag) return;
+            mag.style.display = 'block';
+            mag.style.left = (e.clientX - 75) + 'px';
+            mag.style.top = (e.clientY - 75) + 'px';
+            
+            const r = img.getBoundingClientRect();
+            const x = ((e.clientX - r.left) / r.width) * 100;
+            const y = ((e.clientY - r.top) / r.height) * 100;
+            
+            mag.style.backgroundImage = `url(${img.src})`;
+            mag.style.backgroundPosition = `${x}% ${y}%`;
+            mag.style.backgroundSize = (r.width * 2) + 'px ' + (r.height * 2) + 'px';
+        });
+        img.addEventListener('mouseleave', () => mag && (mag.style.display = 'none'));
+    });
+
+    // 6. Dynamic Cursor Labels
+    const cLabel = document.getElementById('cursor-label');
+    const updateLabel = (text, show) => {
+        if (!cLabel) return;
+        cLabel.textContent = text;
+        cLabel.style.opacity = show ? '1' : '0';
+    };
+
+    window.addEventListener('mousemove', (e) => {
+        if (cLabel) {
+            cLabel.style.left = (e.clientX + 20) + 'px';
+            cLabel.style.top = (e.clientY + 20) + 'px';
+        }
+    });
+
+    document.querySelectorAll('.proj-item, .masonry-card').forEach(el => {
+        el.addEventListener('mouseenter', () => updateLabel('VIEW PROJECT', true));
+        el.addEventListener('mouseleave', () => updateLabel('', false));
+    });
+    document.querySelectorAll('a[href^="#"]').forEach(el => {
+        el.addEventListener('mouseenter', () => updateLabel('JUMP TO', true));
+        el.addEventListener('mouseleave', () => updateLabel('', false));
+    });
+
+    // 7. Price Estimator Logic
+    const estModal = document.getElementById('estimator-modal');
+    const estTotal = document.getElementById('est-total');
+    const checks = document.querySelectorAll('.est-check');
+
+    const updateEstimate = () => {
+        let total = 0;
+        checks.forEach(c => { if (c.checked) total += parseInt(c.dataset.price); });
+        if (estTotal) estTotal.textContent = total;
+    };
+
+    document.getElementById('open-estimator')?.addEventListener('click', () => estModal?.classList.add('active'));
+    document.getElementById('estimator-close')?.addEventListener('click', () => estModal?.classList.remove('active'));
+    checks.forEach(c => c.addEventListener('change', updateEstimate));
+
+    // 8. Enhanced Magnetic Socials
+    document.querySelectorAll('.soc-btn').forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+            const r = btn.getBoundingClientRect();
+            const x = (e.clientX - r.left - r.width/2) * 0.6;
+            const y = (e.clientY - r.top - r.height/2) * 0.6;
+            btn.style.transform = `translate(${x}px, ${y}px)`;
+            btn.style.boxShadow = `${-x/2}px ${-y/2}px 20px rgba(95,15,255,0.3)`;
+        });
+        btn.addEventListener('mouseleave', () => {
+            btn.style.transform = '';
+            btn.style.boxShadow = '';
+        });
+    });
+
+    // 9. Clickbait: Scratch Card
+    const canvas = document.getElementById('scratch-canvas');
+    const ctx = canvas?.getContext('2d');
+    if (ctx && canvas) {
+        ctx.fillStyle = '#222';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.font = '24px Outfit';
+        ctx.fillStyle = '#fff';
+        ctx.textAlign = 'center';
+        ctx.fillText('SCRATCH TO REVEAL', canvas.width/2, canvas.height/2 + 10);
+
+        let isScratching = false;
+        const scratch = (e) => {
+            const r = canvas.getBoundingClientRect();
+            const x = (e.clientX || e.touches[0].clientX) - r.left;
+            const y = (e.clientY || e.touches[0].clientY) - r.top;
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.beginPath();
+            ctx.arc(x, y, 25, 0, Math.PI * 2);
+            ctx.fill();
+        };
+
+        canvas.addEventListener('mousedown', () => isScratching = true);
+        window.addEventListener('mouseup', () => isScratching = false);
+        canvas.addEventListener('mousemove', (e) => isScratching && scratch(e));
+        canvas.addEventListener('touchstart', (e) => { isScratching = true; scratch(e); });
+        canvas.addEventListener('touchend', () => isScratching = false);
+        canvas.addEventListener('touchmove', (e) => isScratching && scratch(e));
+    }
+
+    // 10. Clickbait: Unread Toast
+    const uToast = document.getElementById('unread-toast');
+    setTimeout(() => uToast?.classList.add('active'), 25000);
+    document.getElementById('open-unread')?.addEventListener('click', () => {
+        uToast?.classList.remove('active');
+        showToast('Checking secure connection...');
+        setTimeout(() => {
+            document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+            showToast('Ready to start your project!');
+        }, 1500);
+    });
+
+
 });

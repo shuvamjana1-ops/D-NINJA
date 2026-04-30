@@ -123,27 +123,7 @@
         });
     }
 
-    function initGlobalSearch() {
-        if (!document.querySelector('.global-search-wrapper')) {
-            const searchHTML = `
-            <div class="global-search-wrapper" style="opacity:1; transform:translateY(0); transition: all 0.5s ease;">
-                <div class="global-search">
-                    <i class="fas fa-search search-icon-g"></i>
-                    <input type="text" id="global-search-input" placeholder="Search images (e.g. Logo, Poster)...">
-                </div>
-            </div>`;
-            document.body.insertAdjacentHTML('beforeend', searchHTML);
-        }
 
-        const input = document.getElementById('global-search-input');
-        const urlParams = new URLSearchParams(window.location.search);
-        const q = urlParams.get('q');
-        if (q) input.value = q;
-
-        input.addEventListener('input', (e) => {
-            applySearchFilter(e.target.value);
-        });
-    }
 
     /* ═══════════════════════════════════════════
        2. RENDER — HORIZONTAL SCROLL (default)
@@ -587,7 +567,6 @@
     function init() {
         if (!track || !folder) return;
         buildLightbox();
-        initGlobalSearch();
         buildViewToggle();
         loadImages();
         bindScrollWheel();
