@@ -26,27 +26,46 @@ const sendEmail = async (options) => {
 const sendOrderAlert = async (order) => {
   if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) return;
 
-  const itemDetails = order.items.map(item => `- ${item.name} (x${item.quantity}) - ₹${item.price * item.quantity}`).join('\n');
-  
-  const message = `
-    New Order Received! 🥷
-    
-    Order ID: ${order._id}
-    Customer: ${order.customerName || 'N/A'}
-    Email: ${order.customerEmail || 'N/A'}
-    
-    Items:
-    ${itemDetails}
-    
-    Total: ₹${order.total}
-    Coupon: ${order.coupon || 'None'}
-  `;
+    const itemsHtml = order.items.map(item => `
+        <div style="border-bottom: 1px solid #eee; padding: 10px 0;">
+            <strong>${item.name}</strong> (x${item.quantity}) - ₹${item.price * item.quantity}
+        </div>
+    `).join('');
+
+    const mailOptions = {
+      from: `"D'NINJA Systems" <${process.env.EMAIL_USER}>`,
+      to: process.env.ADMIN_EMAIL,
+      subject: `🥷 NEW MISSION: Order #${order._id.toString().slice(-6)}`,
+      html: `
+        <div style="font-family: sans-serif; color: #333; max-width: 600px;">
+            <h2 style="color: #5f0fff;">New Brief Received!</h2>
+            <p>A customer has submitted a new creative mission. Here are the details:</p>
+            
+            <div style="background: #f9f9f9; padding: 15px; border-radius: 8px;">
+                <strong>Customer:</strong> ${order.customerName}<br>
+                <strong>Email:</strong> ${order.customerEmail}<br>
+                <strong>WhatsApp:</strong> ${order.customerWhatsApp}<br>
+                <strong>Address:</strong> ${order.customerAddress}
+            </div>
+
+            <h3 style="margin-top: 25px;">Mission Scope (Items):</h3>
+            ${itemsHtml}
+
+            <div style="margin-top: 20px; border-top: 2px solid #5f0fff; padding-top: 15px;">
+                <strong>Order Total:</strong> ₹${order.total}<br>
+                <strong style="color: #ff3c6e;">Advance Due (60%): ₹${order.advanceAmount}</strong><br>
+                <strong>Remaining (40%): ₹${order.remainingAmount}</strong>
+            </div>
+
+            <p style="margin-top: 30px; font-size: 0.9rem; color: #666;">
+                <i>Action Required: Connect with the customer via WhatsApp/Email to confirm advance payment.</i>
+            </p>
+        </div>
+      `,
+    };
 
   try {
-    await sendEmail({
-      subject: `New Order Alert: ${order._id}`,
-      message: message
-    });
+    await sendEmail(mailOptions);
     console.log('✅ Order alert email sent');
   } catch (error) {
     console.error('❌ Failed to send order alert email:', error.message);

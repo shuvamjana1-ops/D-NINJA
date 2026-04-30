@@ -6,18 +6,25 @@ const { sendOrderAlert } = require('../utils/emailService');
 // @access  Public
 const createOrder = async (req, res, next) => {
   try {
-    const { items, customerName, customerEmail, coupon } = req.body;
+    const { items, customerName, customerEmail, customerWhatsApp, customerAddress, coupon } = req.body;
     
     const subtotal = items.reduce((sum, i) => sum + (i.price * i.quantity), 0);
-    // Note: Add discount logic if needed
-    const total = subtotal;
+    // Apply discount logic if coupon is present (simplified for now)
+    const total = subtotal; 
+    
+    const advanceAmount = Math.round(total * 0.60);
+    const remainingAmount = total - advanceAmount;
 
     const order = new Order({
       items,
-      subtotal,
-      total,
       customerName,
       customerEmail,
+      customerWhatsApp,
+      customerAddress,
+      subtotal,
+      total,
+      advanceAmount,
+      remainingAmount,
       coupon,
       paymentStatus: 'pending',
       status: 'pending'
@@ -25,13 +32,14 @@ const createOrder = async (req, res, next) => {
 
     const createdOrder = await order.save();
     
-    // Send email alert to admin
+    // Send email alert with new fields
     sendOrderAlert(createdOrder);
 
     res.status(201).json({
       success: true,
       message: 'Order placed successfully! Check your email for details.',
-      orderId: createdOrder._id
+      orderId: createdOrder._id,
+      advanceAmount: createdOrder.advanceAmount
     });
   } catch (error) {
     next(error);

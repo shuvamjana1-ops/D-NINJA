@@ -110,48 +110,11 @@ class Cart {
         setTimeout(() => toast.classList.remove('show'), 3000);
     }
 
-    async checkout() {
-        if (this.items.length === 0) return;
-
-        const customerName = prompt("Enter your Name for the order:");
-        const customerEmail = prompt("Enter your Email for the order:");
-
-        if (!customerName || !customerEmail) {
-            this.showToast("Name and Email are required for orders! 🥷");
-            return;
-        }
-
-        const orderData = {
-            items: this.items,
-            customerName,
-            customerEmail,
-            coupon: this.coupon
-        };
-
-        try {
-            this.showToast("Submitting your order... 🥷");
-            const response = await fetch('http://localhost:5000/api/orders', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(orderData)
-            });
-
-            const result = await response.json();
-            if (result.success) {
-                this.items = [];
-                this.save();
-                
-                // Redirect to success page
-                window.location.href = `success.html?orderId=${result.orderId}`;
-                return true;
-            } else {
-                throw new Error(result.message);
-            }
-        } catch (err) {
-            console.warn("Direct checkout failed.");
-            this.showToast("Order failed. Please contact us directly. 🥷");
-        }
-        return false;
+    checkout() {
+        if (this.items.length === 0) return false;
+        // Redirect to the dedicated checkout page
+        window.location.href = 'checkout.html';
+        return true;
     }
 
     getCheckoutUrl() {

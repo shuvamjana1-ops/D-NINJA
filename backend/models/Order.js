@@ -29,13 +29,19 @@ const orderSchema = new mongoose.Schema({
   },
   customerName: String,
   customerEmail: String,
+  customerWhatsApp: String,
+  customerAddress: String,
+  subtotal: Number,
+  total: Number,
+  advanceAmount: Number, // 60% of total
+  remainingAmount: Number, // 40% of total
   paymentMethod: {
     type: String,
-    default: 'Direct Transfer/UPI'
+    default: 'UPI / Direct Transfer'
   },
   paymentStatus: {
     type: String,
-    enum: ['pending', 'paid', 'failed'],
+    enum: ['pending', 'advance_paid', 'fully_paid', 'failed'],
     default: 'pending'
   },
   status: {
