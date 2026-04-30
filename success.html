@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission Accomplished | D'NINJA</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        .success-page {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: var(--bg-dark, #0a0a0c);
+            padding: 20px;
+        }
+        .success-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 60px;
+            border-radius: 40px;
+            max-width: 600px;
+            width: 100%;
+            animation: card-reveal 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        @keyframes card-reveal {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .success-icon {
+            font-size: 80px;
+            color: #10b981;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.4));
+        }
+        .success-title {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 30%, #a5a5a5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .success-text {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 36px;
+            background: var(--accent-primary, #7c3aed);
+            color: white;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
+        }
+        .btn-home:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(124, 58, 237, 0.5);
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <div class="success-page">
+        <div class="success-card">
+            <i class="fas fa-check-circle success-icon"></i>
+            <h1 class="success-title">Order Transmitted!</h1>
+            <p class="success-text">
+                Your creative mission has been received and saved to our database. 
+                <br><br>
+                <strong>Next Step:</strong> Please wait for our transmission (at your provided email) to finalize the payment and start the design process.
+                <br><br>
+                <span id="order-id-display" style="font-family: monospace; background: rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 5px; color: var(--accent-primary);"></span>
+            </p>
+            <a href="index.html" class="btn-home">
+                <i class="fas fa-home"></i>
+                Return to Base
+            </a>
+        </div>
+    </div>
+    <script>
+        // Trigger celebration
+        window.addEventListener('load', () => {
+            const params = new URLSearchParams(window.location.search);
+            const orderId = params.get('orderId');
+            if (orderId) {
+                document.getElementById('order-id-display').textContent = `Order ID: ${orderId}`;
+            }
+
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#10b981', '#7c3aed', '#ffffff']
+            });
+        });
+    </script>
+</body>
+</html>

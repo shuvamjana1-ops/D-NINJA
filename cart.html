@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,271 +7,6 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        :root {
-            --cart-bg: #0a0a0a;
-        }
-
-        body {
-            background: var(--cart-bg);
-            color: var(--text);
-            min-height: 100vh;
-        }
-
-        .cart-page {
-            padding: 120px 20px 60px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .cart-header {
-            margin-bottom: 40px;
-            text-align: center;
-        }
-
-        .cart-header h1 {
-            font-family: var(--display);
-            font-size: 3.5rem;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-
-        .cart-container {
-            display: grid;
-            grid-template-columns: 1fr 380px;
-            gap: 30px;
-        }
-
-        @media (max-width: 992px) {
-            .cart-container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .cart-items-list {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .cart-item {
-            display: flex;
-            align-items: center;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 20px;
-            gap: 20px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .cart-item:hover {
-            border-color: var(--accent);
-            transform: translateY(-2px);
-        }
-
-        .cart-item-img {
-            width: 100px;
-            height: 100px;
-            border-radius: 12px;
-            object-fit: cover;
-            background: #1a1a1a;
-        }
-
-        .cart-item-info {
-            flex: 1;
-        }
-
-        .cart-item-name {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .cart-item-category {
-            font-size: 0.85rem;
-            color: var(--dim);
-            text-transform: capitalize;
-        }
-
-        .cart-item-price {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--accent);
-        }
-
-        .cart-item-controls {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .qty-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            color: var(--text);
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-        }
-
-        .qty-btn:hover {
-            background: var(--accent);
-            border-color: var(--accent);
-        }
-
-        .qty-val {
-            font-weight: 600;
-            min-width: 20px;
-            text-align: center;
-        }
-
-        .remove-btn {
-            color: #ff4d4d;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            font-size: 1.1rem;
-            padding: 5px;
-            transition: transform 0.2s ease;
-        }
-
-        .remove-btn:hover {
-            transform: scale(1.2);
-        }
-
-        /* Summary Sidebar */
-        .cart-summary {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 28px;
-            padding: 30px;
-            height: fit-content;
-            position: sticky;
-            top: 100px;
-            backdrop-filter: blur(20px);
-        }
-
-        .summary-title {
-            font-family: var(--display);
-            font-size: 1.8rem;
-            margin-bottom: 24px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 15px;
-        }
-
-        .summary-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            font-size: 1rem;
-        }
-
-        .summary-row.total {
-            border-top: 1px solid var(--border);
-            padding-top: 20px;
-            margin-top: 20px;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text);
-        }
-
-        .coupon-box {
-            margin-top: 25px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .coupon-input {
-            flex: 1;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 12px 15px;
-            color: var(--text);
-            font-family: inherit;
-        }
-
-        .coupon-btn {
-            background: var(--accent2);
-            border: none;
-            color: white;
-            padding: 0 20px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: opacity 0.2s;
-        }
-
-        .checkout-btn {
-            width: 100%;
-            margin-top: 30px;
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 18px;
-            border-radius: 15px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .checkout-btn:hover {
-            background: #4a00cc;
-            transform: scale(1.02);
-            box-shadow: 0 10px 20px rgba(95, 15, 255, 0.3);
-        }
-
-        .empty-cart {
-            text-align: center;
-            padding: 100px 20px;
-        }
-
-        .empty-cart i {
-            font-size: 5rem;
-            color: var(--border);
-            margin-bottom: 20px;
-        }
-
-        .empty-cart h2 {
-            font-size: 2rem;
-            margin-bottom: 15px;
-        }
-
-        .empty-cart a {
-            display: inline-block;
-            margin-top: 20px;
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 600;
-            border: 1px solid var(--accent);
-            padding: 12px 30px;
-            border-radius: 50px;
-            transition: all 0.3s;
-        }
-
-        .empty-cart a:hover {
-            background: var(--accent);
-            color: white;
-        }
-
-        .discount-tag {
-            color: #00ff88;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-    </style>
 </head>
 <body>
     <div id="cursor-dot" class="cursor-dot"></div>
@@ -383,7 +118,7 @@
                         <i class="fas fa-arrow-right"></i>
                     </button>
                     <p style="text-align:center; font-size:0.8rem; color:var(--dim); margin-top:15px;">
-                        <i class="fas fa-lock"></i> Secure checkout via Google Forms
+                        <i class="fas fa-lock"></i> Secure checkout powered by D'NINJA Systems
                     </p>
                 </div>
             </div>`;
@@ -400,9 +135,21 @@
             }
         }
 
-        function proceedToCheckout() {
-            const url = window.dninjaCart.getCheckoutUrl();
-            window.open(url, '_blank');
+        async function proceedToCheckout() {
+            const btn = document.querySelector('.checkout-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            btn.disabled = true;
+
+            const success = await window.dninjaCart.checkout();
+            
+            if (!success) {
+                // If it fails (no backend), the checkout method already opens Google Forms as fallback
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            } else {
+                renderCart(); // Refresh cart UI
+            }
         }
 
         window.addEventListener('cartUpdated', renderCart);

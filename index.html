@@ -4,9 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shuvam &mdash; Creative Designer</title>
+    <title>D'NINJA &mdash; Premium Creative Design Studio</title>
     <meta name="description"
-        content="Shuvam &mdash; Graphic Designer crafting bold visual identities, brand stories, and stunning designs with 3+ years of experience.">
+        content="D'NINJA: Premium Branding, Social Media, and Digital Identity Studio. Crafting bold visual stories with 2 years of expertise. Based in India, serving globally.">
+    <meta name="keywords" content="Graphic Design, Branding, Logo Design, Social Media Marketing, India, Creative Studio, D'NINJA, Shuvam Jana, Sumit Dinda">
+    <meta property="og:title" content="D'NINJA &mdash; Premium Creative Design Studio">
+    <meta property="og:description" content="Elevate your brand with intentional, bold design. Browse our portfolio of branding, logos, and digital content.">
+    <meta property="og:image" content="dninja_logo.png">
+    <meta property="og:url" content="https://shuvamjana1-ops.github.io/D-NINJA/">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="stylesheet" href="styles.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700;800&display=swap"
@@ -431,7 +437,7 @@
                         <div class="profile-footer">
                             <div class="footer-stat">
                                 <span class="stat-label">EXP</span>
-                                <span class="stat-val">3+ YEARS</span>
+                                <span class="stat-val">2 YEARS</span>
                             </div>
                             <div class="footer-divider"></div>
                             <div class="footer-stat">
@@ -471,7 +477,7 @@
                         <div class="profile-footer">
                             <div class="footer-stat">
                                 <span class="stat-label">EXP</span>
-                                <span class="stat-val">3+ YEARS</span>
+                                <span class="stat-val">2 YEARS</span>
                             </div>
                             <div class="footer-divider"></div>
                             <div class="footer-stat">
@@ -616,14 +622,37 @@
                 </div>
             </div>
             <div class="contact-right" data-reveal>
-                <div class="c-form" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 40px 30px; background: var(--card); border: 1px solid var(--border); border-top: 1px solid var(--glass-highlight); border-left: 1px solid var(--glass-highlight); border-radius: 28px; backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); box-shadow: var(--glass-shadow);">
-                    <i class="fas fa-clipboard-list" style="font-size: 3rem; color: var(--accent); margin-bottom: 8px;"></i>
-                    <h3 style="font-family: var(--display); font-size: 2.2rem; letter-spacing: 1px; color: var(--text);">Start a Project</h3>
-                    <p style="color: var(--dim); line-height: 1.6; font-size: 0.95rem; margin-bottom: 24px;">Have a query or want to order a design? Fill out our quick Google Form and we'll get back to you shortly.</p>
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfSTa2vXu7hfrneCq3plXLOIn9W68XQvZULHnSnfFl4dWRaVg/viewform" target="_blank" class="cf-submit" style="text-decoration: none; width: 100%;">
-                        <span>Open Order Form</span><i class="fas fa-external-link-alt"></i>
-                    </a>
-                </div>
+                <form id="dninja-contact-form" class="c-form" style="padding: 40px; background: var(--card); border: 1px solid var(--border); border-radius: 28px; backdrop-filter: blur(24px); box-shadow: var(--glass-shadow);">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                        <div class="cf-group">
+                            <label style="display:block; margin-bottom:8px; font-size:0.8rem; color:var(--dim);">YOUR NAME</label>
+                            <input type="text" name="name" class="cf-input" placeholder="Ninja Name" required style="width:100%; padding:15px; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:12px; color:#fff;">
+                        </div>
+                        <div class="cf-group">
+                            <label style="display:block; margin-bottom:8px; font-size:0.8rem; color:var(--dim);">YOUR EMAIL</label>
+                            <input type="email" name="email" class="cf-input" placeholder="ninja@example.com" required style="width:100%; padding:15px; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:12px; color:#fff;">
+                        </div>
+                    </div>
+                    <div class="cf-group" style="margin-bottom: 20px;">
+                        <label style="display:block; margin-bottom:8px; font-size:0.8rem; color:var(--dim);">SUBJECT</label>
+                        <select name="subject" class="cf-input" style="width:100%; padding:15px; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:12px; color:#fff;">
+                            <option value="New Project">New Design Project</option>
+                            <option value="Branding">Full Branding Package</option>
+                            <option value="Social Media">Social Media Management</option>
+                            <option value="Inquiry">General Inquiry</option>
+                        </select>
+                    </div>
+                    <div class="cf-group" style="margin-bottom: 30px;">
+                        <label style="display:block; margin-bottom:8px; font-size:0.8rem; color:var(--dim);">MESSAGE</label>
+                        <textarea name="message" class="cf-input" placeholder="Tell me about your vision..." required style="width:100%; padding:15px; height:120px; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:12px; color:#fff; resize:none;"></textarea>
+                    </div>
+                    <button type="submit" class="cf-submit" style="width: 100%; border:none; padding:18px; border-radius:15px; background:var(--accent); color:#fff; font-weight:700; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:10px;">
+                        <span>Send Mission Brief</span><i class="fas fa-paper-plane"></i>
+                    </button>
+                    <p style="text-align:center; margin-top:15px; font-size:0.8rem; color:var(--dim);">
+                        Or use the <a href="https://docs.google.com/forms/d/e/1FAIpQLSfSTa2vXu7hfrneCq3plXLOIn9W68XQvZULHnSnfFl4dWRaVg/viewform" target="_blank" style="color:var(--accent2);">Legacy Google Form</a>
+                    </p>
+                </form>
                 <p>D'NINJA &copy; 2026 &mdash; Designed & Crafted by Sumit & Shuvam</p>
                 
                 <!-- Clickbait: Scratch Card -->
@@ -635,8 +664,6 @@
                     </div>
                     <canvas class="scratch-canvas" id="scratch-canvas" width="400" height="200"></canvas>
                 </div>
-
-
             </div>
         </div>
     </section>
@@ -830,14 +857,13 @@
                             <span class="bento-pill" style="align-self: flex-start; margin-bottom: 12px; background: rgba(255, 60, 110, 0.1); border-color: var(--accent2); color: var(--accent2);">Class 10 - 12</span>
                             <h3>Bundle Packs</h3>
                             <div class="price-list" style="margin: 16px 0;">
-                                <div style="display:flex; justify-content:space-between; padding: 6px 0; border-bottom: 1px solid var(--border);">
+                                <div style="display:flex; justify-content:space-between; padding: 6px 0; border-bottom: 1px solid var(--border); align-items: center;">
                                     <span style="color:var(--dim);">3 Projects</span>
-                        <div class="price">&#8377;50</div>
+                                    <div class="price" style="font-size: 1.5rem; margin-bottom: 0;">&#8377;50</div>
                                 </div>
-                                <div style="display:flex; justify-content:space-between; padding: 6px 0; border-bottom: 1px solid var(--border);">
+                                <div style="display:flex; justify-content:space-between; padding: 6px 0; border-bottom: 1px solid var(--border); align-items: center;">
                                     <span style="color:var(--dim);">5 Projects</span>
-                        <span style="color:var(--accent2); 
-font-weight:600;">&#8377;80</span>
+                                    <span style="color:var(--accent2); font-weight:600; font-size: 1.2rem;">&#8377;80</span>
                                 </div>
                                 <div style="display:flex; justify-content:space-between; padding: 6px 0;">
                                     <span style="color:var(--dim);">10 Projects</span>
