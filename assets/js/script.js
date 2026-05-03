@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     };
-    
+
     window.addEventListener('load', updateContrast);
     window.addEventListener('resize', updateContrast);
     updateContrast();
@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let audioCtx;
     let sfxEnabled = localStorage.getItem('dninja-sfx') !== 'false';
     const sfxToggle = document.getElementById('sfx-toggle');
-    
+
     const playSound = (freq, type, duration) => {
         if (!sfxEnabled) return;
         try {
@@ -283,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }, { threshold: 0.5 });
-    
+
     document.querySelectorAll('.scramble-text').forEach(el => {
         el.dataset.text = el.innerText;
         scrambleObs.observe(el);
@@ -305,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
-        
+
         // Auto-Hide Navbar
         if (navbar && currentScroll > 150) {
             if (currentScroll > lastScroll && drawer && !drawer.classList.contains('open')) {
@@ -320,7 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (navbar) navbar.classList.toggle('scrolled', currentScroll > 60);
         if (btt) btt.classList.toggle('visible', currentScroll > 600);
-        
+
         // Update Progress
         const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const scrolled = (currentScroll / height) * 100;
@@ -345,9 +345,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (toggle && drawer) {
         toggle.addEventListener('click', () => { toggle.classList.toggle('active'); drawer.classList.toggle('open'); });
     }
-    document.querySelectorAll('.drawer-link').forEach(l => l.addEventListener('click', () => { 
-        if (toggle) toggle.classList.remove('active'); 
-        if (drawer) drawer.classList.remove('open'); 
+    document.querySelectorAll('.drawer-link').forEach(l => l.addEventListener('click', () => {
+        if (toggle) toggle.classList.remove('active');
+        if (drawer) drawer.classList.remove('open');
     }));
     if (btt) btt.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
 
@@ -537,7 +537,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnPricingDrawer = document.getElementById('drawer-pricing-btn');
     const btnPricingClose = document.getElementById('pricing-close');
     const modalCtaBtn = document.getElementById('modal-cta-btn');
-    
+
     const openPricing = (e) => {
         if (e) e.preventDefault();
         if (pricingModal) {
@@ -558,17 +558,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    if(btnPricingNav) btnPricingNav.addEventListener('click', openPricing);
-    if(btnPricingDrawer) btnPricingDrawer.addEventListener('click', openPricing);
-    if(btnPricingClose) btnPricingClose.addEventListener('click', closePricing);
-    
+    if (btnPricingNav) btnPricingNav.addEventListener('click', openPricing);
+    if (btnPricingDrawer) btnPricingDrawer.addEventListener('click', openPricing);
+    if (btnPricingClose) btnPricingClose.addEventListener('click', closePricing);
+
     window.addEventListener('click', (e) => {
         if (e.target === pricingModal) closePricing();
     });
     window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && pricingModal && pricingModal.classList.contains('active')) closePricing();
     });
-    if(modalCtaBtn) modalCtaBtn.addEventListener('click', closePricing);
+    if (modalCtaBtn) modalCtaBtn.addEventListener('click', closePricing);
 
     // ── Project Hub Enhancements ──
     const projectList = document.getElementById('proj-list');
@@ -878,8 +878,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ── Motion Preference (Keep) ──
-    const reduceMotion = localStorage.getItem('dninja-reduce-motion') === 'true' || 
-                         window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reduceMotion = localStorage.getItem('dninja-reduce-motion') === 'true' ||
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     document.body.classList.toggle('reduce-motion', reduceMotion);
 
     window.addEventListener('keydown', (e) => {
@@ -903,7 +903,7 @@ document.addEventListener('DOMContentLoaded', () => {
         else if (hour >= 12 && hour < 17) text = "Good Afternoon! Ready to design";
         else if (hour >= 17 && hour < 21) text = "Good Evening! Let's build something";
         else text = "Working late? We're available";
-        
+
         greetingEl.innerHTML = `<span class="badge-dot"></span>${text}`;
     };
     updateGreeting();
@@ -918,7 +918,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "Sumit is currently working on a social media campaign.",
         "5 people are viewing the Student Corner right now."
     ];
-    
+
     const showPulseToast = () => {
         const msg = pulseMessages[Math.floor(Math.random() * pulseMessages.length)];
         const pulseToast = document.createElement('div');
@@ -928,13 +928,13 @@ document.addEventListener('DOMContentLoaded', () => {
         pulseToast.style.zIndex = '999';
         pulseToast.innerHTML = `<span class="pulse-indicator"></span> ${msg}`;
         document.body.appendChild(pulseToast);
-        
+
         setTimeout(() => {
             pulseToast.classList.remove('active');
             setTimeout(() => pulseToast.remove(), 500);
         }, 4000);
     };
-    
+
     // Show first pulse after 10s, then every 30s
     setTimeout(() => {
         showPulseToast();
@@ -1028,11 +1028,11 @@ document.addEventListener('DOMContentLoaded', () => {
             mag.style.display = 'block';
             mag.style.left = (e.clientX - 75) + 'px';
             mag.style.top = (e.clientY - 75) + 'px';
-            
+
             const r = img.getBoundingClientRect();
             const x = ((e.clientX - r.left) / r.width) * 100;
             const y = ((e.clientY - r.top) / r.height) * 100;
-            
+
             mag.style.backgroundImage = `url(${img.src})`;
             mag.style.backgroundPosition = `${x}% ${y}%`;
             mag.style.backgroundSize = (r.width * 2) + 'px ' + (r.height * 2) + 'px';
@@ -1083,10 +1083,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.soc-btn').forEach(btn => {
         btn.addEventListener('mousemove', (e) => {
             const r = btn.getBoundingClientRect();
-            const x = (e.clientX - r.left - r.width/2) * 0.6;
-            const y = (e.clientY - r.top - r.height/2) * 0.6;
+            const x = (e.clientX - r.left - r.width / 2) * 0.6;
+            const y = (e.clientY - r.top - r.height / 2) * 0.6;
             btn.style.transform = `translate(${x}px, ${y}px)`;
-            btn.style.boxShadow = `${-x/2}px ${-y/2}px 20px rgba(95,15,255,0.3)`;
+            btn.style.boxShadow = `${-x / 2}px ${-y / 2}px 20px rgba(95,15,255,0.3)`;
         });
         btn.addEventListener('mouseleave', () => {
             btn.style.transform = '';
@@ -1103,7 +1103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.font = '24px Outfit';
         ctx.fillStyle = '#fff';
         ctx.textAlign = 'center';
-        ctx.fillText('SCRATCH TO REVEAL', canvas.width/2, canvas.height/2 + 10);
+        ctx.fillText('SCRATCH TO REVEAL', canvas.width / 2, canvas.height / 2 + 10);
 
         let isScratching = false;
         const scratch = (e) => {
