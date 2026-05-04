@@ -1,17 +1,350 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Cart &mdash; D'NINJA</title>
+    <title>Your Cart &mdash; D'NINJA Creative Studio</title>
+    <meta name="description" content="Review your selected D'NINJA design services before placing your order.">
+    <meta property="og:title" content="Your Cart â€” D'NINJA">
+    <meta property="og:description" content="Review and checkout your selected design services from D'NINJA Creative Studio.">
     <link rel="stylesheet" href="assets/css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* â”€â”€ Cart Page Inline Styles â”€â”€ */
+        .cart-page {
+            padding: 140px 40px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        .cart-header {
+            margin-bottom: 60px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 30px;
+        }
+
+        .cart-header h1 {
+            font-family: var(--display);
+            font-size: clamp(3rem, 8vw, 6rem);
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        #item-count-text {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--dim);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .cart-container {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .cart-items-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 24px;
+            background: var(--bg);
+            transition: background 0.3s;
+        }
+
+        .cart-item:hover { background: var(--bg-alt); }
+
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .cart-item-info { flex: 1; }
+
+        .cart-item-name {
+            font-family: var(--display);
+            font-size: 1.2rem;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .cart-item-category {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .cart-item-price {
+            font-family: var(--display);
+            font-size: 1.4rem;
+            color: var(--accent);
+            margin-top: 6px;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .qty-btn {
+            width: 32px;
+            height: 32px;
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .qty-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #000;
+        }
+
+        .qty-val {
+            font-family: var(--mono);
+            font-size: 1rem;
+            color: var(--text);
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .remove-btn {
+            background: none;
+            border: 1px solid rgba(220, 38, 38, 0.2);
+            color: rgba(220, 38, 38, 0.6);
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+
+        .remove-btn:hover {
+            background: rgba(220, 38, 38, 0.1);
+            border-color: rgba(220, 38, 38, 0.5);
+            color: #ef4444;
+        }
+
+        .cart-summary {
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            padding: 40px;
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-title {
+            font-family: var(--display);
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            color: var(--dim);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .summary-row.total {
+            color: var(--text);
+            font-size: 1rem;
+            font-weight: 700;
+            border-bottom: none;
+            padding-top: 20px;
+        }
+
+        .discount-tag { color: #4ade80; }
+
+        .coupon-box {
+            display: flex;
+            gap: 8px;
+            margin: 20px 0;
+        }
+
+        .coupon-input {
+            flex: 1;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 10px 14px;
+            color: var(--text);
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .coupon-input:focus { border-color: var(--accent); }
+
+        .coupon-btn {
+            background: none;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 10px 16px;
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .coupon-btn:hover {
+            background: var(--accent);
+            color: #000;
+        }
+
+        .coupon-msg {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        .coupon-msg.error {
+            background: rgba(220, 38, 38, 0.1);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            color: #fca5a5;
+            display: block;
+        }
+
+        .coupon-msg.success {
+            background: rgba(74, 222, 128, 0.1);
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            color: #4ade80;
+            display: block;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 20px;
+            background: var(--accent);
+            border: none;
+            color: #000;
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.3s;
+            margin-top: 24px;
+        }
+
+        .checkout-btn:hover {
+            background: var(--accent2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
+        }
+
+        .checkout-btn:disabled {
+            opacity: 0.6;
+            transform: none;
+            cursor: not-allowed;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 120px 40px;
+            border: 1px solid var(--border);
+            animation: fadeUp 0.6s ease both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .empty-cart i {
+            font-size: 4rem;
+            color: var(--dim);
+            opacity: 0.3;
+            margin-bottom: 24px;
+            display: block;
+        }
+
+        .empty-cart h2 {
+            font-family: var(--display);
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .empty-cart p {
+            font-size: 0.9rem;
+            color: var(--dim);
+            margin-bottom: 40px;
+        }
+
+        .empty-cart a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .empty-cart a:hover {
+            background: var(--accent);
+            color: #000;
+        }
+
+        @media (max-width: 768px) {
+            .cart-page { padding: 120px 20px 60px; }
+            .cart-container { grid-template-columns: 1fr; }
+            .cart-summary { position: static; }
+            .cart-item { flex-wrap: wrap; }
+        }
+    </style>
 </head>
 <body>
     <div id="cursor-dot" class="cursor-dot"></div>
-    <div id="cursor-ring" class="cursor-ring"></div>
-    <div id="cursor-label" class="cursor-label"></div>
     <div class="noise-overlay"></div>
 
     <div id="preloader" class="preloader">
@@ -20,33 +353,44 @@
             <div class="pre-status">REFINING CART / <span id="pre-percent">0</span>%</div>
         </div>
     </div>
-    <nav class="navbar" style="position: fixed; background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(10px);">
+
+    <nav class="navbar" style="background: rgba(10,10,10,0.85); backdrop-filter: blur(20px);">
         <div class="nav-inner">
             <a href="index.html" class="nav-logo">
                 <div class="nav-logo-placeholder">
-                    <img src="assets/img/dninja_logo.png" alt="D'NINJA" class="nav-logo-img">
+                    <img src="assets/img/dninja_logo.png" alt="D'NINJA" class="nav-logo-img"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <span class="logo-fallback">D'N</span>
                 </div>
-                <span class="nav-logo-text">D'NINJA</span>
+                <span class="nav-logo-text">D<span class="logo-apostrophe">'</span>NINJA</span>
             </a>
-            <div class="nav-right">
-                <a href="catalog/catalog-all.html" class="nav-link"><i class="fas fa-th"></i> Browse Designs</a>
+            <div class="nav-right" style="display:flex; align-items:center; gap:20px;">
+                <a href="catalog/catalog-all.html" class="nav-link"><i class="fas fa-th"></i> Browse</a>
+                <a href="index.html#contact" class="nav-hire">Get a Quote <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </nav>
 
     <main class="cart-page">
         <div class="cart-header">
-            <h1>YOUR CART</h1>
+            <h1>Your Cart</h1>
             <p id="item-count-text">Review your selected designs</p>
         </div>
 
-        <div id="cart-content">
-            <!-- Dynamic Content -->
-        </div>
+        <div id="coupon-msg" class="coupon-msg"></div>
+        <div id="cart-content"><!-- Dynamic Content --></div>
     </main>
 
     <script src="assets/js/cart.js"></script>
     <script>
+        // â”€â”€ Coupon message helper (no alert) â”€â”€
+        const showCouponMsg = (msg, type = 'error') => {
+            const el = document.getElementById('coupon-msg');
+            el.textContent = msg;
+            el.className = `coupon-msg ${type}`;
+            setTimeout(() => { el.className = 'coupon-msg'; }, 4000);
+        };
+
         function renderCart() {
             const container = document.getElementById('cart-content');
             const items = window.dninjaCart.items;
@@ -55,12 +399,12 @@
                 container.innerHTML = `
                     <div class="empty-cart">
                         <i class="fas fa-shopping-basket"></i>
-                        <h2>Your cart is empty</h2>
-                        <p>Looks like you haven't added any designs yet.</p>
-                        <a href="catalog/catalog-all.html">Start Browsing</a>
+                        <h2>Cart is Empty</h2>
+                        <p>You haven't added any designs yet. Browse the catalog to get started.</p>
+                        <a href="catalog/catalog-all.html"><i class="fas fa-th"></i> Browse All Designs</a>
                     </div>
                 `;
-                document.getElementById('item-count-text').textContent = "0 items in your cart";
+                document.getElementById('item-count-text').textContent = '0 items';
                 return;
             }
 
@@ -68,17 +412,17 @@
             items.forEach(item => {
                 itemsHTML += `
                     <div class="cart-item">
-                        <img src="${item.src}" alt="${item.name}" class="cart-item-img">
+                        <img src="${item.src}" alt="${item.name}" class="cart-item-img" loading="lazy" onerror="this.style.opacity=0.3">
                         <div class="cart-item-info">
                             <div class="cart-item-name">${item.name}</div>
                             <div class="cart-item-category">${item.folder}</div>
-                            <div class="cart-item-price">&#8377;${item.price}</div>
+                            <div class="cart-item-price">&#8377;${(item.price * item.quantity).toLocaleString('en-IN')}</div>
                         </div>
                         <div class="cart-item-controls">
-                            <button class="qty-btn" onclick="window.dninjaCart.updateQuantity('${item.id}', -1)">-</button>
+                            <button class="qty-btn" onclick="window.dninjaCart.updateQuantity('${item.id}', -1)">&#x2212;</button>
                             <span class="qty-val">${item.quantity}</span>
-                            <button class="qty-btn" onclick="window.dninjaCart.updateQuantity('${item.id}', 1)">+</button>
-                            <button class="remove-btn" onclick="window.dninjaCart.removeItem('${item.id}')" title="Remove">
+                            <button class="qty-btn" onclick="window.dninjaCart.updateQuantity('${item.id}', 1)">&#x2B;</button>
+                            <button class="remove-btn" onclick="window.dninjaCart.removeItem('${item.id}')" title="Remove item">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                         </div>
@@ -87,78 +431,75 @@
             });
             itemsHTML += '</div>';
 
-            // Summary Sidebar
             const subtotal = window.dninjaCart.getSubtotal();
             const discount = window.dninjaCart.getDiscount();
-            const total = window.dninjaCart.getTotal();
-            const coupon = window.dninjaCart.coupon;
+            const total    = window.dninjaCart.getTotal();
+            const coupon   = window.dninjaCart.coupon;
 
             itemsHTML += `
                 <div class="cart-summary">
                     <div class="summary-title">Order Summary</div>
                     <div class="summary-row">
                         <span>Subtotal</span>
-                        <span>&#8377;${subtotal}</span>
+                        <span>&#8377;${subtotal.toLocaleString('en-IN')}</span>
                     </div>
                     ${discount > 0 ? `
-                        <div class="summary-row">
-                            <span class="discount-tag">Discount (${coupon})</span>
-                            <span class="discount-tag">-&#8377;${discount.toFixed(2)}</span>
-                        </div>
-                    ` : ''}
+                    <div class="summary-row">
+                        <span class="discount-tag"><i class="fas fa-tag"></i> ${coupon}</span>
+                        <span class="discount-tag">-&#8377;${discount.toFixed(2)}</span>
+                    </div>` : ''}
                     <div class="summary-row">
                         <span>Platform Fee</span>
-                        <span>FREE</span>
+                        <span style="color:#4ade80;">FREE</span>
                     </div>
-                    
-                    <div class="coupon-box">
-                        <input type="text" id="coupon-input" class="coupon-input" placeholder="Coupon Code" value="${coupon || ''}">
-                        <button onclick="applyCoupon()" class="coupon-btn">Apply</button>
-                    </div>
-                    ${coupon ? `<button onclick="window.dninjaCart.removeCoupon()" style="background:none; border:none; color:var(--dim); font-size:0.8rem; cursor:pointer; margin-top:5px;">Remove Coupon</button>` : ''}
-
                     <div class="summary-row total">
                         <span>Total</span>
-                        <span>&#8377;${total.toFixed(2)}</span>
+                        <span>&#8377;${total.toLocaleString('en-IN', {minimumFractionDigits:2, maximumFractionDigits:2})}</span>
                     </div>
 
-                    <button onclick="proceedToCheckout()" class="checkout-btn">
+                    <div class="coupon-box">
+                        <input type="text" id="coupon-input" class="coupon-input"
+                            placeholder="COUPON CODE" value="${coupon || ''}"
+                            autocomplete="off">
+                        <button onclick="applyCoupon()" class="coupon-btn">Apply</button>
+                    </div>
+                    ${coupon ? `<button onclick="window.dninjaCart.removeCoupon()" style="background:none;border:none;color:var(--dim);font-size:0.75rem;font-family:var(--mono);letter-spacing:1px;margin-bottom:10px;">&#x2715; Remove ${coupon}</button>` : ''}
+
+                    <button onclick="proceedToCheckout()" class="checkout-btn" id="checkout-btn">
                         <span>Proceed to Order</span>
                         <i class="fas fa-arrow-right"></i>
                     </button>
-                    <p style="text-align:center; font-size:0.8rem; color:var(--dim); margin-top:15px;">
-                        <i class="fas fa-lock"></i> Secure checkout powered by D'NINJA Systems
+                    <p style="text-align:center;font-family:var(--mono);font-size:0.65rem;color:var(--dim);margin-top:16px;letter-spacing:1px;">
+                        <i class="fas fa-lock"></i> SECURE CHECKOUT &mdash; D'NINJA SYSTEMS
                     </p>
                 </div>
             </div>`;
 
             container.innerHTML = itemsHTML;
-            document.getElementById('item-count-text').textContent = `${window.dninjaCart.getItemCount()} items in your cart`;
+            document.getElementById('item-count-text').textContent =
+                `${window.dninjaCart.getItemCount()} item${window.dninjaCart.getItemCount() !== 1 ? 's' : ''} in your cart`;
         }
 
         function applyCoupon() {
             const input = document.getElementById('coupon-input');
-            const res = window.dninjaCart.applyCoupon(input.value);
-            if (!res.success) {
-                alert(res.message);
+            const code  = (input?.value || '').trim();
+            if (!code) { showCouponMsg('Please enter a coupon code.'); return; }
+            const res = window.dninjaCart.applyCoupon(code);
+            if (res.success) {
+                showCouponMsg(`âœ“ Coupon applied! ${Math.round(res.discount * 100)}% off`, 'success');
+            } else {
+                showCouponMsg(res.message || 'Invalid coupon code.');
             }
         }
 
-        async function proceedToCheckout() {
-            const btn = document.querySelector('.checkout-btn');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
-            btn.disabled = true;
-
-            const success = await window.dninjaCart.checkout();
-            
-            if (!success) {
-                // If it fails (no backend), the checkout method already opens Google Forms as fallback
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-            } else {
-                renderCart(); // Refresh cart UI
+        function proceedToCheckout() {
+            const btn = document.getElementById('checkout-btn');
+            if (btn) {
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparing...';
             }
+            // Small delay for visual feedback, then navigate
+            setTimeout(() => { window.location.href = 'checkout.html'; }, 300);
         }
 
         window.addEventListener('cartUpdated', renderCart);
@@ -167,6 +508,3 @@
     <script src="assets/js/script.js"></script>
 </body>
 </html>
-
-
-

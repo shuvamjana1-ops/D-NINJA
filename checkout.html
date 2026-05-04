@@ -1,20 +1,21 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout &mdash; D'NINJA</title>
+    <title>Checkout &mdash; D'NINJA Creative Studio</title>
+    <meta name="description" content="Complete your order with D'NINJA Creative Studio. Secure checkout for premium graphic design services.">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         .checkout-page {
             min-height: 100vh;
             padding: 140px 20px 80px;
-            background: var(--bg-dark);
+            background: var(--bg);
             display: flex;
             justify-content: center;
         }
@@ -173,15 +174,15 @@
                 <form id="checkout-form">
                     <div class="form-group">
                         <label>Full Name</label>
-                        <input type="text" id="name" required placeholder="Enter your name">
+                        <input type="text" id="name" autocomplete="name" required placeholder="Enter your name">
                     </div>
                     <div class="form-group">
                         <label>Email Address</label>
-                        <input type="email" id="email" required placeholder="name@example.com">
+                        <input type="email" id="email" autocomplete="email" required placeholder="name@example.com">
                     </div>
                     <div class="form-group">
                         <label>WhatsApp Number</label>
-                        <input type="tel" id="whatsapp" required placeholder="+91 XXXXX XXXXX">
+                        <input type="tel" id="whatsapp" autocomplete="tel" required placeholder="+91 XXXXX XXXXX">
                     </div>
                     <div class="form-group">
                         <label>Delivery/Billing Address</label>
@@ -211,10 +212,10 @@
                 </div>
                 <div class="summary-total">
                     <span>Total</span>
-                    <span id="total-amount">₹0</span>
+                    <span id="total-amount">Ã¢â€šÂ¹0</span>
                 </div>
                 <div class="advance-pill">
-                    <i class="fas fa-shield-alt"></i> Advance Due (60%): <strong id="advance-amount">₹0</strong>
+                    <i class="fas fa-shield-alt"></i> Advance Due (60%): <strong id="advance-amount">Ã¢â€šÂ¹0</strong>
                 </div>
             </div>
         </div>
@@ -222,6 +223,26 @@
 
     <script src="assets/js/cart.js"></script>
     <script>
+        // Ã¢â€â‚¬Ã¢â€â‚¬ API Configuration Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+        // Override window.DNINJA_API_URL before this script to change the
+        // backend URL (e.g. in production inject: window.DNINJA_API_URL = 'https://api.yourdomain.com')
+        // Inline error banner \u2014 no more browser alert() popups
+        const showFormError = (msg) => {
+            let banner = document.getElementById('form-error-banner');
+            if (!banner) {
+                banner = document.createElement('div');
+                banner.id = 'form-error-banner';
+                banner.style.cssText = 'margin-top:16px;padding:14px 20px;background:rgba(220,38,38,0.1);border:1px solid rgba(220,38,38,0.4);color:#fca5a5;font-family:var(--mono);font-size:0.75rem;letter-spacing:1px;border-radius:4px;';
+                document.getElementById('checkout-form').appendChild(banner);
+            }
+            banner.textContent = msg;
+            banner.style.display = 'block';
+            banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            setTimeout(() => banner.style.display = 'none', 6000);
+        };
+
+        const API_BASE = window.DNINJA_API_URL || 'http://localhost:5000';
+
         document.addEventListener('DOMContentLoaded', () => {
             const cart = window.dninjaCart;
             if (cart.items.length === 0) {
@@ -236,17 +257,31 @@
                 div.className = 'summary-item';
                 div.innerHTML = `
                     <span>${item.name} (x${item.quantity})</span>
-                    <span>₹${item.price * item.quantity}</span>
+                    <span>Ã¢â€šÂ¹${item.price * item.quantity}</span>
                 `;
                 container.appendChild(div);
             });
 
-            const total = cart.getTotal();
-            const advance = Math.round(total * 0.60);
-            document.getElementById('total-amount').textContent = `₹${total.toFixed(2)}`;
-            document.getElementById('advance-amount').textContent = `₹${advance}`;
+            const subtotal = cart.getSubtotal();
+            const discount = cart.getDiscount();
+            const total    = cart.getTotal();
+            const advance  = Math.round(total * 0.60);
 
-            // Handle Form
+            // Show discount line if a coupon is applied
+            if (discount > 0) {
+                const discountDiv = document.createElement('div');
+                discountDiv.className = 'summary-item';
+                discountDiv.innerHTML = `
+                    <span style="color: var(--accent2)">Discount (${cart.coupon})</span>
+                    <span style="color: var(--accent2)">-Ã¢â€šÂ¹${discount.toFixed(2)}</span>
+                `;
+                container.appendChild(discountDiv);
+            }
+
+            document.getElementById('total-amount').textContent = `Ã¢â€šÂ¹${total.toFixed(2)}`;
+            document.getElementById('advance-amount').textContent = `Ã¢â€šÂ¹${advance}`;
+
+            // Handle Form Submission
             const form = document.getElementById('checkout-form');
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -255,35 +290,40 @@
                 btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Transmitting Brief...';
 
                 const orderData = {
-                    items: cart.items,
-                    customerName: document.getElementById('name').value,
-                    customerEmail: document.getElementById('email').value,
-                    customerWhatsApp: document.getElementById('whatsapp').value,
-                    customerAddress: document.getElementById('address').value,
-                    coupon: cart.coupon
+                    items:             cart.items,
+                    customerName:      document.getElementById('name').value.trim(),
+                    customerEmail:     document.getElementById('email').value.trim(),
+                    customerWhatsApp:  document.getElementById('whatsapp').value.trim(),
+                    customerAddress:   document.getElementById('address').value.trim(),
+                    coupon:            cart.coupon || null,
                 };
 
                 try {
-                    const response = await fetch('http://localhost:5000/api/orders', {
-                        method: 'POST',
+                    const response = await fetch(`${API_BASE}/api/orders`, {
+                        method:  'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(orderData)
+                        body:    JSON.stringify(orderData),
                     });
 
                     const result = await response.json();
+
                     if (result.success) {
-                        cart.items = [];
+                        // Clear cart
+                        cart.items  = [];
                         cart.coupon = null;
                         cart.save();
                         window.location.href = `success.html?orderId=${result.orderId}&advance=${result.advanceAmount}`;
                     } else {
-                        const errorMsg = result.errors ? result.errors.map(e => e.msg).join(', ') : (result.message || "Unknown error");
-                        alert("Submission Failed: " + errorMsg);
+                        const errorMsg = result.errors
+                            ? result.errors.map(e => e.msg).join(', ')
+                            : (result.message || 'Unknown error');
+                        alert('Submission Failed: ' + errorMsg);
                         btn.disabled = false;
                         btn.innerHTML = '<span>Confirm Mission</span> <i class="fas fa-paper-plane"></i>';
                     }
                 } catch (err) {
-                    alert("Network Error: Could not connect to the backend server. Make sure it is running on port 5000.");
+                    console.error('Checkout error:', err);
+                    alert('Network Error: Could not connect to the backend server.\nMake sure it is running on port 5000.\n\nRun: npm run dev  (inside the /backend folder)');
                     btn.disabled = false;
                     btn.innerHTML = '<span>Confirm Mission</span> <i class="fas fa-paper-plane"></i>';
                 }

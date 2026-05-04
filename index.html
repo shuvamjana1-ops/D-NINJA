@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -17,7 +17,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
@@ -70,14 +70,18 @@
 
     <div id="festive-container" class="festive-container"></div>
 
-    <!-- Liquid Preloader Redesign -->
+    <!-- Blueprint Grid Preloader -->
     <div id="preloader" class="preloader">
-        <div class="pre-content" style="text-align: center;">
-            <img src="assets/img/dninja_logo.png" alt="D'NINJA" class="pre-logo-img">
+        <div class="pre-content" style="text-align: center; position: relative; z-index: 2;">
+            <img src="assets/img/dninja_logo.png" alt="D'NINJA" class="pre-logo-img"
+                style="animation: preloaderGlow 2s ease-in-out infinite alternate;">
             <h2 id="pre-liquid-text" class="pre-logo-liquid">D'NINJA</h2>
+            <div class="pre-line-wrap" style="margin-top: 30px;">
+                <div class="pre-line-fill"></div>
+            </div>
             <div class="pre-status"
-                style="font-family: var(--mono); font-size: 0.9rem; color: var(--dim); letter-spacing: 2px; margin-top: 20px;">
-                INITIALIZING MISSION / <span id="pre-percent">0</span>%
+                style="font-family: var(--mono); font-size: 0.7rem; color: var(--dim); letter-spacing: 4px; margin-top: 16px;">
+                LOADING BLUEPRINT / <span id="pre-percent">0</span>%
             </div>
         </div>
     </div>
@@ -114,7 +118,7 @@
                     <i class="fas fa-shopping-cart"></i> Cart
                     <span class="cart-count" style="display: none;">0</span>
                 </a>
-                <a href="#contact" class="nav-hire">Hire Me <i class="fas fa-arrow-right"></i></a>
+                <a href="#contact" class="nav-hire magnetic">Hire Me <i class="fas fa-arrow-right"></i></a>
                 <button class="nav-toggle" id="nav-toggle"><span></span><span></span></button>
             </div>
         </div>
@@ -170,9 +174,9 @@
                     <span class="stat-label">CONTENT ARCHITECTS</span>
                 </div>
                 <div class="hero-cta-wrap">
-                    <a href="#projects" class="nav-hire" style="padding: 25px 50px; font-size: 1rem;">VIEW ARCHIVES <i
+                    <a href="#projects" class="nav-hire magnetic" style="padding: 25px 50px; font-size: 1rem;">VIEW ARCHIVES <i
                             class="fas fa-arrow-right"></i></a>
-                    <button id="play-showreel" class="pf-btn"
+                    <button id="play-showreel" class="pf-btn magnetic"
                         style="margin-left: 20px; border: 1px solid rgba(255,255,255,0.1);">
                         <i class="fas fa-play"></i> WATCH SHOWREEL
                     </button>
@@ -197,11 +201,12 @@
     </div>
 
     <!-- Services Redesign -->
+    <hr class="section-divider">
     <section id="services" class="services-section reveal-up">
         <div class="container">
             <div class="services-header" style="margin-bottom: 80px;">
                 <span class="section-label">Architectural Expertise</span>
-                <h2 class="services-heading-new"
+                <h2 class="services-heading-new" data-split="true"
                     style="font-family: var(--display); font-size: clamp(3rem, 8vw, 6rem); margin: 0; text-transform: uppercase;">
                     Crafting Digital<br><em>Monuments.</em></h2>
             </div>
@@ -241,11 +246,12 @@
     </section>
 
     <!-- Projects Redesign -->
+    <hr class="section-divider">
     <section id="projects" class="projects-section reveal-up">
         <div class="container">
             <div class="projects-header" style="margin-bottom: 40px;">
                 <span class="section-label">Selected Works</span>
-                <h2 class="projects-heading-new"
+                <h2 class="projects-heading-new" data-split="true"
                     style="font-family: var(--display); font-size: clamp(3rem, 8vw, 6rem); margin: 0; text-transform: uppercase;">
                     The Visual<br><em>Archive.</em></h2>
             </div>
@@ -300,7 +306,7 @@
                 <a href="catalog/catalog-branding.html" class="proj-card-new" data-category="branding"
                     style="border: 1px solid var(--border);">
                     <div class="proj-img-wrap-new">
-                        <img src="images/branding/branding-cover.png" alt="Branding" class="proj-img-new"
+                        <img src="images/branding/branding-cover.png" alt="Branding" class="proj-img-new" loading="lazy" decoding="async"
                             onerror="this.src='https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=800'">
                     </div>
                     <div class="proj-meta-new">
@@ -313,7 +319,7 @@
                 <a href="catalog/catalog-socialmedia.html" class="proj-card-new" data-category="social"
                     style="border: 1px solid var(--border);">
                     <div class="proj-img-wrap-new">
-                        <img src="images/socialmedia/socialmedia-cover.png" alt="Social Media" class="proj-img-new"
+                        <img src="images/socialmedia/socialmedia-cover.png" alt="Social Media" class="proj-img-new" loading="lazy" decoding="async"
                             onerror="this.src='https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=800'">
                     </div>
                     <div class="proj-meta-new">
@@ -326,7 +332,7 @@
                 <a href="catalog/catalog-thumbnail.html" class="proj-card-new" data-category="content"
                     style="border: 1px solid var(--border);">
                     <div class="proj-img-wrap-new">
-                        <img src="images/thumbnail/thumbnail-cover.png" alt="Thumbnails" class="proj-img-new"
+                        <img src="images/thumbnail/thumbnail-cover.png" alt="Thumbnails" class="proj-img-new" loading="lazy" decoding="async"
                             onerror="this.src='https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&q=80&w=800'">
                     </div>
                     <div class="proj-meta-new">
@@ -339,7 +345,7 @@
                 <a href="catalog/catalog-logo.html" class="proj-card-new" data-category="branding"
                     style="border: 1px solid var(--border);">
                     <div class="proj-img-wrap-new">
-                        <img src="images/logo/logo-cover.png" alt="Logos" class="proj-img-new"
+                        <img src="images/logo/logo-cover.png" alt="Logos" class="proj-img-new" loading="lazy" decoding="async"
                             onerror="this.src='https://images.unsplash.com/photo-1542744094-24638eff58bb?auto=format&fit=crop&q=80&w=800'">
                     </div>
                     <div class="proj-meta-new">
@@ -352,7 +358,7 @@
                 <a href="catalog/catalog-greetings.html" class="proj-card-new" data-category="social"
                     style="border: 1px solid var(--border);">
                     <div class="proj-img-wrap-new">
-                        <img src="images/greetings/greetings-cover.png" alt="Greetings" class="proj-img-new"
+                        <img src="images/greetings/greetings-cover.png" alt="Greetings" class="proj-img-new" loading="lazy" decoding="async"
                             onerror="this.src='https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&q=80&w=800'">
                     </div>
                     <div class="proj-meta-new">
@@ -365,7 +371,7 @@
                 <a href="catalog/catalog-icard.html" class="proj-card-new" data-category="print"
                     style="border: 1px solid var(--border);">
                     <div class="proj-img-wrap-new">
-                        <img src="images/icard/icard-cover.png" alt="ICards" class="proj-img-new"
+                        <img src="images/icard/icard-cover.png" alt="ICards" class="proj-img-new" loading="lazy" decoding="async"
                             onerror="this.src='https://images.unsplash.com/photo-1557200134-90327ee9fafa?auto=format&fit=crop&q=80&w=800'">
                     </div>
                     <div class="proj-meta-new">
@@ -378,7 +384,7 @@
                 <a href="catalog/catalog-invitation.html" class="proj-card-new" data-category="print"
                     style="border: 1px solid var(--border);">
                     <div class="proj-img-wrap-new">
-                        <img src="images/invitation/invitation-cover.png" alt="Invitations" class="proj-img-new"
+                        <img src="images/invitation/invitation-cover.png" alt="Invitations" class="proj-img-new" loading="lazy" decoding="async"
                             onerror="this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800'">
                     </div>
                     <div class="proj-meta-new">
@@ -391,7 +397,7 @@
                 <a href="catalog/catalog-poster.html" class="proj-card-new" data-category="print"
                     style="border: 1px solid var(--border);">
                     <div class="proj-img-wrap-new">
-                        <img src="images/poster/poster-cover.png" alt="Posters" class="proj-img-new"
+                        <img src="images/poster/poster-cover.png" alt="Posters" class="proj-img-new" loading="lazy" decoding="async"
                             onerror="this.src='https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=800'">
                     </div>
                     <div class="proj-meta-new">
@@ -404,7 +410,7 @@
                 <a href="catalog/catalog-accessories.html" class="proj-card-new" data-category="content"
                     style="border: 1px solid var(--border);">
                     <div class="proj-img-wrap-new">
-                        <img src="images/accessories/Project Cover Page.png" alt="Accessories" class="proj-img-new"
+                        <img src="images/accessories/Project Cover Page.png" alt="Accessories" class="proj-img-new" loading="lazy" decoding="async"
                             onerror="this.src='https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&q=80&w=800'">
                     </div>
                     <div class="proj-meta-new">
@@ -426,11 +432,12 @@
     </section>
 
     <!-- Process Redesign -->
+    <hr class="section-divider">
     <section id="process" class="process-section reveal-up">
         <div class="container">
             <div class="process-header" style="margin-bottom: 80px;">
                 <span class="section-label">Our Workflow</span>
-                <h2 class="process-heading-new"
+                <h2 class="process-heading-new" data-split="true"
                     style="font-family: var(--display); font-size: clamp(2rem, 6vw, 4rem); margin: 0; text-transform: uppercase;">
                     The Ninja<br><em>Method.</em></h2>
             </div>
@@ -462,6 +469,7 @@
     </section>
 
     <!-- Pricing & Investment Section -->
+    <hr class="section-divider">
     <section id="pricing" class="pricing-section reveal-up">
         <div class="container">
             <div class="section-header" style="margin-bottom: 80px;">
@@ -529,7 +537,7 @@
                         <div class="p-service">Festive Greetings</div>
                         <div class="p-val">FROM &#8377;15</div>
                     </div>
-                    <a href="#contact" class="nav-hire" style="margin-top: 40px; width: 100%; text-align: center;">START
+                    <a href="#contact" class="nav-hire magnetic" style="margin-top: 40px; width: 100%; text-align: center;">START
                         MISSION</a>
                 </div>
             </div>
@@ -537,6 +545,7 @@
     </section>
 
     <!-- About Redesign (Rich) -->
+    <hr class="section-divider">
     <section id="about" class="about-section reveal-up">
         <div class="container">
             <div class="about-header-wrap" style="margin-bottom: 80px; text-align: left;">
@@ -581,7 +590,7 @@
                     </div>
                     <h3 style="font-size: 2.5rem; margin-bottom: 5px;">Shuvam Jana</h3>
                     <p style="color: var(--dim); line-height: 1.7; font-size: 0.9rem;">A pixel-perfect storyteller who
-                        turns raw concepts into stunning visual narratives. Shuvam blends creativity with strategy —
+                        turns raw concepts into stunning visual narratives. Shuvam blends creativity with strategy â€”
                         every design decision is intentional.</p>
                 </div>
             </div>
@@ -589,11 +598,12 @@
     </section>
 
     <!-- FAQ Redesign -->
+    <hr class="section-divider">
     <section id="faq" class="faq-section reveal-up">
         <div class="container">
             <div class="faq-header" style="margin-bottom: 60px;">
                 <span class="section-label">Intelligence</span>
-                <h2 class="faq-heading-new"
+                <h2 class="faq-heading-new" data-split="true"
                     style="font-family: var(--display); font-size: clamp(2rem, 6vw, 4rem); margin: 0; text-transform: uppercase;">
                     Frequently Asked.</h2>
             </div>
@@ -622,6 +632,7 @@
     </section>
 
     <!-- Student Corner Redesign -->
+    <hr class="section-divider">
     <section id="student-corner" class="student-section reveal-up">
         <div class="container">
             <div class="student-header" style="margin-bottom: 80px;">
@@ -637,7 +648,7 @@
                     <h3>Discounts</h3>
                     <p style="color: var(--dim); line-height: 1.7;">Special project-based rates and monthly memberships
                         for Class 10-12 and College students.</p>
-                    <a href="student-discounts.html" class="nav-hire"
+                    <a href="student-discounts.html" class="nav-hire magnetic"
                         style="padding: 12px 24px; font-size: 0.7rem; margin-top: auto;">VIEW RATES</a>
                 </div>
 
@@ -646,7 +657,7 @@
                     <h3>Accessories</h3>
                     <p style="color: var(--dim); line-height: 1.7;">Exclusive collection of project covers, textures,
                         and design assets to give your work an elite edge.</p>
-                    <a href="catalog/catalog-accessories.html" class="nav-hire"
+                    <a href="catalog/catalog-accessories.html" class="nav-hire magnetic"
                         style="padding: 12px 24px; font-size: 0.7rem; margin-top: auto;">OPEN SLOT</a>
                 </div>
 
@@ -655,7 +666,7 @@
                     <h3>Workshops</h3>
                     <p style="color: var(--dim); line-height: 1.7;">Join our upcoming live design sprints and learn the
                         architectural method behind the pixels.</p>
-                    <a href="#" class="nav-hire"
+                    <a href="#" class="nav-hire magnetic"
                         style="padding: 12px 24px; font-size: 0.7rem; margin-top: auto; opacity: 0.5; pointer-events: none;">COMING
                         SOON</a>
                 </div>
@@ -664,6 +675,7 @@
     </section>
 
     <!-- Testimonials -->
+    <hr class="section-divider">
     <section id="testimonials" class="testimonial-section reveal-up">
         <div class="container">
             <div class="testimonial-header">
@@ -712,6 +724,7 @@
     </section>
 
     <!-- Contact Redesign -->
+    <hr class="section-divider">
     <section id="contact" class="contact-section">
         <div class="container">
             <div class="contact-editorial-wrap"
@@ -782,7 +795,7 @@
                             </div>
                             <button type="submit"
                                 onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSfSTa2vXu7hfrneCq3plXLOIn9W68XQvZULHnSnfFl4dWRaVg/viewform', '_blank')"
-                                class="nav-hire" style="width: 100%; padding: 20px; font-size: 1rem;">CLICK TO CONTACT
+                                class="nav-hire magnetic" style="width: 100%; padding: 20px; font-size: 1rem;">CLICK TO CONTACT
                                 <i class="fas fa-external-link-alt"></i></button>
                         </div>
                     </form>
@@ -798,7 +811,7 @@
             <div style="font-weight: 700; font-size: 0.9rem; color: #fff;">New Message</div>
             <div style="font-size: 0.8rem; color: var(--dim);">From Shuvam: "I have a special..."</div>
         </div>
-        <button id="open-unread" class="pf-btn" style="padding: 6px 12px; font-size: 0.75rem;">Open</button>
+        <button id="open-unread" class="pf-btn magnetic" style="padding: 6px 12px; font-size: 0.75rem;">Open</button>
     </div>
 
     <!-- Footer Redesign -->
@@ -1042,9 +1055,9 @@
                 <div id="quick-view-tags" class="project-quick-tags"></div>
                 <div class="project-quick-actions">
                     <a id="quick-view-open" href="#" class="cf-submit">Open Catalog</a>
-                    <button id="quick-view-favorite" class="pf-btn" type="button">Favorite</button>
-                    <button id="quick-view-compare" class="pf-btn" type="button">Compare</button>
-                    <button id="quick-view-share" class="pf-btn" type="button">Copy Link</button>
+                    <button id="quick-view-favorite" class="pf-btn magnetic" type="button">Favorite</button>
+                    <button id="quick-view-compare" class="pf-btn magnetic" type="button">Compare</button>
+                    <button id="quick-view-share" class="pf-btn magnetic" type="button">Copy Link</button>
                 </div>
             </div>
         </div>

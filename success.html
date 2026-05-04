@@ -1,30 +1,32 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mission Accomplished | D'NINJA</title>
+    <meta name="description" content="Order confirmed! D'NINJA Creative Studio has received your brief and will reach out soon.">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         .success-page {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             background: var(--bg);
-            padding: 20px;
+            padding: 40px 20px;
+            padding-top: 40px;
         }
 
         .success-card {
             background: var(--bg-alt);
             border: 1px solid var(--border);
-            padding: 80px;
-            border-radius: 0;
+            padding: 60px;
             max-width: 800px;
             width: 100%;
             animation: card-reveal 0.8s cubic-bezier(0.23, 1, 0.32, 1);
@@ -32,18 +34,19 @@
 
         @keyframes card-reveal {
             from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         .success-icon {
-            font-size: 60px;
+            font-size: 56px;
             color: var(--accent);
             margin-bottom: 30px;
+            animation: pulse-glow 2s infinite alternate;
         }
 
         .success-title {
             font-family: var(--display);
-            font-size: 3rem;
+            font-size: clamp(2rem, 6vw, 3rem);
             text-transform: uppercase;
             margin-bottom: 20px;
             color: #fff;
@@ -51,10 +54,70 @@
 
         .success-text {
             font-family: var(--font);
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--dim);
             line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .order-id-badge {
+            display: none;
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--accent);
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 8px 20px;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        .payment-box {
+            border: 1px solid var(--border);
+            padding: 40px;
             margin-bottom: 40px;
+            text-align: left;
+            background: var(--bg);
+        }
+
+        .upi-block {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .upi-id-badge {
+            font-family: var(--mono);
+            background: var(--accent);
+            color: #000;
+            display: inline-block;
+            padding: 12px 24px;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .copy-upi-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border: 1px solid var(--border);
+            background: none;
+            color: var(--dim);
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-upi-btn:hover, .copy-upi-btn.copied {
+            border-color: var(--accent);
+            color: var(--accent);
         }
 
         .btn-home {
@@ -76,12 +139,33 @@
             background: var(--accent);
             color: #000;
         }
+
+        .success-toast {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: var(--accent);
+            color: #000;
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            padding: 14px 24px;
+            z-index: 10010;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .success-toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 
 <body class="dark-mode">
     <div id="cursor-dot" class="cursor-dot"></div>
-    <div id="cursor-label" class="cursor-label"></div>
     <div class="noise-overlay"></div>
 
     <div id="preloader" class="preloader">
@@ -90,57 +174,92 @@
             <div class="pre-status">FINALIZING TRANSMISSION / <span id="pre-percent">0</span>%</div>
         </div>
     </div>
+
+    <div id="success-toast" class="success-toast"></div>
+
     <div class="success-page">
         <div class="success-card">
             <div class="success-icon"><i class="fas fa-paper-plane"></i></div>
             <h1 class="success-title">Transmission<br><em>Confirmed.</em></h1>
             <p class="success-text">
-                Your mission brief has been successfully received by our strategic design unit. 
-                Our architects will review the project requirements and respond within the next communication cycle.
-                <br><br>
-                <span id="order-id-display" style="font-family: var(--mono); font-size: 0.8rem; color: var(--accent);"></span>
+                Your mission brief has been received by our strategic design unit.
+                Our architects will review requirements and respond within 24 hours.
             </p>
+            <div id="order-id-display" class="order-id-badge"></div>
 
-            <div style="border: 1px solid var(--border); padding: 40px; margin-bottom: 40px; text-align: left; background: var(--bg);">
-                <h3 style="font-family: var(--display); color: #fff; margin-bottom: 20px; text-transform: uppercase;">Mission Security Deposit</h3>
-                <p style="font-size: 0.9rem; color: var(--dim); margin-bottom: 20px;">
-                    To initiate the design sprint, a 60% security deposit is required. 
+            <div class="payment-box">
+                <h3 style="font-family: var(--display); color: #fff; margin-bottom: 12px; text-transform: uppercase; font-size: 1.4rem;">Mission Security Deposit</h3>
+                <p style="font-size: 0.85rem; color: var(--dim); margin-bottom: 20px;">
+                    A 60% advance is required to initiate your design sprint.
                 </p>
-                <div style="font-family: var(--display); font-size: 2.5rem; color: #fff; margin-bottom: 20px;">
-                    ₹<span id="advance-amount-display">0</span>
+                <div style="font-family: var(--display); font-size: 2.5rem; color: #fff; margin-bottom: 10px;">
+                    &#8377;<span id="advance-amount-display">â€”</span>
                 </div>
-                <div style="font-family: var(--mono); background: var(--accent); color: #000; display: inline-block; padding: 10px 20px; font-weight: 700;">
-                    UPI ID: shuvamjana@fam
+                <div class="upi-block">
+                    <span class="upi-id-badge">shuvamjana@fam</span>
+                    <button class="copy-upi-btn" id="copy-upi-btn" type="button">
+                        <i class="fas fa-copy"></i> Copy UPI ID
+                    </button>
                 </div>
-                <p style="font-size: 0.7rem; color: var(--accent); margin-top: 15px; font-family: var(--mono); letter-spacing: 1px;">
-                    * TRANSMIT PAYMENT SCREENSHOT ON WHATSAPP FOR IMMEDIATE ACTIVATION.
+                <p style="font-size: 0.7rem; color: var(--accent); margin-top: 20px; font-family: var(--mono); letter-spacing: 1px;">
+                    * SEND PAYMENT SCREENSHOT ON WHATSAPP FOR IMMEDIATE ACTIVATION.
                 </p>
             </div>
+
             <a href="index.html" class="btn-home">
-                RETURN TO BASE ARCHIVE
+                <i class="fas fa-home"></i>&nbsp; RETURN TO BASE ARCHIVE
             </a>
         </div>
     </div>
+
     <script>
-        // Trigger celebration
+        const UPI_ID = 'shuvamjana@fam';
+        const toast  = document.getElementById('success-toast');
+
+        const showToast = (msg) => {
+            toast.textContent = msg;
+            toast.classList.add('show');
+            clearTimeout(window._st);
+            window._st = setTimeout(() => toast.classList.remove('show'), 2200);
+        };
+
         window.addEventListener('load', () => {
-            const params = new URLSearchParams(window.location.search);
-            const orderId = params.get('orderId');
-            const advance = params.get('advance');
+            const p       = new URLSearchParams(window.location.search);
+            const orderId = p.get('orderId');
+            const advance = p.get('advance');
+            const badge   = document.getElementById('order-id-display');
+            const advEl   = document.getElementById('advance-amount-display');
 
             if (orderId) {
-                document.getElementById('order-id-display').textContent = `Order ID: ${orderId}`;
+                badge.textContent = `ORDER ID: ${orderId}`;
+                badge.style.display = 'inline-block';
             }
             if (advance) {
-                document.getElementById('advance-amount-display').textContent = advance;
+                advEl.textContent = Number(advance).toLocaleString('en-IN');
             }
 
-            confetti({
-                particleCount: 150,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: ['#10b981', '#7c3aed', '#ffffff']
-            });
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#d4af37', '#7c3aed', '#ffffff'] });
+        });
+
+        document.getElementById('copy-upi-btn').addEventListener('click', async () => {
+            const btn = document.getElementById('copy-upi-btn');
+            try {
+                await navigator.clipboard.writeText(UPI_ID);
+            } catch {
+                // Fallback for older browsers
+                const el = Object.assign(document.createElement('textarea'), { value: UPI_ID });
+                document.body.appendChild(el);
+                el.select();
+                document.execCommand('copy');
+                document.body.removeChild(el);
+            }
+            btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            btn.classList.add('copied');
+            showToast('UPI ID copied to clipboard!');
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-copy"></i> Copy UPI ID';
+                btn.classList.remove('copied');
+            }, 2500);
         });
     </script>
     <script src="assets/js/script.js"></script>

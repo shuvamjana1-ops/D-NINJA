@@ -1,0 +1,9 @@
+{
+  "watch": ["*.js", "config", "controllers", "middleware", "models", "routes", "utils"],
+  "ignore": ["node_modules", "logs", ".env", "*.test.js", "*.spec.js"],
+  "ext": "js,json",
+  "delay": 500,
+  "verbose": false,
+  "colours": true,
+  "exec": "node server.js"
+}

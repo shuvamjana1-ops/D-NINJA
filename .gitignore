@@ -2,5 +2,7 @@ node_modules/
 .vscode/
 .DS_Store
 backend/node_modules/
+backend/logs/
+backend/.env
+!backend/.env.example
 *.log
-
