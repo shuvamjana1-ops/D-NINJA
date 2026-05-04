@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout &mdash; D'NINJA</title>
     <link rel="stylesheet" href="assets/css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         .checkout-page {
@@ -15,6 +18,7 @@
             display: flex;
             justify-content: center;
         }
+
         .checkout-container {
             max-width: 1000px;
             width: 100%;
@@ -22,9 +26,13 @@
             grid-template-columns: 1.5fr 1fr;
             gap: 40px;
         }
+
         @media (max-width: 768px) {
-            .checkout-container { grid-template-columns: 1fr; }
+            .checkout-container {
+                grid-template-columns: 1fr;
+            }
         }
+
         .checkout-form-box {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--border);
@@ -32,9 +40,11 @@
             border-radius: 24px;
             backdrop-filter: blur(10px);
         }
+
         .form-group {
             margin-bottom: 24px;
         }
+
         .form-group label {
             display: block;
             margin-bottom: 8px;
@@ -42,7 +52,9 @@
             color: var(--dim);
             font-size: 0.9rem;
         }
-        .form-group input, .form-group textarea {
+
+        .form-group input,
+        .form-group textarea {
             width: 100%;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border);
@@ -52,11 +64,14 @@
             font-family: inherit;
             transition: all 0.3s ease;
         }
-        .form-group input:focus, .form-group textarea:focus {
+
+        .form-group input:focus,
+        .form-group textarea:focus {
             outline: none;
             border-color: var(--accent);
             background: rgba(255, 255, 255, 0.08);
         }
+
         .checkout-summary {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--border);
@@ -66,12 +81,14 @@
             position: sticky;
             top: 140px;
         }
+
         .summary-item {
             display: flex;
             justify-content: space-between;
             margin-bottom: 12px;
             font-size: 0.9rem;
         }
+
         .summary-total {
             margin-top: 20px;
             padding-top: 20px;
@@ -82,6 +99,7 @@
             font-size: 1.4rem;
             color: #fff;
         }
+
         .advance-pill {
             background: rgba(124, 58, 237, 0.1);
             color: var(--accent);
@@ -92,6 +110,7 @@
             margin-top: 10px;
             border: 1px solid rgba(124, 58, 237, 0.2);
         }
+
         .submit-btn {
             width: 100%;
             padding: 18px;
@@ -109,17 +128,30 @@
             align-items: center;
             gap: 10px;
         }
+
         .submit-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(95, 15, 255, 0.3);
         }
+
         .submit-btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
         }
     </style>
 </head>
+
 <body class="dark-mode">
+    <div id="cursor-dot" class="cursor-dot"></div>
+    <div id="cursor-label" class="cursor-label"></div>
+    <div class="noise-overlay"></div>
+
+    <div id="preloader" class="preloader">
+        <div class="pre-content" style="text-align: center;">
+            <h2 class="pre-logo-liquid">D'NINJA</h2>
+            <div class="pre-status">PREPARING TRANSMISSION / <span id="pre-percent">0</span>%</div>
+        </div>
+    </div>
     <nav class="navbar" style="position: fixed; background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(10px);">
         <div class="nav-inner">
             <a href="index.html" class="nav-logo">
@@ -155,10 +187,13 @@
                         <label>Delivery/Billing Address</label>
                         <textarea id="address" rows="3" required placeholder="Enter your full address"></textarea>
                     </div>
-                    
-                    <div style="background: rgba(255,255,255,0.03); padding: 20px; border-radius: 15px; border: 1px solid var(--border);">
+
+                    <div
+                        style="background: rgba(255,255,255,0.03); padding: 20px; border-radius: 15px; border: 1px solid var(--border);">
                         <p style="font-size: 0.85rem; color: var(--dim); line-height: 1.5;">
-                            <i class="fas fa-info-circle" style="color: var(--accent);"></i> By submitting, you agree to pay the <strong>60% advance</strong> to initiate the design process. The remaining 40% will be paid before final delivery.
+                            <i class="fas fa-info-circle" style="color: var(--accent);"></i> By submitting, you agree to
+                            pay the <strong>60% advance</strong> to initiate the design process. The remaining 40% will
+                            be paid before final delivery.
                         </p>
                     </div>
 
@@ -238,20 +273,24 @@
                     const result = await response.json();
                     if (result.success) {
                         cart.items = [];
+                        cart.coupon = null;
                         cart.save();
                         window.location.href = `success.html?orderId=${result.orderId}&advance=${result.advanceAmount}`;
                     } else {
-                        alert("Server Error: " + (result.message || "Failed to save order. Check if your IP is whitelisted in MongoDB Atlas."));
+                        const errorMsg = result.errors ? result.errors.map(e => e.msg).join(', ') : (result.message || "Unknown error");
+                        alert("Submission Failed: " + errorMsg);
                         btn.disabled = false;
                         btn.innerHTML = '<span>Confirm Mission</span> <i class="fas fa-paper-plane"></i>';
                     }
                 } catch (err) {
-                    alert("Network Error: Could not connect to the backend server. Make sure it is running (npm run dev).");
+                    alert("Network Error: Could not connect to the backend server. Make sure it is running on port 5000.");
                     btn.disabled = false;
                     btn.innerHTML = '<span>Confirm Mission</span> <i class="fas fa-paper-plane"></i>';
                 }
             });
         });
     </script>
+    <script src="assets/js/script.js"></script>
 </body>
+
 </html>

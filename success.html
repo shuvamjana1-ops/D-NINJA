@@ -16,52 +16,43 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: var(--bg-dark, #0a0a0c);
+            background: var(--bg);
             padding: 20px;
         }
 
         .success-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 60px;
-            border-radius: 40px;
-            max-width: 600px;
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            padding: 80px;
+            border-radius: 0;
+            max-width: 800px;
             width: 100%;
             animation: card-reveal 0.8s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         @keyframes card-reveal {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .success-icon {
-            font-size: 80px;
-            color: #10b981;
+            font-size: 60px;
+            color: var(--accent);
             margin-bottom: 30px;
-            filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.4));
         }
 
         .success-title {
-            font-size: 42px;
-            font-weight: 800;
+            font-family: var(--display);
+            font-size: 3rem;
+            text-transform: uppercase;
             margin-bottom: 20px;
-            background: linear-gradient(135deg, #fff 30%, #a5a5a5);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #fff;
         }
 
         .success-text {
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.7);
+            font-family: var(--font);
+            font-size: 1.1rem;
+            color: var(--dim);
             line-height: 1.6;
             margin-bottom: 40px;
         }
@@ -70,55 +61,63 @@
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            padding: 16px 36px;
-            background: var(--accent-primary, #7c3aed);
-            color: white;
-            border-radius: 100px;
+            padding: 20px 40px;
+            border: 1px solid var(--accent);
+            color: var(--accent);
             text-decoration: none;
-            font-weight: 600;
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
         }
 
         .btn-home:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(124, 58, 237, 0.5);
+            background: var(--accent);
+            color: #000;
         }
     </style>
 </head>
 
 <body class="dark-mode">
+    <div id="cursor-dot" class="cursor-dot"></div>
+    <div id="cursor-label" class="cursor-label"></div>
+    <div class="noise-overlay"></div>
+
+    <div id="preloader" class="preloader">
+        <div class="pre-content" style="text-align: center;">
+            <h2 class="pre-logo-liquid">MISSION SUCCESS</h2>
+            <div class="pre-status">FINALIZING TRANSMISSION / <span id="pre-percent">0</span>%</div>
+        </div>
+    </div>
     <div class="success-page">
         <div class="success-card">
-            <i class="fas fa-check-circle success-icon"></i>
-            <h1 class="success-title">Mission Transmitted!</h1>
+            <div class="success-icon"><i class="fas fa-paper-plane"></i></div>
+            <h1 class="success-title">Transmission<br><em>Confirmed.</em></h1>
             <p class="success-text">
-                Your creative brief has been received and stored in our database.
+                Your mission brief has been successfully received by our strategic design unit. 
+                Our architects will review the project requirements and respond within the next communication cycle.
                 <br><br>
-                <span id="order-id-display"
-                    style="font-family: monospace; background: rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 5px; color: var(--accent-primary);"></span>
+                <span id="order-id-display" style="font-family: var(--mono); font-size: 0.8rem; color: var(--accent);"></span>
             </p>
 
-            <div
-                style="background: rgba(124, 58, 237, 0.1); border: 1px dashed var(--accent-primary); padding: 25px; border-radius: 20px; margin-bottom: 30px;">
-                <h3 style="color: #fff; margin-bottom: 10px;">🛡️ Secure Your Slot (60% Advance)</h3>
-                <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7); margin-bottom: 15px;">
-                    Please pay the 60% advance to start the design process. Rest (40%) is due before final delivery.
+            <div style="border: 1px solid var(--border); padding: 40px; margin-bottom: 40px; text-align: left; background: var(--bg);">
+                <h3 style="font-family: var(--display); color: #fff; margin-bottom: 20px; text-transform: uppercase;">Mission Security Deposit</h3>
+                <p style="font-size: 0.9rem; color: var(--dim); margin-bottom: 20px;">
+                    To initiate the design sprint, a 60% security deposit is required. 
                 </p>
-                <div style="font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 10px;">
+                <div style="font-family: var(--display); font-size: 2.5rem; color: #fff; margin-bottom: 20px;">
                     ₹<span id="advance-amount-display">0</span>
                 </div>
-                <div
-                    style="background: #fff; color: #000; display: inline-block; padding: 10px 20px; border-radius: 10px; font-weight: 700; font-family: monospace;">
+                <div style="font-family: var(--mono); background: var(--accent); color: #000; display: inline-block; padding: 10px 20px; font-weight: 700;">
                     UPI ID: shuvamjana@fam
                 </div>
-                <p style="font-size: 0.8rem; color: var(--accent-primary); margin-top: 10px;">
-                    *Share a screenshot of the payment on WhatsApp after paying.
+                <p style="font-size: 0.7rem; color: var(--accent); margin-top: 15px; font-family: var(--mono); letter-spacing: 1px;">
+                    * TRANSMIT PAYMENT SCREENSHOT ON WHATSAPP FOR IMMEDIATE ACTIVATION.
                 </p>
             </div>
             <a href="index.html" class="btn-home">
-                <i class="fas fa-home"></i>
-                Return to Base
+                RETURN TO BASE ARCHIVE
             </a>
         </div>
     </div>
@@ -144,6 +143,7 @@
             });
         });
     </script>
+    <script src="assets/js/script.js"></script>
 </body>
 
 </html>

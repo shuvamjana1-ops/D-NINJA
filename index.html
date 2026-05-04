@@ -4,60 +4,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>D'NINJA &mdash; Premium Creative Design Studio</title>
+    <title>D'NINJA &mdash; Premium Creative Graphic Design Studio</title>
     <meta name="description"
         content="D'NINJA: Premium Branding, Social Media, and Digital Identity Studio. Crafting bold visual stories with 2 years of expertise. Based in India, serving globally.">
-    <meta name="keywords" content="Graphic Design, Branding, Logo Design, Social Media Marketing, India, Creative Studio, D'NINJA, Shuvam Jana, Sumit Dinda">
+    <meta name="keywords"
+        content="Graphic Design, Branding, Logo Design, Social Media Marketing, India, Creative Studio, D'NINJA, Shuvam Jana, Sumit Dinda">
     <meta property="og:title" content="D'NINJA &mdash; Premium Creative Design Studio">
-    <meta property="og:description" content="Elevate your brand with intentional, bold design. Browse our portfolio of branding, logos, and digital content.">
+    <meta property="og:description"
+        content="Elevate your brand with intentional, bold design. Browse our portfolio of branding, logos, and digital content.">
     <meta property="og:image" content="assets/img/dninja_logo.png">
     <meta property="og:url" content="https://shuvamjana1-ops.github.io/D-NINJA/">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+    <script>
+        // Global Preloader Failsafe
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                var pre = document.getElementById('preloader');
+                if (pre && !pre.classList.contains('loaded')) {
+                    pre.classList.add('loaded');
+                    setTimeout(function () { pre.style.display = 'none'; }, 1000);
+                    document.body.style.overflow = 'auto';
+                }
+            }, 5000);
+        });
+    </script>
 </head>
 
 <body>
-    <div id="cursor-dot" class="cursor-dot"></div>
-    <div id="cursor-ring" class="cursor-ring"></div>
-    <div id="cursor-label" class="cursor-label"></div>
-    <div id="magnifier" class="magnifier"></div>
-    <div class="noise-overlay"></div>
-    <div class="bg-aura">
-        <div class="aura-blob"></div>
-        <div class="aura-blob-2"></div>
+    <div class="mesh-bg-container">
+        <div class="mesh-blob mesh-1"></div>
+        <div class="mesh-blob mesh-2"></div>
+        <div class="mesh-blob mesh-3"></div>
     </div>
+
+    <div id="cursor-dot" class="cursor-dot"></div>
+
+    <!-- Professional Social Sidebar -->
+    <div class="social-sidebar">
+        <a href="https://wa.me/8513859870" target="_blank" class="sidebar-item" title="WhatsApp"><i
+                class="fab fa-whatsapp"></i></a>
+        <a href="mailto:workdninja@gmail.com" class="sidebar-item" title="Email"><i class="fas fa-envelope"></i></a>
+        <a href="https://instagram.com/_d.ninja_" target="_blank" class="sidebar-item" title="Instagram"><i
+                class="fab fa-instagram"></i></a>
+    </div>
+    <div class="noise-overlay"></div>
     <div class="reading-progress" id="reading-progress"></div>
     <div class="page-transition" id="page-transition"></div>
-    
+
     <div class="custom-menu" id="custom-menu">
         <a href="#hero" class="menu-item"><i class="fas fa-home"></i> Back to Top</a>
         <a href="#projects" class="menu-item"><i class="fas fa-th-large"></i> Explore Work</a>
         <a href="#contact" class="menu-item"><i class="fas fa-paper-plane"></i> Get in Touch</a>
         <div class="menu-sep"></div>
         <div class="menu-item" id="menu-theme-toggle"><i class="fas fa-moon"></i> Toggle Theme</div>
+        <div class="menu-item" id="menu-grain-toggle"><i class="fas fa-film"></i> Grain: <span
+                class="grain-status">ON</span></div>
         <div class="menu-item" id="menu-confetti"><i class="fas fa-magic"></i> Surprise Me</div>
     </div>
-    
+
     <div id="festive-container" class="festive-container"></div>
 
-    <!-- Preloader -->
+    <!-- Liquid Preloader Redesign -->
     <div id="preloader" class="preloader">
-        <div class="pre-counter" id="pre-counter">0</div>
-        <div class="pre-bar">
-            <div class="pre-fill" id="pre-fill"></div>
+        <div class="pre-content" style="text-align: center;">
+            <img src="assets/img/dninja_logo.png" alt="D'NINJA" class="pre-logo-img">
+            <h2 id="pre-liquid-text" class="pre-logo-liquid">D'NINJA</h2>
+            <div class="pre-status"
+                style="font-family: var(--mono); font-size: 0.9rem; color: var(--dim); letter-spacing: 2px; margin-top: 20px;">
+                INITIALIZING MISSION / <span id="pre-percent">0</span>%
+            </div>
         </div>
-        <div class="pre-name">D'NINJA</div>
     </div>
 
     <!-- Nav -->
     <nav id="navbar" class="navbar">
         <div class="nav-inner">
             <a href="#hero" class="nav-logo">
-                <!-- YOUR LOGO: replace 'dninja_logo.png' with your actual logo file -->
                 <div class="nav-logo-placeholder glint-logo" id="logo-placeholder">
                     <img src="assets/img/dninja_logo.png" alt="D'NINJA Logo" class="nav-logo-img"
                         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -74,12 +102,15 @@
                 <a href="#contact" class="nav-link" data-section="contact">Contact</a>
             </div>
             <div class="nav-right" style="display: flex; align-items: center; gap: 16px;">
-                
-                <button id="sfx-toggle" class="nav-link" style="background:none; border:none; color:var(--text); cursor:none;" title="Toggle UI Sounds">
+
+                <button id="sfx-toggle" class="nav-link"
+                    style="background:none; border:none; color:var(--text); cursor:none;" title="Toggle UI Sounds">
                     <i class="fas fa-volume-up"></i>
                 </button>
-                <a href="#" id="pricing-btn" class="nav-link" style="color: var(--accent2); font-weight: 600;"><i class="fas fa-tags"></i> Pricing</a>
-                <a href="cart.html" class="nav-link" style="position: relative; color: var(--accent); font-weight: 600;">
+                <a href="#pricing" id="pricing-btn" class="nav-link" style="color: var(--accent2); font-weight: 600;"><i
+                        class="fas fa-tags"></i> Pricing</a>
+                <a href="cart.html" class="nav-link"
+                    style="position: relative; color: var(--accent); font-weight: 600;">
                     <i class="fas fa-shopping-cart"></i> Cart
                     <span class="cart-count" style="display: none;">0</span>
                 </a>
@@ -94,37 +125,59 @@
             <a href="#faq" class="drawer-link" data-section="faq">FAQ</a>
             <a href="#student-corner" class="drawer-link" data-section="student-corner">Students</a>
             <a href="#contact" class="drawer-link" data-section="contact">Contact</a>
-            <a href="#" id="drawer-pricing-btn" class="drawer-link" style="color: var(--accent2);">Pricing</a>
-            <a href="cart.html" class="drawer-link" style="color: var(--accent);"><i class="fas fa-shopping-cart"></i> Cart <span class="cart-count"></span></a>
+            <a href="#pricing" id="drawer-pricing-btn" class="drawer-link" style="color: var(--accent2);">Pricing</a>
+            <a href="cart.html" class="drawer-link" style="color: var(--accent);"><i class="fas fa-shopping-cart"></i>
+                Cart <span class="cart-count"></span></a>
+            <div class="menu-item" id="grain-toggle-drawer"
+                style="font-family: var(--display); font-size: 2rem; color: rgba(255, 255, 255, 0.3); cursor: pointer;">
+                <i class="fas fa-film"></i> Film Grain: <span class="grain-status">ON</span>
+            </div>
+        </div>
         </div>
     </nav>
 
-    <!-- HERO -->
     <section id="hero" class="hero-section">
-
-        <div class="hero-top">
-            <div class="hero-badge-wrap">
-                <div class="hero-badge" id="dynamic-greeting"><span class="badge-dot"></span>Available for projects</div>
-                <div class="hero-clock" id="live-clock">IST 00:00:00</div>
-            </div>
-            <div class="hero-location"><i class="fas fa-map-marker-alt"></i> India, West Bengal</div>
+        <div class="hero-showreel-bg" id="hero-showreel">
+            <video autoplay muted loop playsinline id="main-showreel-vid">
+                <source
+                    src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-blue-and-pink-lines-34440-large.mp4"
+                    type="video/mp4">
+            </video>
+            <button class="showreel-close" id="close-showreel"><i class="fas fa-times"></i></button>
         </div>
-        <div class="hero-headline">
-            <div class="hero-line-wrap"><span class="hero-line hl-left reveal-text glint-text">CREATIVE</span></div>
-            <div class="hero-line-wrap hero-line-mid">
-                <span class="hero-line hl-img-wrap reveal-text">
-                    <span class="hl-img"><i class="fas fa-palette"></i></span>
-                    GRAPHIC
-                </span>
+        <div class="hero-editorial-wrap-new">
+            <div class="hero-left-editorial">
+                <div class="hero-content-inner">
+                    <span id="royal-greeting" class="section-label hero-line-reveal"
+                        style="font-style: italic; color: var(--accent);"><span>Welcome, Visionary</span></span>
+                    <h1 class="hero-title-new">
+                        <span class="hero-line-reveal"><span>D'NINJA</span></span>
+                        <span class="hero-line-reveal"><span><em>Studio.</em></span></span>
+                    </h1>
+                    <p class="hero-line-reveal"
+                        style="font-family: var(--mono); color: var(--dim); letter-spacing: 2px; font-size: 0.7rem;">
+                        <span>ENGINEERING VISUAL EXCELLENCE / EST. 2024</span>
+                    </p>
+                </div>
             </div>
-            <div class="hero-line-wrap"><span class="hero-line hl-right reveal-text glint-text">DESIGNER</span></div>
-        </div>
-        <div class="hero-bottom">
-            <p class="hero-desc">Crafting visuals that<br>actually break the scroll</p>
-            <a href="#projects" class="hero-scroll-btn" id="hero-scroll-btn">
-                <span>View Work</span>
-                <div class="scroll-circle"><i class="fas fa-arrow-down"></i></div>
-            </a>
+            <div class="hero-right-editorial">
+                <div class="hero-stat-box">
+                    <span class="stat-num">2</span>
+                    <span class="stat-label">VISIONARY ARCHITECTS</span>
+                </div>
+                <div class="hero-stat-box">
+                    <span class="stat-num">20+</span>
+                    <span class="stat-label">CONTENT ARCHITECTS</span>
+                </div>
+                <div class="hero-cta-wrap">
+                    <a href="#projects" class="nav-hire" style="padding: 25px 50px; font-size: 1rem;">VIEW ARCHIVES <i
+                            class="fas fa-arrow-right"></i></a>
+                    <button id="play-showreel" class="pf-btn"
+                        style="margin-left: 20px; border: 1px solid rgba(255,255,255,0.1);">
+                        <i class="fas fa-play"></i> WATCH SHOWREEL
+                    </button>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -135,461 +188,522 @@
             <span>Picsart</span><span>&#10022;</span><span>Lightroom</span><span>&#10022;</span>
             <span>Snapseed</span><span>&#10022;</span><span>Brand Identity</span><span>&#10022;</span>
             <span>Social Media</span><span>&#10022;</span><span>Print Design</span><span>&#10022;</span>
+            <!-- Duplicated for seamless loop -->
             <span>Canva</span><span>&#10022;</span><span>Photoshop</span><span>&#10022;</span>
             <span>Picsart</span><span>&#10022;</span><span>Lightroom</span><span>&#10022;</span>
             <span>Snapseed</span><span>&#10022;</span><span>Brand Identity</span><span>&#10022;</span>
+            <span>Social Media</span><span>&#10022;</span><span>Print Design</span><span>&#10022;</span>
         </div>
     </div>
 
-    <!-- I DESIGN Section -->
-    <div class="idesign-section">
-        <div class="idesign-inner">
-            <span class="idesign-label">Currently working on</span>
-            <div class="idesign-display">
-                <span class="idesign-prefix">I design</span>
-                <span class="idesign-arrow">&rarr;</span>
-                <span id="typed-text" class="typed-text"></span><span class="typed-cursor">_</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Services -->
-    <section id="services" class="services-section">
+    <!-- Services Redesign -->
+    <section id="services" class="services-section reveal-up">
         <div class="container">
-            <div class="services-header" data-reveal>
-                <span class="section-label">Our Expertise</span>
-                <h2 class="services-heading scramble-text">Professional Services.</h2>
+            <div class="services-header" style="margin-bottom: 80px;">
+                <span class="section-label">Architectural Expertise</span>
+                <h2 class="services-heading-new"
+                    style="font-family: var(--display); font-size: clamp(3rem, 8vw, 6rem); margin: 0; text-transform: uppercase;">
+                    Crafting Digital<br><em>Monuments.</em></h2>
             </div>
-            <div class="services-grid">
-                <div class="service-card" data-reveal>
-                    <div class="s-icon"><i class="fas fa-fingerprint"></i></div>
+
+            <div class="services-grid-editorial reveal-stagger">
+                <!-- Branding -->
+                <div class="service-card-new">
+                    <div style="font-size: 2rem; color: var(--accent); margin-bottom: 20px;"><i
+                            class="fas fa-fingerprint"></i></div>
+                    <span class="s-num-new">01 / BRANDING</span>
                     <h3>Brand Identity</h3>
-                    <p>Crafting unique visual stories that define your brand's essence and personality.</p>
+                    <p style="color: var(--dim); line-height: 1.7;">Crafting unique visual stories that define your
+                        brand's essence and personality across all platforms.</p>
                 </div>
-                <div class="service-card" data-reveal>
-                    <div class="s-icon"><i class="fas fa-hashtag"></i></div>
+
+                <!-- Social -->
+                <div class="service-card-new">
+                    <div style="font-size: 2rem; color: var(--accent); margin-bottom: 20px;"><i
+                            class="fas fa-chart-line"></i></div>
+                    <span class="s-num-new">02 / CONTENT</span>
                     <h3>Social Media</h3>
-                    <p>Strategic content creation designed to stop the scroll and build community.</p>
+                    <p style="color: var(--dim); line-height: 1.7;">Strategic content creation designed to stop the
+                        scroll and build a high-performance community.</p>
                 </div>
-                <div class="service-card" data-reveal>
-                    <div class="s-icon"><i class="fas fa-print"></i></div>
+
+                <!-- Print -->
+                <div class="service-card-new">
+                    <div style="font-size: 2rem; color: var(--accent); margin-bottom: 20px;"><i
+                            class="fas fa-compass_drafting"></i></div>
+                    <span class="s-num-new">03 / PHYSICAL</span>
                     <h3>Print Design</h3>
-                    <p>High-quality layouts for posters, banners, and physical marketing assets.</p>
+                    <p style="color: var(--dim); line-height: 1.7;">High-quality architectural layouts for posters,
+                        banners, and premium physical marketing assets.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Projects -->
-    <section id="projects" class="projects-section">
+    <!-- Projects Redesign -->
+    <section id="projects" class="projects-section reveal-up">
         <div class="container">
-            <div class="projects-header" data-reveal style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap: 20px; margin-bottom: 20px;">
-                <div>
-                    <span class="section-label">Featured Work</span>
-                    <h2 class="projects-heading scramble-text" style="margin-bottom:0;">Selected Designs.</h2>
-                </div>
+            <div class="projects-header" style="margin-bottom: 40px;">
+                <span class="section-label">Selected Works</span>
+                <h2 class="projects-heading-new"
+                    style="font-family: var(--display); font-size: clamp(3rem, 8vw, 6rem); margin: 0; text-transform: uppercase;">
+                    The Visual<br><em>Archive.</em></h2>
             </div>
-            <div class="projects-utility" data-reveal>
-                <div class="projects-search-wrap">
-                    <i class="fas fa-search"></i>
-                    <input id="project-search" type="search" placeholder="Search designs, tags, or categories"
-                        aria-label="Search project cards">
-                </div>
-                <div class="projects-controls">
-                    <select id="project-sort" aria-label="Sort project cards">
-                        <option value="default">Sort: Featured</option>
-                        <option value="az">Sort: A-Z</option>
-                        <option value="za">Sort: Z-A</option>
-                    </select>
-                    <button id="favorites-only-btn" class="pf-btn" type="button" aria-pressed="false"><i class="fas fa-heart"></i> Favorites</button>
-                    <button id="clear-filters-btn" class="pf-btn" type="button"><i class="fas fa-rotate-left"></i> Clear</button>
-                </div>
-            </div>
-            <div class="project-tag-filters" id="project-tag-filters" data-reveal></div>
-            <div class="project-meta-row" data-reveal>
-                <p class="project-result-count" id="project-result-count">0 projects</p>
-                <button id="open-compare-btn" class="pf-btn" type="button"><i class="fas fa-code-compare"></i> Compare (<span id="compare-count">0</span>)</button>
-            </div>
-            <div class="proj-list" id="proj-list" style="margin-top: 32px;" data-reveal>
+            <!-- Transformation Section -->
+            <section id="transformation" class="transformation-section reveal-up">
+                <div class="container">
+                    <div class="section-header" style="margin-bottom: 80px; text-align: center;">
+                        <span class="section-label">Brand Evolution</span>
+                        <h2
+                            style="font-family: var(--display); font-size: clamp(3rem, 6vw, 4.5rem); text-transform: uppercase;">
+                            The D'NINJA<br><em>Metamorphosis.</em></h2>
+                    </div>
 
-                <!-- Branding -->
-                <a href="catalog/catalog-branding.html" class="proj-item">
-                    <div class="proj-img-wrap">
-                        <div class="proj-img-placeholder">
-                            <img src="images/branding/branding-cover.png" alt="Branding Concept" class="proj-img"
-                                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                            <span class="proj-fallback"><i class="fas fa-folder-open"></i> Branding Cover</span>
+                    <div class="comparison-slider" id="brand-evolution">
+                        <div class="compare-item before">
+                            <img src="assets/img/before.png" alt="Before">
+                            <span class="label">GENERIC IDENTITY</span>
+                        </div>
+                        <div class="compare-item after">
+                            <img src="assets/img/after.png" alt="After">
+                            <span class="label">D'NINJA SIGNATURE</span>
+                        </div>
+                        <div class="slider-handle">
+                            <div class="handle-line"></div>
+                            <div class="handle-circle">
+                                <i class="fas fa-chevron-left"></i>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
                         </div>
                     </div>
-                    <div class="proj-meta">
-                        <div class="proj-tags"><span>Identity</span><span>Strategy</span></div>
-                        <h3 class="proj-title">Branding</h3>
-                        <p class="proj-desc">Explore complete brand identity systems, typography, and guidelines.</p>
-                        <span class="proj-arrow" title="View Branding"><i class="fas fa-arrow-right"></i></span>
+                </div>
+            </section>
+            <!-- Category Filter Bar -->
+            <div class="filter-bar"
+                style="margin-bottom: 60px; display: flex; gap: 20px; flex-wrap: wrap; border-bottom: 1px solid var(--border); padding-bottom: 20px;">
+                <button class="filter-btn active" data-filter="all"
+                    style="background:none; border:none; color:var(--text); font-family:var(--mono); font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; padding: 10px 0;">All
+                    Work</button>
+                <button class="filter-btn" data-filter="branding"
+                    style="background:none; border:none; color:var(--dim); font-family:var(--mono); font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; padding: 10px 0;">Branding</button>
+                <button class="filter-btn" data-filter="social"
+                    style="background:none; border:none; color:var(--dim); font-family:var(--mono); font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; padding: 10px 0;">Social</button>
+                <button class="filter-btn" data-filter="content"
+                    style="background:none; border:none; color:var(--dim); font-family:var(--mono); font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; padding: 10px 0;">Content</button>
+                <button class="filter-btn" data-filter="print"
+                    style="background:none; border:none; color:var(--dim); font-family:var(--mono); font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; padding: 10px 0;">Print</button>
+            </div>
+
+            <div class="projects-grid-editorial reveal-stagger"
+                style="grid-template-columns: repeat(2, 1fr); gap: 1px; border: 1px solid var(--border);">
+                <!-- Branding -->
+                <a href="catalog/catalog-branding.html" class="proj-card-new" data-category="branding"
+                    style="border: 1px solid var(--border);">
+                    <div class="proj-img-wrap-new">
+                        <img src="images/branding/branding-cover.png" alt="Branding" class="proj-img-new"
+                            onerror="this.src='https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=800'">
+                    </div>
+                    <div class="proj-meta-new">
+                        <span class="proj-tags-new">IDENTITY / STRATEGY</span>
+                        <h3 class="proj-title-new">Branding</h3>
                     </div>
                 </a>
 
                 <!-- Social Media -->
-                <a href="catalog/catalog-socialmedia.html" class="proj-item">
-                    <div class="trending-badge"><span class="pulse-indicator"></span> TRENDING</div>
-                    <div class="proj-img-wrap">
-                        <div class="proj-img-placeholder">
-                            <img src="images/socialmedia/socialmedia-cover.png" alt="Social Media Concept" class="proj-img"
-                                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                            <span class="proj-fallback"><i class="fas fa-folder-open"></i> Social Media Cover</span>
-                        </div>
+                <a href="catalog/catalog-socialmedia.html" class="proj-card-new" data-category="social"
+                    style="border: 1px solid var(--border);">
+                    <div class="proj-img-wrap-new">
+                        <img src="images/socialmedia/socialmedia-cover.png" alt="Social Media" class="proj-img-new"
+                            onerror="this.src='https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=800'">
                     </div>
-                    <div class="proj-meta">
-                        <div class="proj-tags"><span>Campaigns</span><span>Content</span></div>
-                        <h3 class="proj-title">Social Media</h3>
-                        <p class="proj-desc">Eye-catching Instagram, Facebook &amp; LinkedIn creatives for max engagement.</p>
-                        <span class="proj-arrow" title="View Social Media"><i class="fas fa-arrow-right"></i></span>
+                    <div class="proj-meta-new">
+                        <span class="proj-tags-new">ENGAGEMENT / CONTENT</span>
+                        <h3 class="proj-title-new">Social Media</h3>
                     </div>
                 </a>
 
-                <!-- Poster &amp; Banner -->
-                <a href="catalog/catalog-poster.html" class="proj-item">
-                    <div class="proj-img-wrap">
-                        <div class="proj-img-placeholder">
-                            <img src="images/poster/poster-cover.png" alt="Poster Concept" class="proj-img"
-                                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                            <span class="proj-fallback"><i class="fas fa-folder-open"></i> Poster/Banner Cover</span>
-                        </div>
+                <!-- Thumbnails -->
+                <a href="catalog/catalog-thumbnail.html" class="proj-card-new" data-category="content"
+                    style="border: 1px solid var(--border);">
+                    <div class="proj-img-wrap-new">
+                        <img src="images/thumbnail/thumbnail-cover.png" alt="Thumbnails" class="proj-img-new"
+                            onerror="this.src='https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&q=80&w=800'">
                     </div>
-                    <div class="proj-meta">
-                        <div class="proj-tags"><span>Print</span><span>Digital</span></div>
-                        <h3 class="proj-title">Poster or Banner</h3>
-                        <p class="proj-desc">High-converting web banners and striking print posters.</p>
-                        <span class="proj-arrow" title="View Posters"><i class="fas fa-arrow-right"></i></span>
+                    <div class="proj-meta-new">
+                        <span class="proj-tags-new">YT / CLICK-THROUGH</span>
+                        <h3 class="proj-title-new">Thumbnails</h3>
                     </div>
                 </a>
 
-                <!-- Thumbnail -->
-                <a href="catalog/catalog-thumbnail.html" class="proj-item">
-                    <div class="proj-img-wrap">
-                        <div class="proj-img-placeholder">
-                            <img src="images/thumbnail/thumbnail-cover.png" alt="Thumbnail Concept" class="proj-img"
-                                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                            <span class="proj-fallback"><i class="fas fa-folder-open"></i> Thumbnail Cover</span>
-                        </div>
+                <!-- Logo Design -->
+                <a href="catalog/catalog-logo.html" class="proj-card-new" data-category="branding"
+                    style="border: 1px solid var(--border);">
+                    <div class="proj-img-wrap-new">
+                        <img src="images/logo/logo-cover.png" alt="Logos" class="proj-img-new"
+                            onerror="this.src='https://images.unsplash.com/photo-1542744094-24638eff58bb?auto=format&fit=crop&q=80&w=800'">
                     </div>
-                    <div class="proj-meta">
-                        <div class="proj-tags"><span>YouTube</span><span>Video</span></div>
-                        <h3 class="proj-title">Thumbnail</h3>
-                        <p class="proj-desc">Click-worthy custom thumbnails designed to boost views and engagement.</p>
-                        <span class="proj-arrow" title="View Thumbnails"><i class="fas fa-arrow-right"></i></span>
+                    <div class="proj-meta-new">
+                        <span class="proj-tags-new">MARK / SYMBOLISM</span>
+                        <h3 class="proj-title-new">Logo Design</h3>
                     </div>
                 </a>
 
-                <!-- Logo -->
-                <a href="catalog/catalog-logo.html" class="proj-item">
-                    <div class="proj-img-wrap">
-                        <div class="proj-img-placeholder">
-                            <img src="images/logo/logo-cover.png" alt="Logo Concept" class="proj-img"
-                                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                            <span class="proj-fallback"><i class="fas fa-folder-open"></i> Logo Cover</span>
-                        </div>
+                <!-- Greetings -->
+                <a href="catalog/catalog-greetings.html" class="proj-card-new" data-category="social"
+                    style="border: 1px solid var(--border);">
+                    <div class="proj-img-wrap-new">
+                        <img src="images/greetings/greetings-cover.png" alt="Greetings" class="proj-img-new"
+                            onerror="this.src='https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&q=80&w=800'">
                     </div>
-                    <div class="proj-meta">
-                        <div class="proj-tags"><span>Mark</span><span>Logotype</span></div>
-                        <h3 class="proj-title">Logo</h3>
-                        <p class="proj-desc">Memorable and timeless logo designs crafted for modern brands.</p>
-                        <span class="proj-arrow" title="View Logos"><i class="fas fa-arrow-right"></i></span>
+                    <div class="proj-meta-new">
+                        <span class="proj-tags-new">FESTIVE / WISHES</span>
+                        <h3 class="proj-title-new">Greetings</h3>
                     </div>
                 </a>
 
-                <!-- Invitation Card -->
-                <a href="catalog/catalog-invitation.html" class="proj-item">
-                    <div class="proj-img-wrap">
-                        <div class="proj-img-placeholder">
-                            <img src="images/invitation/invitation-cover.png" alt="Invitation Concept" class="proj-img"
-                                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                            <span class="proj-fallback"><i class="fas fa-folder-open"></i> Invitation Cover</span>
-                        </div>
+                <!-- ICard -->
+                <a href="catalog/catalog-icard.html" class="proj-card-new" data-category="print"
+                    style="border: 1px solid var(--border);">
+                    <div class="proj-img-wrap-new">
+                        <img src="images/icard/icard-cover.png" alt="ICards" class="proj-img-new"
+                            onerror="this.src='https://images.unsplash.com/photo-1557200134-90327ee9fafa?auto=format&fit=crop&q=80&w=800'">
                     </div>
-                    <div class="proj-meta">
-                        <div class="proj-tags"><span>Events</span><span>Cards</span></div>
-                        <h3 class="proj-title">Invitation Card</h3>
-                        <p class="proj-desc">Elegant and creative invitation cards for events and special occasions.</p>
-                        <span class="proj-arrow" title="View Invitations"><i class="fas fa-arrow-right"></i></span>
+                    <div class="proj-meta-new">
+                        <span class="proj-tags-new">CORPORATE / ID</span>
+                        <h3 class="proj-title-new">ICard Design</h3>
                     </div>
                 </a>
 
-                <!-- I-Card -->
-                <a href="catalog/catalog-icard.html" class="proj-item">
-                    <div class="proj-img-wrap">
-                        <div class="proj-img-placeholder">
-                            <img src="images/icard/icard-cover.png" alt="I-Card Concept" class="proj-img"
-                                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                            <span class="proj-fallback"><i class="fas fa-folder-open"></i> I-Card Cover</span>
-                        </div>
+                <!-- Invitation -->
+                <a href="catalog/catalog-invitation.html" class="proj-card-new" data-category="print"
+                    style="border: 1px solid var(--border);">
+                    <div class="proj-img-wrap-new">
+                        <img src="images/invitation/invitation-cover.png" alt="Invitations" class="proj-img-new"
+                            onerror="this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800'">
                     </div>
-                    <div class="proj-meta">
-                        <div class="proj-tags"><span>Corporate</span><span>ID</span></div>
-                        <h3 class="proj-title">I-Card</h3>
-                        <p class="proj-desc">Professional corporate identity cards designed for businesses and schools.</p>
-                        <span class="proj-arrow" title="View I-Cards"><i class="fas fa-arrow-right"></i></span>
+                    <div class="proj-meta-new">
+                        <span class="proj-tags-new">EVENTS / CELEBRATION</span>
+                        <h3 class="proj-title-new">Invitations</h3>
                     </div>
                 </a>
 
-                <!-- Greetings Card -->
-                <a href="catalog/catalog-greetings.html" class="proj-item">
-                    <div class="proj-img-wrap">
-                        <div class="proj-img-placeholder">
-                            <img src="images/greetings/greetings-cover.png" alt="Greetings Concept" class="proj-img"
-                                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                            <span class="proj-fallback"><i class="fas fa-folder-open"></i> Greetings Cover</span>
-                        </div>
+                <!-- Poster -->
+                <a href="catalog/catalog-poster.html" class="proj-card-new" data-category="print"
+                    style="border: 1px solid var(--border);">
+                    <div class="proj-img-wrap-new">
+                        <img src="images/poster/poster-cover.png" alt="Posters" class="proj-img-new"
+                            onerror="this.src='https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=800'">
                     </div>
-                    <div class="proj-meta">
-                        <div class="proj-tags"><span>Gift</span><span>Events</span></div>
-                        <h3 class="proj-title">Greetings Card</h3>
-                        <p class="proj-desc">Heartfelt and creative greetings cards for every occasion and celebration.</p>
-                        <span class="proj-arrow" title="View Greetings"><i class="fas fa-arrow-right"></i></span>
+                    <div class="proj-meta-new">
+                        <span class="proj-tags-new">PRINT / BANNERS</span>
+                        <h3 class="proj-title-new">Poster Design</h3>
                     </div>
                 </a>
-            </div>
-            <div class="project-empty-state" id="project-empty-state" hidden>
-                <i class="fas fa-box-open"></i>
-                <h3>No matching designs found</h3>
-                <p>Try another keyword or clear active filters.</p>
-            </div>
-            <div class="recently-viewed-wrap" id="recently-viewed-wrap" data-reveal hidden>
-                <h3>Recently Viewed</h3>
-                <div class="recently-viewed-list" id="recently-viewed-list"></div>
-            </div>
-            
-            <div style="display:flex; justify-content:center; margin-top: 60px;" data-reveal>
-                <a href="catalog/catalog-all.html" class="pf-btn active" style="font-size: 1rem; padding: 16px 40px; border-color: var(--accent); background: var(--accent); color: #fff; border-radius: 50px; text-decoration: none;">
-                    <i class="fas fa-th"></i>&nbsp;&nbsp;View All Designs
+
+                <!-- Accessories -->
+                <a href="catalog/catalog-accessories.html" class="proj-card-new" data-category="content"
+                    style="border: 1px solid var(--border);">
+                    <div class="proj-img-wrap-new">
+                        <img src="images/accessories/Project Cover Page.png" alt="Accessories" class="proj-img-new"
+                            onerror="this.src='https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&q=80&w=800'">
+                    </div>
+                    <div class="proj-meta-new">
+                        <span class="proj-tags-new">ELEMENTS / ASSETS</span>
+                        <h3 class="proj-title-new">Accessories</h3>
+                    </div>
+                </a>
+
+                <!-- All Archives -->
+                <a href="catalog/catalog-all.html" class="proj-card-new"
+                    style="border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; background: var(--accent); color: #000;">
+                    <div style="text-align: center;">
+                        <span class="proj-tags-new" style="color: #000;">COMPLETE ARCHIVE</span>
+                        <h3 class="proj-title-new" style="color: #000;">VIEW ALL</h3>
+                    </div>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- The Ninja Method (Process) -->
-    <section id="process" class="process-section">
+    <!-- Process Redesign -->
+    <section id="process" class="process-section reveal-up">
         <div class="container">
-            <div class="process-header" data-reveal>
+            <div class="process-header" style="margin-bottom: 80px;">
                 <span class="section-label">Our Workflow</span>
-                <h2 class="process-heading scramble-text">THE NINJA METHOD.</h2>
+                <h2 class="process-heading-new"
+                    style="font-family: var(--display); font-size: clamp(2rem, 6vw, 4rem); margin: 0; text-transform: uppercase;">
+                    The Ninja<br><em>Method.</em></h2>
             </div>
-            <div class="process-grid">
-                <div class="process-card" data-reveal>
-                    <div class="pc-num">01</div>
-                    <div class="pc-icon"><i class="fas fa-comment-dots"></i></div>
-                    <h3>Discovery</h3>
-                    <p>We dive deep into your brand's DNA, goals, and audience to build a strategic foundation.</p>
+
+            <div class="process-grid-editorial reveal-stagger">
+                <div class="process-card-new">
+                    <span class="pc-num-new">STEP 01</span>
+                    <h3 style="font-family: var(--display); font-size: 1.8rem; text-transform: uppercase;">Discovery
+                    </h3>
+                    <p style="color: var(--dim); line-height: 1.7;">We dive deep into your brand's DNA, goals, and
+                        audience to build a strategic foundation.</p>
                 </div>
-                <div class="process-card active" data-reveal>
-                    <div class="pc-num">02</div>
-                    <div class="pc-icon"><i class="fas fa-pen-nib"></i></div>
-                    <h3>Creation</h3>
-                    <p>Pixels meet purpose. We craft bold visual narratives that demand attention and drive results.</p>
+
+                <div class="process-card-new">
+                    <span class="pc-num-new">STEP 02</span>
+                    <h3 style="font-family: var(--display); font-size: 1.8rem; text-transform: uppercase;">Creation</h3>
+                    <p style="color: var(--dim); line-height: 1.7;">Pixels meet purpose. We craft bold visual narratives
+                        that demand attention and drive results.</p>
                 </div>
-                <div class="process-card" data-reveal>
-                    <div class="pc-num">03</div>
-                    <div class="pc-icon"><i class="fas fa-paper-plane"></i></div>
-                    <h3>Delivery</h3>
-                    <p>Final polish and handover of high-res assets ready to conquer your market.</p>
+
+                <div class="process-card-new">
+                    <span class="pc-num-new">STEP 03</span>
+                    <h3 style="font-family: var(--display); font-size: 1.8rem; text-transform: uppercase;">Delivery</h3>
+                    <p style="color: var(--dim); line-height: 1.7;">Final polish and handover of high-res assets ready
+                        to conquer your specific market.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About -->
-    <section id="about" class="about-section">
-        <div class="about-bg-text">D'NINJA</div>
+    <!-- Pricing & Investment Section -->
+    <section id="pricing" class="pricing-section reveal-up">
         <div class="container">
-            <div class="about-header-wrap" data-reveal>
-                <span class="section-label">THE ARCHITECTS</span>
-                <h2 class="about-team-heading scramble-text">THE CREATIVE DUO</h2>
-                <p class="about-team-sub">Engineering Visual Excellence</p>
+            <div class="section-header" style="margin-bottom: 80px;">
+                <span class="section-label">Investment Guide</span>
+                <h2 style="font-family: var(--display); font-size: clamp(3rem, 8vw, 5rem); text-transform: uppercase;">
+                    Service<br><em>Value.</em></h2>
             </div>
 
-            <div class="team-cards-wrap">
-                <!-- Sumit Dinda -->
-                <div class="team-card spotlight-card" data-reveal>
-                    <div class="card-accent-glow"></div>
-                    <div class="team-card-inner">
-                        <div class="profile-main">
-                            <div class="avatar-portal">
-                                <img src="assets/img/sumit_avatar.png" alt="Sumit Dinda" class="creator-img" 
-                                     onerror="this.src='https://ui-avatars.com/api/?name=Sumit+Dinda&background=5f0fff&color=fff&size=200'">
-                                <div class="portal-ring"></div>
-                            </div>
-                            <div class="profile-header">
-                                <span class="profile-badge">Co-Founder</span>
-                                <h3 class="creator-name">SUMIT DINDA</h3>
-                                <p class="creator-role">Creative Director & Brand Architect</p>
-                            </div>
-                        </div>
-
-                        <div class="profile-content">
-                            <div class="creator-bio">
-                                <p>A visionary brand architect with an eye for bold aesthetics. Sumit breathes life into brand identities, transforming abstract ideas into powerful visual statements.</p>
-                            </div>
-                            <div class="creator-tags">
-                                <span>Branding</span><span>Art Direction</span><span>Logo Design</span><span>Video Editor</span>
-                            </div>
-                        </div>
-
-                        <div class="profile-footer">
-                            <div class="footer-stat">
-                                <span class="stat-label">EXP</span>
-                                <span class="stat-val">2 YEARS</span>
-                            </div>
-                            <div class="footer-divider"></div>
-                            <div class="footer-stat">
-                                <span class="stat-label">LOCATION</span>
-                                <span class="stat-val">INDIA</span>
+            <div class="pricing-editorial-grid">
+                <!-- Visual Value Chart -->
+                <div class="pricing-visual-chart">
+                    <h3
+                        style="font-family: var(--display); margin-bottom: 40px; font-size: 1.5rem; letter-spacing: 2px;">
+                        MARKET COMPARISON / ROI</h3>
+                    <div class="value-bar-item">
+                        <div class="value-label"><span>D'NINJA DESIGN</span> <span class="val">100% IMPACT</span></div>
+                        <div class="value-bar-track">
+                            <div class="value-bar-fill" data-width="100%" style="width: 0%; background: var(--accent);">
                             </div>
                         </div>
                     </div>
+                    <div class="value-bar-item">
+                        <div class="value-label"><span>GENERIC FREELANCER</span> <span class="val">40% IMPACT</span>
+                        </div>
+                        <div class="value-bar-track">
+                            <div class="value-bar-fill" data-width="40%" style="width: 0%; background: var(--dim);">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="value-bar-item">
+                        <div class="value-label"><span>AI GENERATED</span> <span class="val">25% IMPACT</span></div>
+                        <div class="value-bar-track">
+                            <div class="value-bar-fill" data-width="25%" style="width: 0%; background: var(--dim);">
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        style="margin-top: 40px; padding: 30px; border: 1px dashed var(--border); border-radius: 12px;">
+                        <p style="font-family: var(--mono); font-size: 0.7rem; color: var(--dim); line-height: 1.6;">
+                            Our mission is to provide high-end studio quality at startup-friendly investments. Each
+                            project is engineered for maximum conversion and brand recall.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Price Table -->
+                <div class="pricing-table-wrap">
+                    <div class="price-row">
+                        <div class="p-service">Logo Identity</div>
+                        <div class="p-val">FROM &#8377;24</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="p-service">Social Creatives</div>
+                        <div class="p-val">FROM &#8377;19</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="p-service">Thumbnail Architecture</div>
+                        <div class="p-val">FROM &#8377;16</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="p-service">I-Card / Print</div>
+                        <div class="p-val">FROM &#8377;17</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="p-service">Festive Greetings</div>
+                        <div class="p-val">FROM &#8377;15</div>
+                    </div>
+                    <a href="#contact" class="nav-hire" style="margin-top: 40px; width: 100%; text-align: center;">START
+                        MISSION</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Redesign (Rich) -->
+    <section id="about" class="about-section reveal-up">
+        <div class="container">
+            <div class="about-header-wrap" style="margin-bottom: 80px; text-align: left;">
+                <span class="section-label">The Architects</span>
+                <h2
+                    style="font-family: var(--display); font-size: clamp(2rem, 6vw, 4rem); margin: 0; text-transform: uppercase;">
+                    The Creative<br><em>Duo.</em></h2>
+            </div>
+
+            <div class="projects-grid-editorial" style="grid-template-columns: 1fr 1fr;">
+                <!-- Sumit Dinda -->
+                <div class="service-card-new"
+                    style="background: var(--bg-alt); border-radius: var(--r); padding: 40px;">
+                    <div
+                        style="width: 80px; height: 80px; border-radius: 50%; border: 1px solid var(--accent); padding: 3px; margin-bottom: 25px; background: var(--bg); overflow: hidden;">
+                        <img src="assets/img/sumit_avatar.png" alt="Sumit Dinda"
+                            style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;"
+                            onerror="this.src='https://ui-avatars.com/api/?name=Sumit+Dinda&background=5f0fff&color=fff&size=200'">
+                    </div>
+                    <div
+                        style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: rgba(212, 175, 55, 0.1); border: 1px solid var(--border); border-radius: 100px; font-family: var(--mono); font-size: 0.6rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px;">
+                        RANK: CO-FOUNDER / DIRECTOR
+                    </div>
+                    <h3 style="font-size: 2.5rem; margin-bottom: 5px;">Sumit Dinda</h3>
+                    <p style="color: var(--dim); line-height: 1.7; font-size: 0.9rem;">A visionary brand architect with
+                        an eye for bold aesthetics. Sumit breathes life into brand identities, transforming abstract
+                        ideas into powerful visual statements.</p>
                 </div>
 
                 <!-- Shuvam Jana -->
-                <div class="team-card spotlight-card" data-reveal>
-                    <div class="card-accent-glow glow-alt"></div>
-                    <div class="team-card-inner">
-                        <div class="profile-main">
-                            <div class="avatar-portal">
-                                <img src="assets/img/shuvam_avatar.png" alt="Shuvam Jana" class="creator-img"
-                                     onerror="this.src='https://ui-avatars.com/api/?name=Shuvam+Jana&background=ff3c6e&color=fff&size=200'">
-                                <div class="portal-ring"></div>
-                            </div>
-                            <div class="profile-header">
-                                <span class="profile-badge">Co-Founder</span>
-                                <h3 class="creator-name">SHUVAM JANA</h3>
-                                <p class="creator-role">Visual Designer & Strategist</p>
-                            </div>
-                        </div>
-
-                        <div class="profile-content">
-                            <div class="creator-bio">
-                                <p>A pixel-perfect storyteller who turns raw concepts into stunning visual narratives. Shuvam blends creativity with strategy — every design decision is intentional.</p>
-                            </div>
-                            <div class="creator-tags">
-                                <span>Visual Design</span><span>Social Media</span><span>Print Design</span><span>Motion</span>
-                            </div>
-                        </div>
-
-                        <div class="profile-footer">
-                            <div class="footer-stat">
-                                <span class="stat-label">EXP</span>
-                                <span class="stat-val">2 YEARS</span>
-                            </div>
-                            <div class="footer-divider"></div>
-                            <div class="footer-stat">
-                                <span class="stat-label">LOCATION</span>
-                                <span class="stat-val">INDIA</span>
-                            </div>
-                        </div>
+                <div class="service-card-new"
+                    style="background: var(--bg-alt); border-radius: var(--r); padding: 40px;">
+                    <div
+                        style="width: 80px; height: 80px; border-radius: 50%; border: 1px solid var(--accent); padding: 3px; margin-bottom: 25px; background: var(--bg); overflow: hidden;">
+                        <img src="assets/img/shuvam_avatar.png" alt="Shuvam Jana"
+                            style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;"
+                            onerror="this.src='https://ui-avatars.com/api/?name=Shuvam+Jana&background=ff3c6e&color=fff&size=200'">
                     </div>
+                    <div
+                        style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: rgba(212, 175, 55, 0.1); border: 1px solid var(--border); border-radius: 100px; font-family: var(--mono); font-size: 0.6rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px;">
+                        RANK: CO-FOUNDER / STRATEGIST
+                    </div>
+                    <h3 style="font-size: 2.5rem; margin-bottom: 5px;">Shuvam Jana</h3>
+                    <p style="color: var(--dim); line-height: 1.7; font-size: 0.9rem;">A pixel-perfect storyteller who
+                        turns raw concepts into stunning visual narratives. Shuvam blends creativity with strategy —
+                        every design decision is intentional.</p>
                 </div>
             </div>
         </div>
     </section>
 
-
-
-    <!-- FAQ Section -->
-    <section id="faq" class="faq-section">
+    <!-- FAQ Redesign -->
+    <section id="faq" class="faq-section reveal-up">
         <div class="container">
-            <div class="faq-header" data-reveal>
-                <span class="section-label">Questions?</span>
-                <h2 class="faq-heading scramble-text">Frequently Asked.</h2>
+            <div class="faq-header" style="margin-bottom: 60px;">
+                <span class="section-label">Intelligence</span>
+                <h2 class="faq-heading-new"
+                    style="font-family: var(--display); font-size: clamp(2rem, 6vw, 4rem); margin: 0; text-transform: uppercase;">
+                    Frequently Asked.</h2>
             </div>
-            <div class="faq-list" data-reveal>
-                <div class="faq-item">
-                    <div class="faq-q">What is your typical turnaround time? <i class="fas fa-plus"></i></div>
-                    <div class="faq-a">For small projects like logos or thumbnails, 2-3 days. Larger brand identities take 1-2 weeks.</div>
+
+            <div class="faq-list-editorial reveal-stagger">
+                <div class="faq-item-new">
+                    <h4 style="font-family: var(--font); font-size: 1.1rem; color: var(--accent); margin-bottom: 10px;">
+                        What is your typical turnaround time?</h4>
+                    <p style="color: var(--dim); line-height: 1.6;">For small projects like logos or thumbnails, 2-3
+                        days. Larger brand identities take 1-2 weeks.</p>
                 </div>
-                <div class="faq-item">
-                    <div class="faq-q">Do you offer unlimited revisions? <i class="fas fa-plus"></i></div>
-                    <div class="faq-a">Yes, we work until you are 100% satisfied with the final result.</div>
+                <div class="faq-item-new">
+                    <h4 style="font-family: var(--font); font-size: 1.1rem; color: var(--accent); margin-bottom: 10px;">
+                        Do you offer unlimited revisions?</h4>
+                    <p style="color: var(--dim); line-height: 1.6;">Yes, we work until you are 100% satisfied with the
+                        final result of your design mission.</p>
                 </div>
-                <div class="faq-item">
-                    <div class="faq-q">Can you handle rush orders? <i class="fas fa-plus"></i></div>
-                    <div class="faq-a">Yes, we offer express delivery for an additional fee depending on our current schedule.</div>
+                <div class="faq-item-new">
+                    <h4 style="font-family: var(--font); font-size: 1.1rem; color: var(--accent); margin-bottom: 10px;">
+                        Can you handle rush orders?</h4>
+                    <p style="color: var(--dim); line-height: 1.6;">Yes, we offer express delivery for an additional fee
+                        depending on our current studio schedule.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Student Corner -->
-    <section id="student-corner" class="student-section">
+    <!-- Student Corner Redesign -->
+    <section id="student-corner" class="student-section reveal-up">
         <div class="container">
-            <div class="student-header" data-reveal>
-                <span class="section-label">For The Learners</span>
-                <h2 class="student-heading scramble-text">Student Corner.</h2>
-                <p style="color: var(--dim); margin-top: 10px; max-width: 500px; line-height: 1.6;">Exclusive resources, discounts, and opportunities dedicated to empowering the next generation of designers and creators.</p>
+            <div class="student-header" style="margin-bottom: 80px;">
+                <span class="section-label">Future Generation</span>
+                <h2
+                    style="font-family: var(--display); font-size: clamp(2rem, 6vw, 4rem); margin: 0; text-transform: uppercase;">
+                    Student<br><em>Corner.</em></h2>
             </div>
-            
-            <div class="student-grid" data-reveal>
-                <!-- Card 1 -->
-                <div class="student-card">
-                    <div class="sc-icon"><i class="fas fa-percent"></i></div>
-                    <div class="sc-content">
-                        <h3>Student Discounts</h3>
-                        <p>Special project-based rates and monthly memberships for Class 10-12 and College students.</p>
-                        <a href="student-discounts.html" class="sc-btn">Explore Discounts <i class="fas fa-arrow-right"></i></a>
-                    </div>
+
+            <div class="process-grid-editorial reveal-stagger">
+                <div class="service-card-new">
+                    <span class="s-num-new">RESOURCE 01</span>
+                    <h3>Discounts</h3>
+                    <p style="color: var(--dim); line-height: 1.7;">Special project-based rates and monthly memberships
+                        for Class 10-12 and College students.</p>
+                    <a href="student-discounts.html" class="nav-hire"
+                        style="padding: 12px 24px; font-size: 0.7rem; margin-top: auto;">VIEW RATES</a>
                 </div>
-                
-                <!-- Card 2 -->
-                <div class="student-card">
-                    <div class="sc-icon"><i class="fas fa-gem"></i></div>
-                    <div class="sc-content">
-                        <h3>Design Accessories</h3>
-                        <p>Browse our exclusive collection of project cover pages, greetings card covers, textures, and design assets to give your work an elite edge.</p>
-                        <a href="catalog/catalog-accessories.html" class="sc-btn">Open Accessories Slot <i class="fas fa-arrow-right"></i></a>
-                    </div>
+
+                <div class="service-card-new">
+                    <span class="s-num-new">RESOURCE 02</span>
+                    <h3>Accessories</h3>
+                    <p style="color: var(--dim); line-height: 1.7;">Exclusive collection of project covers, textures,
+                        and design assets to give your work an elite edge.</p>
+                    <a href="catalog/catalog-accessories.html" class="nav-hire"
+                        style="padding: 12px 24px; font-size: 0.7rem; margin-top: auto;">OPEN SLOT</a>
+                </div>
+
+                <div class="service-card-new">
+                    <span class="s-num-new">RESOURCE 03</span>
+                    <h3>Workshops</h3>
+                    <p style="color: var(--dim); line-height: 1.7;">Join our upcoming live design sprints and learn the
+                        architectural method behind the pixels.</p>
+                    <a href="#" class="nav-hire"
+                        style="padding: 12px 24px; font-size: 0.7rem; margin-top: auto; opacity: 0.5; pointer-events: none;">COMING
+                        SOON</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Testimonials -->
-    <section id="testimonials" class="testimonial-section">
+    <section id="testimonials" class="testimonial-section reveal-up">
         <div class="container">
-            <div class="testimonial-header" data-reveal>
+            <div class="testimonial-header">
                 <span class="section-label">Wall of Love</span>
                 <h2 class="testimonial-heading scramble-text">WHAT CLIENTS SAY.</h2>
             </div>
-            <div class="testimonial-slider" data-reveal>
-                <div class="testimonial-track">
-                    <div class="testimonial-card">
-                        <div class="t-quote"><i class="fas fa-quote-left"></i></div>
-                        <p class="t-text">D'NINJA transformed our brand identity from generic to iconic in record time. Their vision is unmatched!</p>
-                        <div class="t-user">
-                            <div class="t-avatar-small">RS</div>
-                            <div>
-                                <h4 class="t-name">Rahul Sharma</h4>
-                                <p class="t-meta">Founder, TechRise</p>
-                            </div>
+            <div class="testimonial-grid reveal-stagger">
+                <div class="testimonial-card glass-panel">
+                    <div class="t-quote"><i class="fas fa-quote-left"></i></div>
+                    <p class="t-text">D'NINJA transformed our brand identity from generic to iconic in record time.
+                        Their vision is unmatched!</p>
+                    <div class="t-user">
+                        <div class="t-avatar-small">RS</div>
+                        <div>
+                            <h4 class="t-name">Rahul Sharma</h4>
+                            <p class="t-meta">Founder, TechRise</p>
                         </div>
                     </div>
-                    <div class="testimonial-card">
-                        <div class="t-quote"><i class="fas fa-quote-left"></i></div>
-                        <p class="t-text">The social media creatives they produced literally doubled our engagement rate. Absolute wizards!</p>
-                        <div class="t-user">
-                            <div class="t-avatar-small">AK</div>
-                            <div>
-                                <h4 class="t-name">Anjali Kapoor</h4>
-                                <p class="t-meta">Marketing Head, Bloom</p>
-                            </div>
+                </div>
+                <div class="testimonial-card glass-panel">
+                    <div class="t-quote"><i class="fas fa-quote-left"></i></div>
+                    <p class="t-text">The social media creatives they produced literally doubled our engagement
+                        rate. Absolute wizards!</p>
+                    <div class="t-user">
+                        <div class="t-avatar-small">AK</div>
+                        <div>
+                            <h4 class="t-name">Anjali Kapoor</h4>
+                            <p class="t-meta">Marketing Head, Bloom</p>
                         </div>
                     </div>
-                    <div class="testimonial-card">
-                        <div class="t-quote"><i class="fas fa-quote-left"></i></div>
-                        <p class="t-text">Pixel perfect designs and incredibly fast delivery. D'NINJA is our go-to for all things visual.</p>
-                        <div class="t-user">
-                            <div class="t-avatar-small">VP</div>
-                            <div>
-                                <h4 class="t-name">Vikram P.</h4>
-                                <p class="t-meta">Creative Lead, PixelBox</p>
-                            </div>
+                </div>
+                <div class="testimonial-card glass-panel">
+                    <div class="t-quote"><i class="fas fa-quote-left"></i></div>
+                    <p class="t-text">Pixel perfect designs and incredibly fast delivery. D'NINJA is our go-to for
+                        all things visual.</p>
+                    <div class="t-user">
+                        <div class="t-avatar-small">VP</div>
+                        <div>
+                            <h4 class="t-name">Vikram P.</h4>
+                            <p class="t-meta">Creative Lead, PixelBox</p>
                         </div>
                     </div>
                 </div>
@@ -597,72 +711,81 @@
         </div>
     </section>
 
-    <!-- Contact -->
+    <!-- Contact Redesign -->
     <section id="contact" class="contact-section">
-        <div class="contact-inner">
-            <div class="contact-left" data-reveal>
-                <span class="section-label light">Slide into our inbox</span>
-                <h2 class="contact-heading">Let's build<br>something<br><em>iconic.</em></h2>
-                <div class="contact-details">
-                    <a href="mailto:workdninja@gmail.com" class="cd-item">
-                        <div class="cd-icon"><i class="fas fa-envelope"></i></div>
-                        <div><span class="cd-label">Email</span><span class="cd-val">workdninja@gmail.com</span>
+        <div class="container">
+            <div class="contact-editorial-wrap"
+                style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;">
+                <div class="contact-info-new">
+                    <span class="section-label">Transmission</span>
+                    <h2
+                        style="font-family: var(--display); font-size: clamp(3rem, 10vw, 7rem); margin: 0; text-transform: uppercase; line-height: 1;">
+                        Let's Build<br><em>Something.</em></h2>
+
+                    <div style="margin-top: 60px; display: flex; flex-direction: column; gap: 40px;">
+                        <div class="contact-item-new">
+                            <span
+                                style="font-family: var(--mono); font-size: 0.6rem; color: var(--accent); letter-spacing: 3px;">DIRECT
+                                LINE</span>
+                            <a href="mailto:workdninja@gmail.com"
+                                style="display: block; font-family: var(--display); font-size: 1.5rem; color: var(--text); text-decoration: none; margin-top: 10px;">workdninja@gmail.com</a>
                         </div>
-                    </a>
-                    <div class="cd-item">
-                        <div class="cd-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div><span class="cd-label">Location</span><span class="cd-val">India</span></div>
+                        <div class="contact-item-new">
+                            <span
+                                style="font-family: var(--mono); font-size: 0.6rem; color: var(--accent); letter-spacing: 3px;">SOCIAL
+                                FREQUENCIES</span>
+                            <div style="display: flex; gap: 20px; margin-top: 20px;">
+                                <a href="https://instagram.com/_d.ninja_" target="_blank"
+                                    style="color: var(--text); font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
+                                <a href="#" target="_blank" style="color: var(--text); font-size: 1.2rem;"><i
+                                        class="fab fa-behance"></i></a>
+                                <a href="#" target="_blank" style="color: var(--text); font-size: 1.2rem;"><i
+                                        class="fab fa-dribbble"></i></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="social-row">
-                    <a href="https://www.instagram.com/_d.ninja_/" target="_blank" class="soc-btn instagram"
-                        id="social-instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.facebook.com/" target="_blank" class="soc-btn facebook" id="social-facebook"><i
-                            class="fab fa-facebook-f"></i></a>
-                </div>
-            </div>
-            <div class="contact-right" data-reveal>
-                <form id="dninja-contact-form" class="c-form" style="padding: 40px; background: var(--card); border: 1px solid var(--border); border-radius: 28px; backdrop-filter: blur(24px); box-shadow: var(--glass-shadow);">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
-                        <div class="cf-group">
-                            <label style="display:block; margin-bottom:8px; font-size:0.8rem; color:var(--dim);">YOUR NAME</label>
-                            <input type="text" name="name" class="cf-input" placeholder="Ninja Name" required style="width:100%; padding:15px; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:12px; color:#fff;">
+
+                <div class="contact-form-new"
+                    style="border: 1px solid var(--border); padding: 60px; background: var(--bg-alt);">
+                    <form id="dninja-contact-form">
+                        <div style="display: flex; flex-direction: column; gap: 30px;">
+                            <div class="input-group-new">
+                                <label
+                                    style="font-family: var(--mono); font-size: 0.6rem; color: var(--dim); letter-spacing: 2px;">IDENTIFICATION</label>
+                                <input type="text" name="name" placeholder="YOUR NAME" required
+                                    style="width: 100%; background: none; border: none; border-bottom: 1px solid var(--border); padding: 15px 0; color: #fff; font-family: var(--font); outline: none;">
+                            </div>
+                            <div class="input-group-new">
+                                <label
+                                    style="font-family: var(--mono); font-size: 0.6rem; color: var(--dim); letter-spacing: 2px;">COMMUNICATION</label>
+                                <input type="email" name="email" placeholder="YOUR EMAIL" required
+                                    style="width: 100%; background: none; border: none; border-bottom: 1px solid var(--border); padding: 15px 0; color: #fff; font-family: var(--font); outline: none;">
+                            </div>
+                            <div class="input-group-new">
+                                <label
+                                    style="font-family: var(--mono); font-size: 0.6rem; color: var(--dim); letter-spacing: 2px;">MISSION
+                                    TYPE</label>
+                                <select name="subject" class="editorial-select"
+                                    style="width: 100%; background: none; border: none; border-bottom: 1px solid var(--border); padding: 15px 0; color: #fff; font-family: var(--font); outline: none; cursor: pointer;">
+                                    <option value="Branding">BRAND IDENTITY</option>
+                                    <option value="Social Media">SOCIAL MEDIA</option>
+                                    <option value="Thumbnails">THUMBNAILS</option>
+                                    <option value="Other">OTHER</option>
+                                </select>
+                            </div>
+                            <div class="input-group-new">
+                                <label
+                                    style="font-family: var(--mono); font-size: 0.6rem; color: var(--dim); letter-spacing: 2px;">BRIEFING</label>
+                                <textarea name="message" placeholder="TELL US ABOUT THE VISION..." required
+                                    style="width: 100%; background: none; border: none; border-bottom: 1px solid var(--border); padding: 15px 0; color: #fff; font-family: var(--font); outline: none; height: 100px; resize: none;"></textarea>
+                            </div>
+                            <button type="submit"
+                                onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSfSTa2vXu7hfrneCq3plXLOIn9W68XQvZULHnSnfFl4dWRaVg/viewform', '_blank')"
+                                class="nav-hire" style="width: 100%; padding: 20px; font-size: 1rem;">CLICK TO CONTACT
+                                <i class="fas fa-external-link-alt"></i></button>
                         </div>
-                        <div class="cf-group">
-                            <label style="display:block; margin-bottom:8px; font-size:0.8rem; color:var(--dim);">YOUR EMAIL</label>
-                            <input type="email" name="email" class="cf-input" placeholder="ninja@example.com" required style="width:100%; padding:15px; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:12px; color:#fff;">
-                        </div>
-                    </div>
-                    <div class="cf-group" style="margin-bottom: 20px;">
-                        <label style="display:block; margin-bottom:8px; font-size:0.8rem; color: #fff; font-weight: 600; letter-spacing: 1px;">SUBJECT</label>
-                        <select name="subject" class="cf-input" style="width:100%; padding:15px; background: #151518; border:1px solid rgba(255,255,255,0.2); border-radius:12px; color: #fff; cursor: pointer; outline: none; transition: border-color 0.3s ease;">
-                            <option value="New Project" style="background: #151518; color: #fff;">New Design Project</option>
-                            <option value="Branding" style="background: #151518; color: #fff;">Full Branding Package</option>
-                            <option value="Social Media" style="background: #151518; color: #fff;">Social Media Management</option>
-                            <option value="Inquiry" style="background: #151518; color: #fff;">General Inquiry</option>
-                        </select>
-                    </div>
-                    <div class="cf-group" style="margin-bottom: 30px;">
-                        <label style="display:block; margin-bottom:8px; font-size:0.8rem; color:var(--dim);">MESSAGE</label>
-                        <textarea name="message" class="cf-input" placeholder="Tell me about your vision..." required style="width:100%; padding:15px; height:120px; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:12px; color:#fff; resize:none;"></textarea>
-                    </div>
-                    <button type="submit" class="cf-submit" style="width: 100%; border:none; padding:18px; border-radius:15px; background:var(--accent); color:#fff; font-weight:700; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:10px;">
-                        <span>Send Mission Brief</span><i class="fas fa-paper-plane"></i>
-                    </button>
-                    <p style="text-align:center; margin-top:15px; font-size:0.8rem; color:var(--dim);">
-                        Or use the <a href="https://docs.google.com/forms/d/e/1FAIpQLSfSTa2vXu7hfrneCq3plXLOIn9W68XQvZULHnSnfFl4dWRaVg/viewform" target="_blank" style="color:var(--accent2);">Legacy Google Form</a>
-                    </p>
-                </form>
-                <p>D'NINJA &copy; 2026 &mdash; Designed & Crafted by Sumit & Shuvam</p>
-                
-                <!-- Clickbait: Scratch Card -->
-                <div class="scratch-container" id="scratch-container" data-reveal>
-                    <div class="scratch-content">
-                        <h4 style="color: var(--accent2); margin-bottom: 5px;">CONGRATS!</h4>
-                        <p style="font-size: 0.9rem;">You've unlocked a secret 20% discount code!</p>
-                        <h2 style="color: #fff; font-family: var(--mono); letter-spacing: 2px; margin-top: 10px;">NINJA20</h2>
-                    </div>
-                    <canvas class="scratch-canvas" id="scratch-canvas" width="400" height="200"></canvas>
+                    </form>
                 </div>
             </div>
         </div>
@@ -678,37 +801,43 @@
         <button id="open-unread" class="pf-btn" style="padding: 6px 12px; font-size: 0.75rem;">Open</button>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-inner">
-            <div class="footer-top">
-                <div class="footer-col">
-                    <div class="footer-brand">
-                        <img src="assets/img/dninja_logo.png" alt="D'NINJA" class="footer-logo-img" onerror="this.style.display='none'">
-                        <span class="footer-logo">D<span>'</span>NINJA</span>
+    <!-- Footer Redesign -->
+    <footer class="footer" style="padding: 100px 0; background: var(--bg); border-top: 1px solid var(--border);">
+        <div class="container">
+            <div class="footer-grid-new" style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 80px;">
+                <div class="footer-col-main">
+                    <div class="footer-logo"
+                        style="font-family: var(--display); font-size: 2.5rem; text-transform: uppercase; letter-spacing: 10px;">
+                        D<span style="color: var(--accent);">'</span>NINJA</div>
+                    <p style="color: var(--dim); margin-top: 20px; line-height: 1.7; max-width: 400px;">Elevating brands
+                        through bold, intentional design. Engineering visual excellence since 2024.</p>
+                </div>
+                <div class="footer-col-links">
+                    <span
+                        style="font-family: var(--mono); font-size: 0.6rem; color: var(--accent); letter-spacing: 3px;">DIRECTORY</span>
+                    <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                        <a href="#projects"
+                            style="color: var(--text); text-decoration: none; font-size: 0.9rem;">WORK</a>
+                        <a href="#about" style="color: var(--text); text-decoration: none; font-size: 0.9rem;">ABOUT</a>
+                        <a href="#contact"
+                            style="color: var(--text); text-decoration: none; font-size: 0.9rem;">CONTACT</a>
                     </div>
-                    <p class="footer-about">Elevating brands through bold, intentional design. Based in India, working globally.</p>
                 </div>
-                <div class="footer-col">
-                    <h4>Navigation</h4>
-                    <a href="#about">About</a>
-                    <a href="#projects">Work</a>
-                    <a href="#services">Services</a>
-                    <a href="#contact">Contact</a>
-                </div>
-                <div class="footer-col">
-                    <h4>Social</h4>
-                    <a href="https://instagram.com/_d.ninja_" target="_blank">Instagram</a>
-                    <a href="#">Facebook</a>
-                    <a href="#">Behance</a>
+                <div class="footer-col-social">
+                    <span
+                        style="font-family: var(--mono); font-size: 0.6rem; color: var(--accent); letter-spacing: 3px;">CONNECT</span>
+                    <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                        <a href="https://instagram.com/_d.ninja_" target="_blank"
+                            style="color: var(--text); text-decoration: none; font-size: 0.9rem;">INSTAGRAM</a>
+                        <a href="#" style="color: var(--text); text-decoration: none; font-size: 0.9rem;">BEHANCE</a>
+                    </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>D'NINJA &copy; 2026 &mdash; Designed & Crafted by Sumit & Shuvam</p>
-                <div class="footer-legal">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                </div>
+            <div class="footer-bottom-new"
+                style="margin-top: 100px; padding-top: 40px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+                <p style="font-family: var(--mono); font-size: 0.6rem; color: var(--dim);">&copy; 2026 D'NINJA STUDIO /
+                    ALL RIGHTS RESERVED</p>
+                <p style="font-family: var(--mono); font-size: 0.6rem; color: var(--dim);">CRAFTED IN INDIA</p>
             </div>
         </div>
     </footer>
@@ -722,195 +851,181 @@
         <div class="btt-icon"><i class="fas fa-arrow-up"></i></div>
     </div>
 
-    <!-- Pricing & Sizes Modal -->
+    <!-- Pricing Modal Redesign -->
     <div id="pricing-modal" class="modal-overlay">
-        <div class="modal-content glass-panel">
-            <button class="modal-close" id="pricing-close"><i class="fas fa-times"></i></button>
-            <div class="modal-header">
-                <i class="fas fa-tags modal-icon"></i>
-                <h2>Pricing &amp; Size Chart</h2>
-                <p>Standard rates and common dimensions for our design services.</p>
+        <div class="modal-content"
+            style="background: var(--bg); border: 1px solid var(--border); border-radius: 0; padding: 80px; max-width: 1000px; width: 90%;">
+            <button class="modal-close" id="pricing-close" style="top: 30px; right: 30px; font-size: 1.5rem;"><i
+                    class="fas fa-times"></i></button>
+
+            <div class="pricing-header-editorial" style="margin-bottom: 60px;">
+                <span class="section-label">Rate Card</span>
+                <h2 style="font-family: var(--display); font-size: 3rem; margin: 10px 0; text-transform: uppercase;">
+                    Service<br><em>Investment.</em></h2>
             </div>
-            
-            <div class="modal-body">
-                <div class="pricing-grid">
-                    <div class="pricing-card">
-                        <h3>Logo Design</h3>
-                        <div class="price">&#8377;24</div>
-                        <ul>
-                            <li><i class="fas fa-check"></i> High Res Vectors (AI, EPS)</li>
-                            <li><i class="fas fa-check"></i> Unlimited Revisions</li>
-                            <li><i class="fas fa-check"></i> Brand Guidelines</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="pricing-card">
-                        <h3>Social Media Post</h3>
-                        <div class="price">&#8377;19</div>
-                        <ul>
-                            <li><i class="fas fa-check"></i> Instagram Square (1080x1080)</li>
-                            <li><i class="fas fa-check"></i> Instagram Portrait (1080x1350)</li>
-                            <li><i class="fas fa-check"></i> Story/Reel (1080x1920)</li>
-                        </ul>
-                    </div>
 
-                    <div class="pricing-card">
-                        <h3>YouTube Thumbnail</h3>
-                        <div class="price">&#8377;16</div>
-                        <ul>
-                            <li><i class="fas fa-check"></i> High CTR Design</li>
-                            <li><i class="fas fa-check"></i> 1920x1080 Resolution</li>
-                            <li><i class="fas fa-check"></i> Source File Included</li>
-                        </ul>
-                    </div>
-
-                    <div class="pricing-card">
-                        <h3>Poster / Banner</h3>
-                        <div class="price">&#8377;25</div>
-                        <ul>
-                            <li><i class="fas fa-check"></i> Print-Ready PDF (300 DPI)</li>
-                            <li><i class="fas fa-check"></i> A3 / A4 / Custom Sizes</li>
-                            <li><i class="fas fa-check"></i> CMYK Color Profile</li>
-                        </ul>
-                    </div>
-
-                    <div class="pricing-card">
-                        <h3>Invitation Card</h3>
-                        <div class="price">&#8377;15</div>
-                        <ul>
-                            <li><i class="fas fa-check"></i> Premium Custom Themes</li>
-                            <li><i class="fas fa-check"></i> Digital &amp; Print Versions</li>
-                            <li><i class="fas fa-check"></i> Fast 24h Delivery</li>
-                        </ul>
-                    </div>
-
-                    <div class="pricing-card">
-                        <h3>Greetings Card</h3>
-                        <div class="price">&#8377;15</div>
-                        <ul>
-                            <li><i class="fas fa-check"></i> Custom Festive Themes</li>
-                            <li><i class="fas fa-check"></i> High Res Printable Files</li>
-                            <li><i class="fas fa-check"></i> Multiple Design Variations</li>
-                        </ul>
-                    </div>
-
-                    <div class="pricing-card">
-                        <h3>I-Card Design</h3>
-                        <div class="price">&#8377;17</div>
-                        <ul>
-                            <li><i class="fas fa-check"></i> Professional Corporate/School Layout</li>
-                            <li><i class="fas fa-check"></i> Multiple Design Variants</li>
-                            <li><i class="fas fa-check"></i> Print-Ready Format</li>
-                        </ul>
-                    </div>
+            <div class="pricing-grid-editorial"
+                style="display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid var(--border);">
+                <div class="pricing-item-new" style="padding: 40px; border: 1px solid var(--border);">
+                    <h3 style="font-family: var(--display); font-size: 1.5rem; text-transform: uppercase;">Branding
+                        Identity</h3>
+                    <div style="font-family: var(--mono); color: var(--accent); margin: 15px 0;">FROM &#8377;99</div>
+                    <p style="color: var(--dim); font-size: 0.9rem; line-height: 1.6;">Complete brand strategy, visual
+                        systems, and high-res source files.</p>
                 </div>
-                
-                <div style="text-align: center; margin-top: 40px;" data-reveal>
-                    <button class="estimator-btn" id="open-estimator">
-                        <i class="fas fa-calculator"></i> Quick Project Estimate
-                    </button>
+                <div class="pricing-item-new" style="padding: 40px; border: 1px solid var(--border);">
+                    <h3 style="font-family: var(--display); font-size: 1.5rem; text-transform: uppercase;">Logo Design
+                    </h3>
+                    <div style="font-family: var(--mono); color: var(--accent); margin: 15px 0;">FROM &#8377;24</div>
+                    <p style="color: var(--dim); font-size: 0.9rem; line-height: 1.6;">Minimalist or illustrative marks
+                        designed for longevity and impact.</p>
                 </div>
-
-                <!-- Price Estimator Modal -->
-                <div class="estimator-modal" id="estimator-modal">
-                    <div class="estimator-content">
-                        <button class="modal-close" id="estimator-close">&times;</button>
-                        <h2 style="margin-bottom: 24px;">Project Estimator</h2>
-                        <div class="estimate-row">
-                            <span>Logo Design</span>
-                            <input type="checkbox" data-price="19" class="est-check">
-                        </div>
-                        <div class="estimate-row">
-                            <span>Social Media Kit</span>
-                            <input type="checkbox" data-price="35" class="est-check">
-                        </div>
-                        <div class="estimate-row">
-                            <span>Poster / Banner</span>
-                            <input type="checkbox" data-price="25" class="est-check">
-                        </div>
-                        <div class="estimate-row">
-                            <span>I-Card / Invitation</span>
-                            <input type="checkbox" data-price="15" class="est-check">
-                        </div>
-                        <div class="estimate-row">
-                            <span>Full Branding Suite</span>
-                            <input type="checkbox" data-price="99" class="est-check">
-                        </div>
-                        <div class="estimate-total">
-                            Estimated: &#8377;<span id="est-total">0</span>
-                        </div>
-                        <p style="font-size: 0.8rem; color: var(--dim); margin-top: 15px;">*Final price may vary based on specific requirements.</p>
-                    </div>
+                <div class="pricing-item-new" style="padding: 40px; border: 1px solid var(--border);">
+                    <h3 style="font-family: var(--display); font-size: 1.5rem; text-transform: uppercase;">Social
+                        Content</h3>
+                    <div style="font-family: var(--mono); color: var(--accent); margin: 15px 0;">FROM &#8377;19</div>
+                    <p style="color: var(--dim); font-size: 0.9rem; line-height: 1.6;">High-performance creatives
+                        optimized for scroll-stopping engagement.</p>
                 </div>
-
-                <!-- Student Special Pricing -->
-                <div class="student-pricing-wrap">
-                    <div class="modal-header" style="margin-bottom: 24px; margin-top: 40px;">
-                        <i class="fas fa-user-graduate modal-icon" style="color: var(--accent2);"></i>
-                        <h2 style="font-size: 2.2rem;">Student Specials</h2>
-                        <p>Exclusive discounted rates for students (ID verification required).</p>
-                    </div>
-                    
-                    <div class="pricing-grid">
-                        <!-- Class 10-12 -->
-                        <div class="pricing-card" style="border-color: var(--accent2);">
-                            <span class="bento-pill" style="align-self: flex-start; margin-bottom: 12px; background: rgba(255, 60, 110, 0.1); border-color: var(--accent2); color: var(--accent2);">Class 10 - 12</span>
-                            <h3>Bundle Packs</h3>
-                            <div class="price-list" style="margin: 16px 0;">
-                                <div style="display:flex; justify-content:space-between; padding: 6px 0; border-bottom: 1px solid var(--border); align-items: center;">
-                                    <span style="color:var(--dim);">3 Projects</span>
-                                    <div class="price" style="font-size: 1.5rem; margin-bottom: 0;">&#8377;50</div>
-                                </div>
-                                <div style="display:flex; justify-content:space-between; padding: 6px 0; border-bottom: 1px solid var(--border); align-items: center;">
-                                    <span style="color:var(--dim);">5 Projects</span>
-                                    <span style="color:var(--accent2); font-weight:600; font-size: 1.2rem;">&#8377;80</span>
-                                </div>
-                                <div style="display:flex; justify-content:space-between; padding: 6px 0;">
-                                    <span style="color:var(--dim);">10 Projects</span>
-                                    <span style="color:var(--accent2); font-weight:600;">&#8377;170</span>
-                                </div>
-                            </div>
-                            <p style="font-size: 0.8rem; color: var(--dim); margin-top: auto;">*Exclusive to school students.</p>
-                        </div>
-
-                        <!-- College Membership -->
-                        <div class="pricing-card" style="border-color: var(--accent);">
-                            <span class="bento-pill" style="align-self: flex-start; margin-bottom: 12px; background: rgba(95, 15, 255, 0.1); border-color: var(--accent); color: var(--accent);">College Students</span>
-                            <h3>Membership</h3>
-                            <div class="price-list" style="margin: 16px 0;">
-                                <div style="display:flex; justify-content:space-between; padding: 6px 0; border-bottom: 1px solid var(--border);">
-                                    <span style="color:var(--dim);">1 Month</span>
-                                    <span style="color:var(--accent); font-weight:600;">&#8377;150</span>
-                                </div>
-                                <div style="display:flex; justify-content:space-between; padding: 6px 0;">
-                                    <span style="color:var(--dim);">3 Months</span>
-                                    <span style="color:var(--accent); font-weight:600;">&#8377;500</span>
-                                </div>
-                            </div>
-                            <div style="background: rgba(95, 15, 255, 0.1); padding: 10px; border-radius: 8px; font-size: 0.8rem; color: var(--accent); border: 1px dashed var(--accent); margin-top: 10px;">
-                                <i class="fas fa-gift"></i> <strong>NEW:</strong> First Project is <strong>FREE</strong> for all new student signups!
-                            </div>
-                            <p style="font-size: 0.8rem; color: var(--dim); margin-top: 10px;">*Unlock priority support &amp; unlimited minor tweaks.</p>
-                        </div>
-                    </div>
-
-                    <!-- Referral Bonus -->
-                    <div style="margin-top: 24px; padding: 16px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; gap: 16px;">
-                        <div style="font-size: 1.5rem; color: var(--accent2);"><i class="fas fa-users"></i></div>
-                        <div>
-                            <h4 style="font-size: 0.95rem; margin-bottom: 4px;">Ninja Referral Bonus</h4>
-                            <p style="font-size: 0.8rem; color: var(--dim);">Refer a fellow student and you <strong>BOTH get 20% OFF</strong> your next project bundle!</p>
-                        </div>
-                    </div>
+                <div class="pricing-item-new" style="padding: 40px; border: 1px solid var(--border);">
+                    <h3 style="font-family: var(--display); font-size: 1.5rem; text-transform: uppercase;">Thumbnails
+                    </h3>
+                    <div style="font-family: var(--mono); color: var(--accent); margin: 15px 0;">FROM &#8377;16</div>
+                    <p style="color: var(--dim); font-size: 0.9rem; line-height: 1.6;">Aggressive click-through designs
+                        built to dominate your specific niche.</p>
                 </div>
-                
-                <div class="modal-footer">
-                    <a href="#contact" id="modal-cta-btn" class="cf-submit" style="text-decoration: none; width: 100%; display: inline-flex; justify-content: center; margin-top: 10px;">
-                        <span>Order Now</span><i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
+            </div>
+
+            <div style="margin-top: 40px; text-align: center;">
+                <p style="font-family: var(--mono); font-size: 0.7rem; color: var(--dim);">*ALL RATES SUBJECT TO
+                    COMPLEXITY AND PROJECT MISSION SCALE</p>
             </div>
         </div>
+    </div>
+
+    </div>
+
+
+    <div style="text-align: center; margin-top: 40px;" data-reveal>
+        <button class="estimator-btn" id="open-estimator">
+            <i class="fas fa-calculator"></i> Quick Project Estimate
+        </button>
+    </div>
+
+    <!-- Price Estimator Modal -->
+    <div class="estimator-modal" id="estimator-modal">
+        <div class="estimator-content">
+            <button class="modal-close" id="estimator-close">&times;</button>
+            <h2 style="margin-bottom: 24px;">Project Estimator</h2>
+            <div class="estimate-row">
+                <span>Logo Design</span>
+                <input type="checkbox" data-price="19" class="est-check">
+            </div>
+            <div class="estimate-row">
+                <span>Social Media Kit</span>
+                <input type="checkbox" data-price="35" class="est-check">
+            </div>
+            <div class="estimate-row">
+                <span>Poster / Banner</span>
+                <input type="checkbox" data-price="25" class="est-check">
+            </div>
+            <div class="estimate-row">
+                <span>I-Card / Invitation</span>
+                <input type="checkbox" data-price="15" class="est-check">
+            </div>
+            <div class="estimate-row">
+                <span>Full Branding Suite</span>
+                <input type="checkbox" data-price="99" class="est-check">
+            </div>
+            <div class="estimate-total">
+                Estimated: &#8377;<span id="est-total">0</span>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--dim); margin-top: 15px;">*Final price may vary based on specific
+                requirements.</p>
+        </div>
+    </div>
+
+    <!-- Student Special Pricing -->
+    <div class="student-pricing-wrap">
+        <div class="modal-header" style="margin-bottom: 24px; margin-top: 40px;">
+            <i class="fas fa-user-graduate modal-icon" style="color: var(--accent2);"></i>
+            <h2 style="font-size: 2.2rem;">Student Specials</h2>
+            <p>Exclusive discounted rates for students (ID verification required).</p>
+        </div>
+
+        <div class="pricing-grid">
+            <!-- Class 10-12 -->
+            <div class="pricing-card" style="border-color: var(--accent2);">
+                <span class="bento-pill"
+                    style="align-self: flex-start; margin-bottom: 12px; background: rgba(255, 60, 110, 0.1); border-color: var(--accent2); color: var(--accent2);">Class
+                    10 - 12</span>
+                <h3>Bundle Packs</h3>
+                <div class="price-list" style="margin: 16px 0;">
+                    <div
+                        style="display:flex; justify-content:space-between; padding: 6px 0; border-bottom: 1px solid var(--border); align-items: center;">
+                        <span style="color:var(--dim);">3 Projects</span>
+                        <div class="price" style="font-size: 1.5rem; margin-bottom: 0;">&#8377;50</div>
+                    </div>
+                    <div
+                        style="display:flex; justify-content:space-between; padding: 6px 0; border-bottom: 1px solid var(--border); align-items: center;">
+                        <span style="color:var(--dim);">5 Projects</span>
+                        <span style="color:var(--accent2); font-weight:600; font-size: 1.2rem;">&#8377;80</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; padding: 6px 0;">
+                        <span style="color:var(--dim);">10 Projects</span>
+                        <span style="color:var(--accent2); font-weight:600;">&#8377;170</span>
+                    </div>
+                </div>
+                <p style="font-size: 0.8rem; color: var(--dim); margin-top: auto;">*Exclusive to school students.</p>
+            </div>
+
+            <!-- College Membership -->
+            <div class="pricing-card" style="border-color: var(--accent);">
+                <span class="bento-pill"
+                    style="align-self: flex-start; margin-bottom: 12px; background: rgba(95, 15, 255, 0.1); border-color: var(--accent); color: var(--accent);">College
+                    Students</span>
+                <h3>Membership</h3>
+                <div class="price-list" style="margin: 16px 0;">
+                    <div
+                        style="display:flex; justify-content:space-between; padding: 6px 0; border-bottom: 1px solid var(--border);">
+                        <span style="color:var(--dim);">1 Month</span>
+                        <span style="color:var(--accent); font-weight:600;">&#8377;150</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; padding: 6px 0;">
+                        <span style="color:var(--dim);">3 Months</span>
+                        <span style="color:var(--accent); font-weight:600;">&#8377;500</span>
+                    </div>
+                </div>
+                <div
+                    style="background: rgba(95, 15, 255, 0.1); padding: 10px; border-radius: 8px; font-size: 0.8rem; color: var(--accent); border: 1px dashed var(--accent); margin-top: 10px;">
+                    <i class="fas fa-gift"></i> <strong>NEW:</strong> First Project is <strong>FREE</strong> for all new
+                    student signups!
+                </div>
+                <p style="font-size: 0.8rem; color: var(--dim); margin-top: 10px;">*Unlock priority support &amp;
+                    unlimited minor tweaks.</p>
+            </div>
+        </div>
+
+        <!-- Referral Bonus -->
+        <div
+            style="margin-top: 24px; padding: 16px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; gap: 16px;">
+            <div style="font-size: 1.5rem; color: var(--accent2);"><i class="fas fa-users"></i></div>
+            <div>
+                <h4 style="font-size: 0.95rem; margin-bottom: 4px;">Ninja Referral Bonus</h4>
+                <p style="font-size: 0.8rem; color: var(--dim);">Refer a fellow student and you <strong>BOTH get 20%
+                        OFF</strong> your next project bundle!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <a href="#contact" id="modal-cta-btn" class="cf-submit"
+            style="text-decoration: none; width: 100%; display: inline-flex; justify-content: center; margin-top: 10px;">
+            <span>Order Now</span><i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+    </div>
+    </div>
     </div>
 
 
@@ -918,7 +1033,8 @@
     <div class="project-quick-view" id="project-quick-view" aria-hidden="true">
         <div class="project-quick-view-backdrop" data-close-quick-view></div>
         <div class="project-quick-view-panel" role="dialog" aria-modal="true" aria-labelledby="quick-view-title">
-            <button id="quick-view-close" class="modal-close" type="button" aria-label="Close quick view"><i class="fas fa-times"></i></button>
+            <button id="quick-view-close" class="modal-close" type="button" aria-label="Close quick view"><i
+                    class="fas fa-times"></i></button>
             <div class="project-quick-media"><img id="quick-view-image" src="" alt=""></div>
             <div class="project-quick-content">
                 <h3 id="quick-view-title"></h3>
@@ -937,7 +1053,8 @@
     <div class="compare-modal" id="compare-modal" aria-hidden="true">
         <div class="project-quick-view-backdrop" data-close-compare></div>
         <div class="compare-panel" role="dialog" aria-modal="true" aria-labelledby="compare-title">
-            <button id="compare-close" class="modal-close" type="button" aria-label="Close compare"><i class="fas fa-times"></i></button>
+            <button id="compare-close" class="modal-close" type="button" aria-label="Close compare"><i
+                    class="fas fa-times"></i></button>
             <h3 id="compare-title">Compare Projects</h3>
             <div class="compare-grid" id="compare-grid"></div>
         </div>
@@ -948,7 +1065,7 @@
 
     <div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>
 
-    
+
     <script src="assets/js/cart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
     <script src="assets/js/script.js"></script>

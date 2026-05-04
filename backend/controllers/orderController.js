@@ -1,6 +1,13 @@
 const Order = require('../models/Order');
 const { sendOrderAlert } = require('../utils/emailService');
 
+// Coupon Dictionary to match frontend
+const COUPONS = {
+  'NINJA20': 0.20,
+  'STUDENT30': 0.30,
+  'FIRSTORDER': 0.15
+};
+
 // @desc    Create new order
 // @route   POST /api/orders
 // @access  Public
@@ -8,10 +15,15 @@ const createOrder = async (req, res, next) => {
   try {
     const { items, customerName, customerEmail, customerWhatsApp, customerAddress, coupon } = req.body;
     
+    // Calculate financial details
     const subtotal = items.reduce((sum, i) => sum + (i.price * i.quantity), 0);
-    // Apply discount logic if coupon is present (simplified for now)
-    const total = subtotal; 
     
+    let discount = 0;
+    if (coupon && COUPONS[coupon.toUpperCase()]) {
+      discount = Math.round(subtotal * COUPONS[coupon.toUpperCase()]);
+    }
+    
+    const total = subtotal - discount; 
     const advanceAmount = Math.round(total * 0.60);
     const remainingAmount = total - advanceAmount;
 
@@ -22,6 +34,7 @@ const createOrder = async (req, res, next) => {
       customerWhatsApp,
       customerAddress,
       subtotal,
+      discount,
       total,
       advanceAmount,
       remainingAmount,
@@ -32,8 +45,8 @@ const createOrder = async (req, res, next) => {
 
     const createdOrder = await order.save();
     
-    // Send email alert with new fields
-    sendOrderAlert(createdOrder);
+    // Await email alert to ensure delivery before responding (or catch error)
+    await sendOrderAlert(createdOrder);
 
     res.status(201).json({
       success: true,

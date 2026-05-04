@@ -9,8 +9,8 @@ const createInquiry = async (req, res, next) => {
     const inquiry = new Inquiry(req.body);
     const createdInquiry = await inquiry.save();
 
-    // Send email alert in background
-    sendInquiryAlert(createdInquiry);
+    // Send email alert
+    await sendInquiryAlert(createdInquiry);
 
     res.status(201).json({
       success: true,

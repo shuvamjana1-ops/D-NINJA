@@ -27,12 +27,22 @@ const orderSchema = new mongoose.Schema({
     type: String,
     default: null
   },
-  customerName: String,
-  customerEmail: String,
-  customerWhatsApp: String,
-  customerAddress: String,
-  subtotal: Number,
-  total: Number,
+  customerName: {
+    type: String,
+    required: true
+  },
+  customerEmail: {
+    type: String,
+    required: true
+  },
+  customerWhatsApp: {
+    type: String,
+    required: true
+  },
+  customerAddress: {
+    type: String,
+    required: true
+  },
   advanceAmount: Number, // 60% of total
   remainingAmount: Number, // 40% of total
   paymentMethod: {
