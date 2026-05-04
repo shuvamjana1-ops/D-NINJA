@@ -1,0 +1,15 @@
+# Jekyll Configuration
+exclude:
+  - backend
+  - node_modules
+  - tools
+  - vendor
+  - .github
+  - .vscode
+  - package.json
+  - package-lock.json
+  - IMAGE-GUIDE.md
+  - Install-Dependencies.bat
+  - Run-Backend.bat
+  - Sync-Images.bat
+  - scratch
