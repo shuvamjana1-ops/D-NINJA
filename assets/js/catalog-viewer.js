@@ -1,4 +1,4 @@
-/**
+﻿/**
  * D'NINJA — Catalog Viewer
  * Pinterest masonry grid + Google/Lightbox image viewer
  * Features: zoom, pan, download, prev/next, keyboard nav, share
@@ -25,6 +25,13 @@
     let dragStartX = 0, dragStartY = 0;
     let panStartX = 0, panStartY = 0;
     let viewMode = 'grid'; // 'scroll' | 'grid'
+    let filteredImages = [];
+    let searchQuery = '';
+    let categoryFilter = 'all';
+
+    let searchInputEl = null;
+    let categorySelectEl = null;
+    let resultCountEl = null;
 
     /* ─── DOM REFS ─── */
     const track = document.getElementById('gallery-track');
@@ -47,7 +54,8 @@
     };
 
     const handleAddToCart = (idx) => {
-        const img = images[idx];
+        const img = filteredImages[idx];
+        if (!img) return;
         // Ensure the path in the cart is always root-relative (images/...)
         const cleanSrc = img.src.replace(/^(\.\.\/)+/, '');
         
@@ -106,27 +114,63 @@
     function onAllAttempted() {
         if (allAttempted) return;
         allAttempted = true;
-        renderGridView();
-        if (images.length === 0) renderEmpty();
 
-        // Apply URL search filter if present
+        // Apply URL filters if present
         const urlParams = new URLSearchParams(window.location.search);
         const q = urlParams.get('q');
-        if (q) {
-            applySearchFilter(q);
-        }
+        const cat = urlParams.get('cat');
+        if (q) searchQuery = q.trim().toLowerCase();
+        if (cat) categoryFilter = cat.trim().toLowerCase();
+        if (searchInputEl && q) searchInputEl.value = q;
+        if (categorySelectEl && cat) categorySelectEl.value = categoryFilter;
+
+        applyFilters();
     }
 
-    function applySearchFilter(query) {
-        const q = query.toLowerCase();
-        const items = document.querySelectorAll('.gallery-frame, .masonry-card');
-        items.forEach(item => {
-            if (item.dataset.search.includes(q)) {
-                item.style.display = '';
-            } else {
-                item.style.display = 'none';
-            }
+    function updateUrlParams() {
+        const params = new URLSearchParams(window.location.search);
+        if (searchQuery) params.set('q', searchQuery);
+        else params.delete('q');
+        if (categoryFilter && categoryFilter !== 'all') params.set('cat', categoryFilter);
+        else params.delete('cat');
+        const next = `${window.location.pathname}${params.toString() ? `?${params.toString()}` : ''}`;
+        window.history.replaceState({}, '', next);
+    }
+
+    function updateResultCount() {
+        if (!resultCountEl) return;
+        resultCountEl.textContent = `${filteredImages.length} / ${images.length} results`;
+    }
+
+    function applyFilters() {
+        filteredImages = images.filter((img) => {
+            const nameMatch = !searchQuery || img.alt.toLowerCase().includes(searchQuery);
+            const folderMatch = categoryFilter === 'all' || img.folder === categoryFilter;
+            return nameMatch && folderMatch;
         });
+
+        updateUrlParams();
+        renderCurrentView();
+        updateResultCount();
+    }
+
+    function renderCurrentView() {
+        if (!images.length) {
+            renderEmpty();
+            return;
+        }
+        if (!filteredImages.length) {
+            renderNoResults();
+            return;
+        }
+        if (viewMode === 'scroll') {
+            scrollWrap.classList.remove('grid-mode');
+            track.classList.remove('masonry-grid');
+            renderScrollView();
+            bindScrollWheel();
+        } else {
+            renderGridView();
+        }
     }
 
 
@@ -137,7 +181,7 @@
     function renderScrollView() {
         document.body.classList.add('horizontal-mode');
         track.innerHTML = '';
-        images.forEach((img, i) => {
+        filteredImages.forEach((img, i) => {
             const displayName = img.alt;
             const searchStr = img.alt.toLowerCase();
 
@@ -200,7 +244,7 @@
         track.classList.add('masonry-grid');
         track.innerHTML = '';
 
-        images.forEach((img, i) => {
+        filteredImages.forEach((img, i) => {
             const displayName = img.alt;
             const searchStr = img.alt.toLowerCase();
 
@@ -239,21 +283,6 @@
             card.addEventListener('click', (e) => {
                 if (!e.target.closest('.masonry-btn')) openLightbox(i);
             });
-
-            // 3D Tilt Effect
-            card.addEventListener('mousemove', e => {
-                const r = card.getBoundingClientRect();
-                const x = e.clientX - r.left;
-                const y = e.clientY - r.top;
-                const xc = r.width / 2;
-                const yc = r.height / 2;
-                const dx = (x - xc) / 10;
-                const dy = (y - yc) / 10;
-                card.style.transform = `perspective(1000px) rotateY(${dx}deg) rotateX(${-dy}deg) translateY(-4px)`;
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = '';
-            });
         });
     }
 
@@ -281,8 +310,7 @@
             document.getElementById('btn-grid').classList.remove('active');
             scrollWrap.classList.remove('grid-mode');
             track.classList.remove('masonry-grid');
-            renderScrollView();
-            bindScrollWheel();
+            renderCurrentView();
         });
 
         document.getElementById('btn-grid').addEventListener('click', () => {
@@ -290,7 +318,64 @@
             viewMode = 'grid';
             document.getElementById('btn-grid').classList.add('active');
             document.getElementById('btn-scroll').classList.remove('active');
-            renderGridView();
+            renderCurrentView();
+        });
+    }
+
+    function buildFilterBar() {
+        if (!track || !scrollWrap) return;
+        const nav = document.querySelector('.catalog-nav');
+        if (!nav || document.getElementById('catalog-filter-bar')) return;
+
+        const categories = window.CATALOG_DATA ? Object.keys(window.CATALOG_DATA) : [];
+        const categoryOptions = categories
+            .map((c) => `<option value="${c}">${c.charAt(0).toUpperCase() + c.slice(1)}</option>`)
+            .join('');
+
+        const wrap = el('div', 'catalog-filter-bar');
+        wrap.id = 'catalog-filter-bar';
+        wrap.innerHTML = `
+            <div class="catalog-filter-left">
+                <i class="fas fa-search"></i>
+                <input id="catalog-search" type="search" placeholder="Search design name..." autocomplete="off">
+            </div>
+            <select id="catalog-category" class="catalog-filter-select">
+                <option value="all">All Categories</option>
+                ${categoryOptions}
+            </select>
+            <button id="catalog-clear-filter" class="catalog-clear-btn" type="button">Clear</button>
+            <span id="catalog-result-count" class="catalog-result-count">0 results</span>
+        `;
+        nav.insertAdjacentElement('afterend', wrap);
+
+        searchInputEl = document.getElementById('catalog-search');
+        categorySelectEl = document.getElementById('catalog-category');
+        resultCountEl = document.getElementById('catalog-result-count');
+
+        if (folder && folder !== 'all' && categorySelectEl) {
+            categorySelectEl.value = folder;
+            categorySelectEl.disabled = true;
+            categoryFilter = folder;
+        }
+
+        searchInputEl?.addEventListener('input', (e) => {
+            searchQuery = e.target.value.trim().toLowerCase();
+            applyFilters();
+        });
+
+        categorySelectEl?.addEventListener('change', (e) => {
+            categoryFilter = e.target.value;
+            applyFilters();
+        });
+
+        document.getElementById('catalog-clear-filter')?.addEventListener('click', () => {
+            searchQuery = '';
+            if (searchInputEl) searchInputEl.value = '';
+            if (categorySelectEl && !categorySelectEl.disabled) {
+                categoryFilter = 'all';
+                categorySelectEl.value = 'all';
+            }
+            applyFilters();
         });
     }
 
@@ -343,7 +428,11 @@
         document.getElementById('lb-zoom-in').addEventListener('click', () => applyZoom(zoom * 1.3));
         document.getElementById('lb-zoom-out').addEventListener('click', () => applyZoom(zoom / 1.3));
         document.getElementById('lb-zoom-reset').addEventListener('click', () => applyZoom(1));
-        document.getElementById('lb-download').addEventListener('click', () => downloadImage(images[currentIdx].src, `${folder}-${images[currentIdx].idx}`));
+        document.getElementById('lb-download').addEventListener('click', () => {
+            const active = filteredImages[currentIdx];
+            if (!active) return;
+            downloadImage(active.src, `${folder}-${active.idx}`);
+        });
         document.getElementById('lb-add-to-cart').addEventListener('click', () => handleAddToCart(currentIdx));
         document.getElementById('lb-share').addEventListener('click', shareImage);
 
@@ -398,14 +487,15 @@
     }
 
     function navigateLightbox(dir) {
-        currentIdx = (currentIdx + dir + images.length) % images.length;
+        currentIdx = (currentIdx + dir + filteredImages.length) % filteredImages.length;
         zoom = 1; panX = 0; panY = 0;
         updateLightbox();
         updateThumbnailActive();
     }
 
     function updateLightbox() {
-        const img = images[currentIdx];
+        const img = filteredImages[currentIdx];
+        if (!img) return;
         const lbImg = document.getElementById('lb-img');
         lbImg.style.opacity = '0';
         lbImg.onload = () => { lbImg.style.opacity = '1'; };
@@ -414,20 +504,20 @@
             lbImg.style.opacity = '1';
         }
         lbImg.alt = img.alt;
-        document.getElementById('lb-counter').textContent = `${currentIdx + 1} / ${images.length}`;
+        document.getElementById('lb-counter').textContent = `${currentIdx + 1} / ${filteredImages.length}`;
         document.getElementById('lb-title').textContent = img.alt;
         document.getElementById('lb-order').href = getOrderUrl(img.alt);
         applyZoom(1);
 
         // Show/hide prev-next
-        document.getElementById('lb-prev').style.visibility = images.length > 1 ? 'visible' : 'hidden';
-        document.getElementById('lb-next').style.visibility = images.length > 1 ? 'visible' : 'hidden';
+        document.getElementById('lb-prev').style.visibility = filteredImages.length > 1 ? 'visible' : 'hidden';
+        document.getElementById('lb-next').style.visibility = filteredImages.length > 1 ? 'visible' : 'hidden';
     }
 
     function buildThumbnails() {
         const strip = document.getElementById('lb-thumbnails');
         strip.innerHTML = '';
-        images.forEach((img, i) => {
+        filteredImages.forEach((img, i) => {
             const thumb = el('div', `lb-thumb${i === currentIdx ? ' active' : ''}`);
             thumb.innerHTML = `<img src="${img.src}" alt="${img.alt}" loading="lazy">`;
             thumb.addEventListener('click', () => {
@@ -531,7 +621,7 @@
     function shareImage() {
         const url = window.location.href;
         if (navigator.share) {
-            navigator.share({ title: images[currentIdx].alt, url });
+            navigator.share({ title: filteredImages[currentIdx]?.alt || label, url });
         } else {
             navigator.clipboard.writeText(url).then(() => {
                 const btn = document.getElementById('lb-share');
@@ -551,6 +641,15 @@
                 <span>Save your designs here with descriptive names<br>
                 e.g. <code>my-cool-design.jpg</code><br>
                 then run <code>Sync-Images.bat</code></span>
+            </div>`;
+    }
+
+    function renderNoResults() {
+        track.innerHTML = `
+            <div class="catalog-empty">
+                <i class="fas fa-search-minus"></i>
+                <p>No designs match your filters.</p>
+                <span>Try a different keyword or reset category filter.</span>
             </div>`;
     }
 
@@ -574,6 +673,7 @@
         if (!track || !folder) return;
         buildLightbox();
         buildViewToggle();
+        buildFilterBar();
         loadImages();
         bindScrollWheel();
     }
@@ -585,3 +685,4 @@
     }
 
 })();
+

@@ -20,7 +20,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js" defer></script>
     <script>
         // Global Preloader Failsafe
         window.addEventListener('load', function () {
@@ -44,6 +44,7 @@
     </div>
 
     <div id="cursor-dot" class="cursor-dot"></div>
+    <div id="cursor-ring" class="cursor-ring"></div>
 
     <!-- Professional Social Sidebar -->
     <div class="social-sidebar">
@@ -137,7 +138,6 @@
                 <i class="fas fa-film"></i> Film Grain: <span class="grain-status">ON</span>
             </div>
         </div>
-        </div>
     </nav>
 
     <section id="hero" class="hero-section">
@@ -152,6 +152,7 @@
         <div class="hero-editorial-wrap-new">
             <div class="hero-left-editorial">
                 <div class="hero-content-inner">
+                    <div class="availability-badge" id="availability-badge"><span class="availability-dot"></span><span id="availability-text">CURRENTLY ACCEPTING PROJECTS</span></div>
                     <span id="royal-greeting" class="section-label hero-line-reveal"
                         style="font-style: italic; color: var(--accent);"><span>Welcome, Visionary</span></span>
                     <h1 class="hero-title-new">
@@ -174,8 +175,6 @@
                     <span class="stat-label">CONTENT ARCHITECTS</span>
                 </div>
                 <div class="hero-cta-wrap">
-                    <a href="#projects" class="nav-hire magnetic" style="padding: 25px 50px; font-size: 1rem;">VIEW ARCHIVES <i
-                            class="fas fa-arrow-right"></i></a>
                     <button id="play-showreel" class="pf-btn magnetic"
                         style="margin-left: 20px; border: 1px solid rgba(255,255,255,0.1);">
                         <i class="fas fa-play"></i> WATCH SHOWREEL
@@ -183,6 +182,7 @@
                 </div>
             </div>
         </div>
+        <div class="scroll-indicator" id="scroll-indicator"><div class="scroll-indicator-line"></div><span class="scroll-indicator-label">Scroll</span></div>
     </section>
 
     <!-- Marquee -->
@@ -1079,9 +1079,30 @@
     <div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>
 
 
-    <script src="assets/js/cart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
-    <script src="assets/js/script.js"></script>
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-mobile-cta" id="sticky-mobile-cta">
+        <a href="#contact" class="sticky-cta-hire"><i class="fas fa-arrow-right"></i> HIRE US</a>
+        <a href="https://wa.me/8513859870" target="_blank" class="sticky-cta-whatsapp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+
+    <!-- Cookie/Preference Notice -->
+    <div class="cookie-bar" id="cookie-bar">
+        <p class="cookie-bar-text"><strong>D'NINJA</strong> uses local storage to remember your theme, grain, and sound preferences.</p>
+        <div class="cookie-bar-actions">
+            <button class="cookie-accept-btn" id="cookie-accept">Got it!</button>
+            <button class="cookie-dismiss-btn" id="cookie-dismiss">Dismiss</button>
+        </div>
+    </div>
+
+    <script src="assets/js/cart.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js" defer></script>
+    <script src="assets/js/script.js" defer></script>
 </body>
 
 </html>
+
+
+
+
+
+
