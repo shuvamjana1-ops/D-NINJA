@@ -28,9 +28,11 @@
     let filteredImages = [];
     let searchQuery = '';
     let categoryFilter = 'all';
+    let sortMode = 'name-asc';
 
     let searchInputEl = null;
     let categorySelectEl = null;
+    let sortSelectEl = null;
     let resultCountEl = null;
 
     /* ─── DOM REFS ─── */
@@ -119,10 +121,13 @@
         const urlParams = new URLSearchParams(window.location.search);
         const q = urlParams.get('q');
         const cat = urlParams.get('cat');
+        const sort = urlParams.get('sort');
         if (q) searchQuery = q.trim().toLowerCase();
         if (cat) categoryFilter = cat.trim().toLowerCase();
+        if (sort) sortMode = sort;
         if (searchInputEl && q) searchInputEl.value = q;
         if (categorySelectEl && cat) categorySelectEl.value = categoryFilter;
+        if (sortSelectEl && sort) sortSelectEl.value = sortMode;
 
         applyFilters();
     }
@@ -133,6 +138,8 @@
         else params.delete('q');
         if (categoryFilter && categoryFilter !== 'all') params.set('cat', categoryFilter);
         else params.delete('cat');
+        if (sortMode && sortMode !== 'name-asc') params.set('sort', sortMode);
+        else params.delete('sort');
         const next = `${window.location.pathname}${params.toString() ? `?${params.toString()}` : ''}`;
         window.history.replaceState({}, '', next);
     }
@@ -148,10 +155,27 @@
             const folderMatch = categoryFilter === 'all' || img.folder === categoryFilter;
             return nameMatch && folderMatch;
         });
+        sortFilteredImages();
 
         updateUrlParams();
         renderCurrentView();
         updateResultCount();
+    }
+
+    function sortFilteredImages() {
+        const folderOrder = Object.keys(window.CATALOG_DATA || {});
+        filteredImages.sort((a, b) => {
+            if (sortMode === 'name-desc') return b.alt.localeCompare(a.alt);
+            if (sortMode === 'newest') return b.idx - a.idx;
+            if (sortMode === 'oldest') return a.idx - b.idx;
+            if (sortMode === 'category') {
+                const fa = folderOrder.indexOf(a.folder);
+                const fb = folderOrder.indexOf(b.folder);
+                if (fa !== fb) return fa - fb;
+                return a.alt.localeCompare(b.alt);
+            }
+            return a.alt.localeCompare(b.alt);
+        });
     }
 
     function renderCurrentView() {
@@ -293,6 +317,29 @@
         const nav = document.querySelector('.catalog-nav .catalog-right');
         if (!nav) return;
 
+        if (!document.getElementById('catalog-view-all-nav')) {
+            const navViewAll = el('a', 'catalog-view-all-btn catalog-view-all-nav');
+            navViewAll.id = 'catalog-view-all-nav';
+            navViewAll.href = folder === 'all' ? '#' : '../catalog/catalog-all.html';
+            navViewAll.title = 'View all designs';
+            navViewAll.innerHTML = `<i class="fas fa-sparkles"></i><span>View All</span>`;
+            nav.insertBefore(navViewAll, nav.firstChild);
+
+            if (folder === 'all') {
+                navViewAll.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    searchQuery = '';
+                    categoryFilter = 'all';
+                    sortMode = 'name-asc';
+                    if (searchInputEl) searchInputEl.value = '';
+                    if (categorySelectEl) categorySelectEl.value = 'all';
+                    if (sortSelectEl) sortSelectEl.value = 'name-asc';
+                    syncQuickCategoryButtons();
+                    applyFilters();
+                });
+            }
+        }
+
         const toggleWrap = el('div', 'view-toggle-wrap');
         toggleWrap.innerHTML = `
             <button class="view-toggle-btn" id="btn-scroll" title="Scroll view">
@@ -343,20 +390,54 @@
                 <option value="all">All Categories</option>
                 ${categoryOptions}
             </select>
+            <select id="catalog-sort" class="catalog-filter-select">
+                <option value="name-asc">Name A-Z</option>
+                <option value="name-desc">Name Z-A</option>
+                <option value="newest">Newest</option>
+                <option value="oldest">Oldest</option>
+                <option value="category">Category</option>
+            </select>
+            <a id="catalog-view-all" class="catalog-view-all-btn" href="../catalog/catalog-all.html" title="View all designs">
+                <i class="fas fa-sparkles"></i><span>View All</span>
+            </a>
+            <button id="catalog-shuffle" class="catalog-clear-btn" type="button">Shuffle</button>
             <button id="catalog-clear-filter" class="catalog-clear-btn" type="button">Clear</button>
             <span id="catalog-result-count" class="catalog-result-count">0 results</span>
+            <div id="catalog-quick-cats" class="catalog-quick-cats"></div>
         `;
         nav.insertAdjacentElement('afterend', wrap);
 
         searchInputEl = document.getElementById('catalog-search');
         categorySelectEl = document.getElementById('catalog-category');
+        sortSelectEl = document.getElementById('catalog-sort');
         resultCountEl = document.getElementById('catalog-result-count');
+        const viewAllEl = document.getElementById('catalog-view-all');
+
+        if (viewAllEl) {
+            if (folder === 'all') {
+                viewAllEl.href = '#';
+                viewAllEl.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    searchQuery = '';
+                    categoryFilter = 'all';
+                    sortMode = 'name-asc';
+                    if (searchInputEl) searchInputEl.value = '';
+                    if (categorySelectEl) categorySelectEl.value = 'all';
+                    if (sortSelectEl) sortSelectEl.value = 'name-asc';
+                    syncQuickCategoryButtons();
+                    applyFilters();
+                });
+            } else {
+                viewAllEl.href = '../catalog/catalog-all.html';
+            }
+        }
 
         if (folder && folder !== 'all' && categorySelectEl) {
             categorySelectEl.value = folder;
             categorySelectEl.disabled = true;
             categoryFilter = folder;
         }
+        if (sortSelectEl) sortSelectEl.value = sortMode;
 
         searchInputEl?.addEventListener('input', (e) => {
             searchQuery = e.target.value.trim().toLowerCase();
@@ -365,7 +446,22 @@
 
         categorySelectEl?.addEventListener('change', (e) => {
             categoryFilter = e.target.value;
+            syncQuickCategoryButtons();
             applyFilters();
+        });
+
+        sortSelectEl?.addEventListener('change', (e) => {
+            sortMode = e.target.value;
+            applyFilters();
+        });
+
+        document.getElementById('catalog-shuffle')?.addEventListener('click', () => {
+            filteredImages = filteredImages
+                .map((value) => ({ value, seed: Math.random() }))
+                .sort((a, b) => a.seed - b.seed)
+                .map((item) => item.value);
+            renderCurrentView();
+            updateResultCount();
         });
 
         document.getElementById('catalog-clear-filter')?.addEventListener('click', () => {
@@ -375,7 +471,39 @@
                 categoryFilter = 'all';
                 categorySelectEl.value = 'all';
             }
+            sortMode = 'name-asc';
+            if (sortSelectEl) sortSelectEl.value = sortMode;
+            syncQuickCategoryButtons();
             applyFilters();
+        });
+
+        buildQuickCategoryButtons(categories);
+    }
+
+    function buildQuickCategoryButtons(categories) {
+        const host = document.getElementById('catalog-quick-cats');
+        if (!host || !categories.length) return;
+        host.innerHTML = ['all', ...categories].map((cat) => {
+            const text = cat === 'all' ? 'All' : cat.charAt(0).toUpperCase() + cat.slice(1);
+            return `<button class="catalog-quick-cat" data-cat="${cat}" type="button">${text}</button>`;
+        }).join('');
+
+        host.querySelectorAll('.catalog-quick-cat').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                if (categorySelectEl?.disabled) return;
+                categoryFilter = btn.dataset.cat || 'all';
+                if (categorySelectEl) categorySelectEl.value = categoryFilter;
+                syncQuickCategoryButtons();
+                applyFilters();
+            });
+        });
+        syncQuickCategoryButtons();
+    }
+
+    function syncQuickCategoryButtons() {
+        document.querySelectorAll('.catalog-quick-cat').forEach((btn) => {
+            btn.classList.toggle('active', btn.dataset.cat === categoryFilter);
+            if (categorySelectEl?.disabled) btn.disabled = true;
         });
     }
 

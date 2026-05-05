@@ -508,7 +508,6 @@
     const circleFill = document.querySelector('.btt-circle-fill');
     const percentText = document.getElementById('btt-percent');
 
-    let lastScroll = 0;
     let scrollTimeout;
 
         // --- MASTER SCROLL LISTENER (THROTTLED) ---
@@ -525,20 +524,11 @@
                 const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
                 const scrolled = height > 0 ? (currentScroll / height) * 100 : 0;
 
-                // 1. Auto-Hide & Scrolled Navbar State
+                // 1. Always-visible navbar + scrolled state
                 if (navbar) {
-                    if (currentScroll > 150) {
-                        if (currentScroll > lastScroll && drawer && !drawer.classList.contains('open')) {
-                            navbar.classList.add('hidden');
-                        } else {
-                            navbar.classList.remove('hidden');
-                        }
-                    } else {
-                        navbar.classList.remove('hidden');
-                    }
+                    navbar.classList.remove('hidden');
                     navbar.classList.toggle('scrolled', currentScroll > 60);
                 }
-                lastScroll = currentScroll;
 
                 // 2. Navbar Opacity Fade
                 if (navbarEl) {
@@ -1545,6 +1535,7 @@
     initDraggableMarquee();
 
 });
+
 
 
 
